@@ -11,7 +11,7 @@ const morgan = require('morgan');
 const fs = require('fs');
 const path = require('path');
 const router = require('./router.js');
-const routerPost = require('./routerPost.js');
+const routerMSSQL = require('./routerMSSQL.js');
 const routerAuth = require('./routerAuth.js');
 const routerOLAP = require('./routerOLAP.js');
 const redis=require('./redis.js');
@@ -54,7 +54,7 @@ function initialize() {
 
     app.use(bodyParser.json({limit: '100mb', extended: true}));
     app.use('/get', router);
-    app.use('/ora', routerPost);
+    app.use('/mssql', routerMSSQL);
     app.use('/auth', routerAuth);
     app.use('/olap', routerOLAP);
 
