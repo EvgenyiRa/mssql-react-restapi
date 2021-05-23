@@ -18,6 +18,87 @@ async function close() {
 
 module.exports.close = close;
 
+function getParamsOut(result,params_out) {
+  if (Array.isArray(params_out)) {
+    params_out.forEach((el) => {
+        if (['varchar','nvarchar','char','nchar'].indexOf(el.type)>-1) {
+          let type;
+          if (el.type==='varchar') {
+              if (!!el.length) {
+                type=sql.VarChar(el.length);
+              }
+              else {
+                type=sql.VarChar;
+              }
+          }
+          else if (el.type==='nvarchar') {
+              if (!!el.length) {
+                type=sql.NVarChar(el.length);
+              }
+              else {
+                type=sql.NVarChar;
+              }
+          }
+          else if (el.type==='char') {
+              if (!!el.length) {
+                type=sql.Char(el.length);
+              }
+              else {
+                type=sql.Char;
+              }
+          }
+          else if (el.type==='nchar') {
+              if (!!el.length) {
+                type=sql.NChar(el.length);
+              }
+              else {
+                type=sql.NChar;
+              }
+          }
+          result.output(el.name, type,((!!el.value)?el.value:null));
+        }
+        else if (el.type==='bigint') {
+          result.output(el.name, sql.BigInt,((!!el.value)?el.value:null));
+        }
+        else if (el.type==='int') {
+          result.output(el.name, sql.Int,((!!el.value)?el.value:null));
+        }
+        else if (el.type==='float') {
+          result.output(el.name, sql.Float,((!!el.value)?el.value:null));
+        }
+        if (['numeric','decimal'].indexOf(el.type)>-1) {
+          let type;
+          if ((!!el.precision) & (!!!el.scale)) {
+              if (el.type==='numeric') {
+                sql.Numeric(el.precision);
+              }
+              else if (el.type==='decimal') {
+                sql.Decimal(el.precision);
+              }
+          }
+          else if ((!!el.precision) & (!!el.scale)) {
+            if (el.type==='numeric') {
+              sql.Numeric(el.precision,el.scale);
+            }
+            else if (el.type==='decimal') {
+              sql.Decimal(el.precision,el.scale);
+            }
+          }
+          else {
+            if (el.type==='numeric') {
+              sql.Numeric;
+            }
+            else if (el.type==='decimal') {
+              sql.Decimal;
+            }
+          }
+          result.output(el.name, type,((!!el.value)?el.value:null));
+        }
+    })
+  }
+  return result;
+}
+
 function simpleExecute(context) {
   return new Promise(async (resolve, reject) => {
     let conn,
@@ -32,6 +113,7 @@ function simpleExecute(context) {
       for (var prop in binds) {
         result.input(prop,binds[prop]);
       }
+      result=getParamsOut(result,context.params_out);
       result=await result.query(statement);
       resolve(result.recordset);
     } catch (err) {
@@ -57,6 +139,7 @@ function doubleExecute(context) {
             resultsql.input(prop,context.query_params[prop]);
           }
         }
+        resultsql=getParamsOut(resultsql,context.query_params_out);
         resultsql=await resultsql.query(context.sql);
         result.sqlrows=result.recordset;
       }
