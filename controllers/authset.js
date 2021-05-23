@@ -17,7 +17,8 @@
                            FROM REP_USERS
                           WHERE LOGIN=@login`;
             context.city=req.body.city;
-            const rows = await query.find(context);
+            const resquery = await query.find(context),
+                  rows=resquery.recordsets[0];
             if (rows.length>0) {
               const bcrypt = require('bcrypt');
               bcrypt.hash(req.body.password, jwt.salts[rows[0]['SOL']],async function(err, hash) {

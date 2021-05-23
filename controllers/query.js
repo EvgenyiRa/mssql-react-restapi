@@ -26,7 +26,7 @@
                   const rows = await query.find(context);
                   let resObj={tokenOne:tokenOne};
                   if (!!rows.recordsets) {
-                      resObj.rows=rows.recordsets;
+                      resObj.rows=rows.recordsets[0];
                   }
                   if (!!rows.output) {
                       resObj.output=rows.output;

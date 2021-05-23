@@ -177,7 +177,8 @@ async function authUser(req,rows,context) {
                  JOIN REP_RIGHTS R
                    ON R.RIGHTS_ID=UR.RIGHT_ID
                 WHERE U.USER_ID=@user_id`;
-   const rowsR = await query.find(context);
+   const resquery = await query.find(context),
+         rowsR=resquery.recordsets[0];
    if (rowsR.length>0) {
      redis.client.set('userRigths_'+context.city+'_'+rows[0]['USER_ID'], JSON.stringify(rowsR));
      redis.client.expire('userRigths_'+context.city+'_'+rows[0]['USER_ID'], jwt.redisExpire);//установка времени действия кэша
