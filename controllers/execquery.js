@@ -29,10 +29,13 @@
                   context.execsql=req.body.execsql;
                   context.city=user.city;
                   if (!!req.body.sql) {
+                    if (!!req.body.query_params_out) {
+                      context.query_params_out=req.body.query_params_out;
+                    }
                     context.sql=req.body.sql;
                   }
-                  const rows = await execquery.find(context);
-                  res.status(200).json({rows:rows,tokenOne:tokenOne});
+                  const resexecquery = await execquery.find(context);
+                  res.status(200).json({result:resexecquery,tokenOne:tokenOne});
                 }
                 else {
                     res.status(404).end();

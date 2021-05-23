@@ -115,7 +115,8 @@ function simpleExecute(context) {
       }
       result=getParamsOut(result,context.params_out);
       result=await result.query(statement);
-      resolve(result.recordset);
+      //resolve(result.recordset);
+      resolve(result);
     } catch (err) {
       reject(err);
     }
@@ -141,7 +142,7 @@ function doubleExecute(context) {
         }
         resultsql=getParamsOut(resultsql,context.query_params_out);
         resultsql=await resultsql.query(context.sql);
-        result.sqlrows=result.recordset;
+        result.sqlout=resultsql;
       }
       resolve(result);
     } catch (err) {

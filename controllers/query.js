@@ -19,8 +19,19 @@
                 if (!!req.body.sql) {
                   context.sql=req.body.sql;
                   context.city=user.city;
+                  if (!!req.body.params_out) {
+                    context.params_out=req.body.params_out;
+                  }
+                  context.sql=req.body.sql;
                   const rows = await query.find(context);
-                  res.status(200).json({rows:rows,tokenOne:tokenOne});
+                  let resObj={tokenOne:tokenOne};
+                  if (!!rows.recordsets) {
+                      resObj.rows=rows.recordsets;
+                  }
+                  if (!!rows.output) {
+                      resObj.output=rows.output;
+                  }
+                  res.status(200).json(resObj);
                 }
                 else {
                     res.status(404).end();
