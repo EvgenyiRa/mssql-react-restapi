@@ -88,7 +88,7 @@
                       }
                       result=await result.query($sql_true);
                       $tsql="CREATE TABLE "+tab_temp+" (";
-                      console.log(result.recordset.columns);
+                      //console.log(result.recordset.columns);
                       for (let prop in result.recordset.columns) {
                         const $m=result.recordset.columns[prop];
                         //ставим соответствие типа
@@ -136,11 +136,34 @@
                       $count_all=result.recordsets[0].length;
 
                       //объёмная вставка
-                      const table = new sql.Table(tab_temp);
-                      table.create = false;
-                      result.recordsets[0].forEach(row => table.rows.add.apply(table.rows,row));
-                      let resInsert = $conn.request();
-                      resInsert = await resInsert.bulk(table);
+                      if (result.recordsets[0].length>0) {
+                        const table = new sql.Table(tab_temp);
+                        table.create = false;
+                        //делаем цикл по result.recordsets[0][0], а не по result.recordset.columns, чтобы был одинаковый порядок полей
+                        //при формировании структуры для добавления и при вставке строк
+                        for (let prop in result.recordsets[0][0]) {
+                          const $m=result.recordset.columns[prop];
+                          //table.columns.add($m['name'], $m['type'], { nullable: $m['nullable'] });
+                          table.columns.add($m['name'],
+                                            {type: $m.type,
+                                             length: $m.length,
+                                             scale: $m.scale,
+                                             precision: $m.precision
+                                           },
+                                           { nullable: $m['nullable'] }
+                                         );
+
+                        }
+                        result.recordsets[0].forEach(row => {
+                          const rowIn=[];
+                          for (let prop in row) {
+                            rowIn.push(row[prop]);
+                          }
+                          table.rows.add.apply(table.rows,rowIn)
+                        });
+                        let resInsert = $conn.request();
+                        resInsert = await resInsert.bulk(table);
+                      }
                     }
                     else {
                       time01 = performance.now();
