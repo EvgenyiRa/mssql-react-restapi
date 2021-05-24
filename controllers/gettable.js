@@ -1,6 +1,18 @@
-/*01*/const jwt = require('../config/jwt'),
-            oracledb = require('oracledb'),
+/*01*/const dbConfig = require('../config/database.js'),
+            jwt = require('../config/jwt'),
             { performance } = require('perf_hooks');
+      let $dbt='ora',
+          oracledb,sql,database;
+      if (!!dbConfig.dbtype) {
+          $dbt=dbConfig.dbtype;
+      }
+      if ($dbt==='ora') {
+          oracledb = require('oracledb');
+      }
+      else if ($dbt==='mssql') {
+          sql = require('mssql');
+          database = require('../services/database.js');
+      }
 
       function secondstotime(time01,time00)
       {
@@ -27,31 +39,30 @@
                   statement,
                   binds = {},
                   opts = {};
-              if (!!req.body.opts) {
-                  opts=context.opts;
+              if ($dbt==='ora') {
+                if (!!req.body.opts) {
+                    opts=context.opts;
+                }
+                opts.outFormat = oracledb.OUT_FORMAT_OBJECT;
+                opts.autoCommit = true;
               }
-              opts.outFormat = oracledb.OUT_FORMAT_OBJECT;
-              opts.autoCommit = true;
-              //предполагается что тип БД будет браться из настроек или передаваться вместе с параметрами,
-              //сейчас сделано для 2 типов БД ORACLE,MSSQL
-              const $dbt='ora',
-                    $mass=req.body.data;
+              const $mass=req.body.data;
               let tab_temp;
               if (!!!req.body.tabname) {
                 const timeMilli=String(performance.now()).split('.')[0];
-                if ($dbt=='mssql') {
-                    tab_temp="##REP_TAB_"+$mass['tab_id']+"_"+timeMilli;
-                }
-                else if ($dbt=='ora') {
-                    tab_temp="REP_TAB_"+$mass['tab_id']+"_"+timeMilli;
-                }
+                tab_temp="REP_TAB_"+$mass['tab_id']+"_"+timeMilli;
               }
               else {
                   tab_temp=req.body.tabname;
               }
 
               try {
-                $conn = await oracledb.getConnection(user.city);
+                if ($dbt==='ora') {
+                  $conn = await oracledb.getConnection(user.city);
+                }
+                else if ($dbt==='mssql') {
+                  $conn = await database.poolPromise;
+                }
                 //const result = await conn.execute(statement, binds, opts);
 
                 const $tab_str= $mass['tab_str'],
@@ -61,12 +72,6 @@
                       $params_val_true=$mass['params_val'];
                       $data={};
 
-                /*let $type_decode;
-                if ($dbt=='mssql') {
-                    //получаем массив для преобразования полей для создания временной таблицы
-                    $type_decode=meta_var();
-                }*/
-
                 const $sql_true=$mass['sql_true'];
 
                 let $tsql,
@@ -74,49 +79,75 @@
                     time01;
 
                 $data['tabname']=tab_temp;
-                if ($dbt=='mssql') {
-                    $tsql="SET NOCOUNT ON;SET DATEFORMAT YMD;CREATE TABLE "+tab_temp+" (";
-                    /*if ($stmt3 = sqlsrv_prepare( $conn, $sql_true)) {
-                        $meta_struct=sqlsrv_field_metadata($stmt3);
-                        if ($meta_struct) {
-                            $data['meta_struct']= json_encode($meta_struct);
-                            foreach($meta_struct as $m) {
-                                $tsql+='['+$m['NAME']+']'+" "+$type_decode[$m['Type']];
-                                if ($m['Precision']) {
-                                    if (!in_array($m['Type'], array(93,91,-154,5,-5))) {
-                                        $tsql+="("+$m['Precision']+(($m['Scale']) ? ","+$m['Scale']:"" )+")";
-                                    }
+                if ($dbt==='mssql') {
+                    if (!!!req.body.tabname) {
+                      //получаем сразу и данные и структуру
+                      let result = $conn.request();
+                      for (var prop in $params_val_true) {
+                        result.input(prop,$params_val_true[prop]);
+                      }
+                      result=await result.query($sql_true);
+                      $tsql="CREATE TABLE "+tab_temp+" (";
+                      console.log(result.recordset.columns);
+                      for (let prop in result.recordset.columns) {
+                        const $m=result.recordset.columns[prop];
+                        //ставим соответствие типа
+                        const $type_decode=getMSSQLTypeDecode($m['type']);
+                        $tsql+='['+$m['name']+']'+" "+$type_decode;
+                        if (['Decimal','Numeric'].indexOf($type_decode)>-1) {
+                            if (!!$m['precision']) {
+                              if ($m['precision']>0) {
+                                let prScale=false;
+                                if (!!$m['scale']) {
+                                  if ($m['scale']>0) {
+                                      prScale=true;
+                                  }
                                 }
-                                else if ($m['Size']) {
-                                    $tsql+="("+$m['Size']+")";
+                                if (prScale) {
+                                    $tsql+="("+$m['precision']+","+$m['scale']+")";
                                 }
                                 else {
-                                    if (in_array($m['Type'], array(-9,12))) {
-                                        $tsql+="(MAX)";
-                                    }
+                                    $tsql+="("+$m['precision']+")";
                                 }
-                                $tsql+=(($m['Nullable']) ? " ":" NOT")+" NULL,";
+                              }
                             }
                         }
-                        sqlsrv_free_stmt( $stmt3);
-                    }
-                    $tsql=substr($tsql, 0, -1);
-                    $tsql+=")";
-                    $tsql+=" INSERT INTO "+tab_temp+" "+$sql_true;
-                    //$data['tsql']=str_replace('↵','',html_entity_decode($tsql, ENT_COMPAT | ENT_HTML401, 'UTF-8'));
-                    $data['tsql']=$tsql;
+                        else if (['Char','NChar','VarChar','NVarChar','VarBinary'].indexOf($type_decode)>-1) {
+                          if (!!$m['length']) {
+                            if ($m['length']>0) {
+                              $tsql+="("+$m['length']+")";
+                            }
+                          }
+                        }
+                        else if (['Time','DateTime2','DateTimeOffset'].indexOf($type_decode)>-1) {
+                          if (!!$m['scale']) {
+                            if ($m['scale']>0) {
+                              $tsql+="("+$m['scale']+")";
+                            }
+                          }
+                        }
+                        $tsql+=(($m['nullable']) ? " ":" NOT")+" NULL,\r\n";
+                      }
+                      $tsql=$tsql.slice(0, -3);
+                      $tsql+=")";
+                      $data['sql_create_tab']=$tsql;
+                      let execresult = $conn.request();
+                      execresult=await execresult.batch($tsql);
+                      $count_all=result.recordsets[0].length;
 
-                    $stmt=sqlsrv_prepare($conn, $tsql,$params_val_true);
-                    if (sqlsrv_execute($stmt)) {
-                            $data['ex_insert']="Успех";
+                      //объёмная вставка
+                      const table = new sql.Table(tab_temp);
+                      table.create = false;
+                      result.recordsets[0].forEach(row => table.rows.add.apply(table.rows,row));
+                      let resInsert = $conn.request();
+                      resInsert = await resInsert.bulk(table);
                     }
                     else {
-                            $data['ex_insert']="Error in executing statement.\n"+sqlsrv_errors();
+                      time01 = performance.now();
+                      $count_all=req.body.countall;
                     }
-                    sqlsrv_free_stmt($stmt);*/
                 }
                 else if ($dbt=='ora') {
-
                     //$tsql="CREATE GLOBAL TEMPORARY TABLE "+tab_temp+" (";
                     if (!!!req.body.tabname) {
                       $tsql="CREATE TABLE "+tab_temp+" (";
@@ -170,20 +201,6 @@
                     }
                 }
 
-                if ($dbt=='mssql') {
-                    //$tsql = "SELECT COUNT(1) COUNT_ALL
-                      //         FROM "+tab_temp;
-                     //$getRows = sqlsrv_query($conn, $tsql);
-                     //if(sqlsrv_has_rows($getRows)) {
-                        // $row = sqlsrv_fetch_array( $getRows, SQLSRV_FETCH_ASSOC);
-                         //$count_all=$row['COUNT_ALL'];
-                     //}
-                     //else {
-                    //     $data['tab_html']='Что-пошло не так '+sqlsrv_errors();
-                     //}
-                     //sqlsrv_free_stmt($getRows);
-                }
-
                 //test
                 $data['countall']=$count_all;
                 $data['$tab_pok']=$tab_pok;
@@ -205,11 +222,11 @@
                         }
                         $sql_unic_pok_cool+="SELECT * FROM "
                                         +"("+
-                                        "   SELECT COUNT(DISTINCT "+$tab_pok[0]['SYSNAME']+") count, '"+$tab_pok[0]['SYSNAME']+"' sysname,'"+$tab_pok[0]['NAME']+"' name"
+                                        "   SELECT COUNT(DISTINCT "+$tab_pok[0]['SYSNAME']+") COUNT, '"+$tab_pok[0]['SYSNAME']+"' SYSNAME,'"+$tab_pok[0]['NAME']+"' NAME"
                                            +"   FROM "+tab_temp;
                         for (var $i = 1; $i < $tab_pok.length; $i++) {
                             $sql_unic_pok_cool+=" UNION"
-                                            +"  SELECT COUNT(DISTINCT "+$tab_pok[$i]['SYSNAME']+") count, '"+$tab_pok[$i]['SYSNAME']+"' sysname,'"+$tab_pok[$i]['NAME']+"' name"
+                                            +"  SELECT COUNT(DISTINCT "+$tab_pok[$i]['SYSNAME']+") COUNT, '"+$tab_pok[$i]['SYSNAME']+"' SYSNAME,'"+$tab_pok[$i]['NAME']+"' NAME"
                                               +"  FROM "+tab_temp;
                         }
                         $sql_unic_pok_cool+=  ") T"
@@ -218,15 +235,9 @@
                         $data['$sql_unic_pok_cool']=$sql_unic_pok_cool;
 
                         if ($dbt=='mssql') {
-                            //$getRows = sqlsrv_query($conn, $sql_unic_pok_cool);
-                            //if(sqlsrv_has_rows($getRows)) {
-                                //$i=1;
-                                //while($tab_pok_cool[$i] = sqlsrv_fetch_array( $getRows, SQLSRV_FETCH_ASSOC)) {
-                                  //  ++$i;
-                                //}
-                                //unset($tab_pok_cool[$i]);
-                                //sqlsrv_free_stmt($getRows);
-                            //}
+                            let $tab_pok_cool_result = $conn.request();
+                            $tab_pok_cool_result=await $tab_pok_cool_result.query($sql_unic_pok_cool);
+                            $tab_pok_cool=$tab_pok_cool_result.recordsets[0];
                         }
                         else if ($dbt=='ora') {
                             const $tab_pok_cool_result = await $conn.execute($sql_unic_pok_cool, {}, opts);
@@ -249,17 +260,9 @@
                         $sql_unic_pok=$sql_unic_pok.slice(0, -1);
                         $data['sql_unic_pok']=$sql_unic_pok;
                         if ($dbt=='mssql') {
-                            //$getRows = sqlsrv_query($conn, $sql_unic_pok);
-                            //if(sqlsrv_has_rows($getRows)) {
-                                ////$rowCount_unic_pok = sqlsrv_num_rows($getRows);
-                                //$i=1;
-                                //while( $rows_unic_pok[$i] = sqlsrv_fetch_array( $getRows, SQLSRV_FETCH_ASSOC)) {
-                                //    ++$i;
-                                //}
-                                //$rowCount_unic_pok = $i-1;
-                                //unset($rows_unic_pok[$i]);
-                                //sqlsrv_free_stmt($getRows);
-                            //}
+                            let $rows_unic_pok_result = $conn.request();
+                            $rows_unic_pok_result=await $rows_unic_pok_result.query($sql_unic_pok);
+                            $rows_unic_pok=$rows_unic_pok_result.recordsets[0];
                         }
                         else if ($dbt=='ora') {
                             const $rows_unic_pok_result = await $conn.execute($sql_unic_pok, {}, opts);
@@ -272,16 +275,16 @@
                         $rows_unic_str=[],
                         $rowCount_unic_str=0;
                     if ($dbt=='mssql') {
-                        //$sql_unic_str+="SET NOCOUNT ON;SET DATEFORMAT YMD;";
-                        //$sql_unic_str+="SELECT DISTINCT ";
-                        //$tab_str.forEach((item) => {
-                        //    $sql_unic_str+="["+item['SYSNAME']+"],";
-                        //});
-                        //$sql_unic_str=$sql_unic_str.slice(0, -1);
-                        //$sql_unic_str+=" FROM "+tab_temp+" ORDER BY ";
-                        //$tab_str.forEach((item) => {
-                        //    $sql_unic_str+="["+item['SYSNAME']+"],";
-                        //});
+                        $sql_unic_str+="SET NOCOUNT ON;SET DATEFORMAT YMD;";
+                        $sql_unic_str+="SELECT DISTINCT ";
+                        $tab_str.forEach((item) => {
+                            $sql_unic_str+="["+item['SYSNAME']+"],";
+                        });
+                        $sql_unic_str=$sql_unic_str.slice(0, -1);
+                        $sql_unic_str+=" FROM "+tab_temp+" ORDER BY ";
+                        $tab_str.forEach((item) => {
+                            $sql_unic_str+="["+item['SYSNAME']+"],";
+                        });
                     }
                     else if ($dbt=='ora') {
                         $sql_unic_str+="SELECT DISTINCT ";
@@ -298,16 +301,9 @@
                     $sql_unic_str=$sql_unic_str.slice(0, -1);
                     $data['sql_unic_str']=$sql_unic_str;
                     if ($dbt=='mssql') {
-                        //$getRows = sqlsrv_query($conn, $sql_unic_str);
-                        //if(sqlsrv_has_rows($getRows)) {
-                            //$i=1;
-                            //while( $rows_unic_str[$i] = sqlsrv_fetch_array( $getRows, SQLSRV_FETCH_ASSOC)) {
-                            //    ++$i;
-                            //}
-                            //$rowCount_unic_str = $i-1;
-                            //unset($rows_unic_str[$i]);
-                            //sqlsrv_free_stmt($getRows);
-                        //}
+                        let $rows_unic_str_result = $conn.request();
+                        $rows_unic_str_result=await $rows_unic_str_result.query($sql_unic_str);
+                        $rowCount_unic_str=$rows_unic_str_result.recordsets[0];
                     }
                     else if ($dbt=='ora') {
                         const $rows_unic_str_result = await $conn.execute($sql_unic_str, {}, opts);
@@ -322,37 +318,17 @@
                         $sql_unic_val+="SET NOCOUNT ON;SET DATEFORMAT YMD;";
                     }
                     $sql_unic_val+="WITH TAB AS (SELECT ";
-                    if (!!$mass['tab_str_itog_order']) {
-                        for (var $i = 0; $i <= ($tab_str.length-2); $i++) {
-                            if ($dbt=='mssql') {
-                                $sql_unic_val+="["+$tab_str[$i]['SYSNAME']+"],";
-                            }
-                            else if ($dbt=='ora') {
-                                $sql_unic_val+='"'+$tab_str[$i]['SYSNAME']+'",';
-                            }
-                        }
+                    $tab_str.forEach(($m) => {
                         if ($dbt=='mssql') {
-                            //$sql_unic_val+="CAST(["+$tab_str[$tab_str.length-1]['SYSNAME']+"] AS NVARCHAR(MAX)) ["+$tab_str[$tab_str.length-1]['SYSNAME']+"],["
-                                            //+$tab_str[$tab_str.length-1]['SYSNAME']+"] "+$tab_str[$tab_str.length-1]['SYSNAME']+"_ITG_,";
+                            $sql_unic_val+="["+$m['SYSNAME']+"],";
                         }
                         else if ($dbt=='ora') {
-                            $sql_unic_val+="TO_CHAR(\""+$tab_str[$tab_str.length-1]['SYSNAME']+"\") \""+$tab_str[$tab_str.length-1]['SYSNAME']+"\",\""
-                                            +$tab_str[$tab_str.length-1]['SYSNAME']+"\" "+$tab_str[$tab_str.length-1]['SYSNAME']+"_ITG_,";
+                            $sql_unic_val+="\""+$m['SYSNAME']+"\",";
                         }
+                    });
 
-                        if ($tab_pok.length>0) {
-                            for (var $i = 0; $i <$tab_pok_cool.length; $i++) {
-                                if ($dbt=='mssql') {
-                                    $sql_unic_val+="["+$tab_pok_cool[$i]['SYSNAME']+"],";
-                                }
-                                else if ($dbt=='ora') {
-                                    $sql_unic_val+="\""+$tab_pok_cool[$i]['SYSNAME']+"\",";
-                                }
-                            }
-                        }
-                    }
-                    else {
-                        $tab_str.forEach(($m) => {
+                    if ($tab_pok.length>0) {
+                        $tab_pok_cool.forEach(($m) => {
                             if ($dbt=='mssql') {
                                 $sql_unic_val+="["+$m['SYSNAME']+"],";
                             }
@@ -360,18 +336,8 @@
                                 $sql_unic_val+="\""+$m['SYSNAME']+"\",";
                             }
                         });
-
-                        if ($tab_pok.length>0) {
-                            $tab_pok_cool.forEach(($m) => {
-                                if ($dbt=='mssql') {
-                                    $sql_unic_val+="["+$m['SYSNAME']+"],";
-                                }
-                                else if ($dbt=='ora') {
-                                    $sql_unic_val+="\""+$m['SYSNAME']+"\",";
-                                }
-                            });
-                        }
                     }
+
                     if ($dbt=='mssql') {
                         $tab_val.forEach(($m) => {
                             $sql_unic_val+='ISNULL('+$m['AGGR']+'(ISNULL(['+$m['SYSNAME']+"],0)),0) ["+$m['SYSNAME']+"],";
@@ -421,121 +387,6 @@
                         });
                     }
                     $sql_unic_val+="TAB.* FROM TAB";
-                    //ИТОГИ
-                    if ($mass['tab_str_itog_order']) {
-                        $sql_unic_val+=" UNION ALL SELECT ";
-                        if ($dbt=='mssql') {
-                            $tab_str.forEach(($m) => {
-                                $sql_unic_val+="GROUPING(["+$m['SYSNAME']+"]) "+$m['SYSNAME']+"_GRPNG_,";
-                            });
-                        }
-                        else if ($dbt=='ora') {
-                            $tab_str.forEach(($m) => {
-                                $sql_unic_val+="GROUPING(\""+$m['SYSNAME']+"\") "+$m['SYSNAME']+"_GRPNG_,";
-                            });
-                        }
-                        if ($tab_pok_cool.length>0) {
-                            if ($dbt=='mssql') {
-                                $tab_pok_cool.forEach(($m) => {
-                                    $sql_unic_val+="GROUPING(["+$m['SYSNAME']+"]) "+$m['SYSNAME']+"_GRPNG_,";
-                                });
-                            }
-                            else if ($dbt=='ora') {
-                                $tab_pok_cool.forEach(($m) => {
-                                    $sql_unic_val+="GROUPING(\""+$m['SYSNAME']+"\") "+$m['SYSNAME']+"_GRPNG_,";
-                                });
-                            }
-                        }
-
-                        if ($dbt=='mssql') {
-                            for (var $i = 0; $i <= ($tab_str.length-2); $i++) {
-                                $sql_unic_val+="["+$tab_str[$i]['SYSNAME']+"],";
-                            }
-                            $sql_unic_val+="'Итого' ["+$tab_str[$tab_str.length-1]['SYSNAME']+"],["+$tab_str[$tab_str.length-1]['SYSNAME']+"] "+$tab_str[$tab_str.length-1]['SYSNAME']+"_ITG_,";
-                        }
-                        else if ($dbt=='ora') {
-                            for (var $i = 0; $i <= ($tab_str.length-2); $i++) {
-                                $sql_unic_val+="\""+$tab_str[$i]['SYSNAME']+"\",";
-                            }
-                            $sql_unic_val+="'Итого' \""+$tab_str[$tab_str.length-1]['SYSNAME']+"\",\""+$tab_str[$tab_str.length-1]['SYSNAME']+"\" "+$tab_str[$tab_str.length-1]['SYSNAME']+"_ITG_,";
-                        }
-
-
-                        if ($tab_pok.length>0) {
-                            if ($dbt=='mssql') {
-                                $tab_pok_cool.forEach(($m) => {
-                                    $sql_unic_val+="["+$m['SYSNAME']+"],";
-                                });
-                            }
-                            else if ($dbt=='ora') {
-                                $tab_pok_cool.forEach(($m) => {
-                                    $sql_unic_val+="\""+$m['SYSNAME']+"\",";
-                                });
-                            }
-                        }
-
-                        if ($dbt=='mssql') {
-                            $tab_val.forEach(($m) => {
-                                $sql_unic_val+='ISNULL('+$mass['tab_str_itog_val']+'(ISNULL(['+$m['SYSNAME']+"],0)),0) ["+$m['SYSNAME']+"],";
-                            });
-                        }
-                        else if ($dbt=='ora') {
-                            $tab_val.forEach(($m) => {
-                                $sql_unic_val+='NVL('+$mass['tab_str_itog_val']+'(NVL("'+$m['SYSNAME']+'",0)),0) "'+$m['SYSNAME']+'",';
-                            });
-                        }
-                        $sql_unic_val=$sql_unic_val.slice(0, -1);
-                        if ($dbt=='mssql') {
-                            $sql_unic_val+=" FROM TAB GROUP BY ";
-                            $tab_str.forEach(($m) => {
-                                $sql_unic_val+="["+$m['SYSNAME']+"],";
-                            });
-                        }
-                        else if ($dbt=='ora') {
-                            $sql_unic_val+=" FROM TAB GROUP BY CUBE(";
-                            $tab_str.forEach(($m) => {
-                                $sql_unic_val+="\""+$m['SYSNAME']+"\",";
-                            });
-                        }
-                        if ($tab_pok.length>0) {
-                            if ($dbt=='mssql') {
-                                $tab_pok_cool.forEach(($m) => {
-                                    $sql_unic_val+="["+$m['SYSNAME']+"],";
-                                });
-                            }
-                            else if ($dbt=='ora') {
-                                $tab_pok_cool.forEach(($m) => {
-                                    $sql_unic_val+="\""+$m['SYSNAME']+"\",";
-                                });
-                            }
-                        }
-                        $sql_unic_val=$sql_unic_val.slice(0, -1);
-                        if ($dbt=='mssql') {
-                            $sql_unic_val+=" WITH CUBE HAVING (GROUPING(["+$tab_str[$tab_str.length-1]['SYSNAME']+"])=1";
-                            for (var $i = 0; $i <= ($tab_str.length-2); $i++) {
-                                $sql_unic_val+=" AND GROUPING(["+$tab_str[$i]['SYSNAME']+"])=1 ";
-                            }
-                        }
-                        else if ($dbt=='ora') {
-                            $sql_unic_val+=") HAVING (GROUPING(\""+$tab_str[$tab_str.length-1]['SYSNAME']+"\")=1";
-                            for (var $i = 0; $i <= ($tab_str.length-2); $i++) {
-                                $sql_unic_val+=" AND GROUPING(\""+$tab_str[$i]['SYSNAME']+"\")=1 ";
-                            }
-                        }
-                        $sql_unic_val+=")";
-                        if ($tab_pok.length>0) {
-                            if ($dbt=='mssql') {
-                                $tab_pok_cool.forEach(($m) => {
-                                    $sql_unic_val+=" AND GROUPING(["+$m['SYSNAME']+"])=0 ";
-                                });
-                            }
-                            else if ($dbt=='ora') {
-                                $tab_pok_cool.forEach(($m) => {
-                                    $sql_unic_val+=" AND GROUPING(\""+$m['SYSNAME']+"\")=0 ";
-                                });
-                            }
-                        }
-                    }
                     if ($dbt=='mssql') {
                         $sql_unic_val+=" ORDER BY ";
                     }
@@ -543,64 +394,27 @@
                         $sql_unic_val+=") ORDER BY ";
                     }
 
-                    //для ИТОГов
-                    if (!!$mass['tab_str_itog_order']) {
+                    if ($dbt=='mssql') {
+                        $tab_str.forEach(($m) => {
+                            $sql_unic_val+="["+$m['SYSNAME']+"],";
+                        });
                         if ($tab_pok.length>0) {
-                            if ($dbt=='mssql') {
-                                for (var $i = 0; $i <= ($tab_str.length-2); $i++) {
-                                    $sql_unic_val+=$tab_str[$i]['SYSNAME']+"_GRPNG_,["+$tab_str[$i]['SYSNAME']+"],";
-                                }
-                                $sql_unic_val+=$tab_str[$tab_str.length-1]['SYSNAME']+"_GRPNG_,"+$tab_str[$tab_str.length-1]['SYSNAME']+"_ITG_,";
-                                $tab_pok_cool.forEach(($m) => {
-                                    $sql_unic_val+=$m['SYSNAME']+"_GRPNG_,["+$m['SYSNAME']+"],";
-                                });
-                            }
-                            else if ($dbt=='ora') {
-                                for (var $i = 0; $i <= ($tab_str.length-2); $i++) {
-                                    $sql_unic_val+=$tab_str[$i]['SYSNAME']+"_GRPNG_,\""+$tab_str[$i]['SYSNAME']+"\",";
-                                }
-                                $sql_unic_val+=$tab_str[$tab_str.length-1]['SYSNAME']+"_GRPNG_,"+$tab_str[$tab_str.length-1]['SYSNAME']+"_ITG_,";
-                                $tab_pok_cool.forEach(($m) => {
-                                    $sql_unic_val+=$m['SYSNAME']+"_GRPNG_,\""+$m['SYSNAME']+"\",";
-                                });
-                            }
-                        }
-                        else {
-                            if ($dbt=='mssql') {
-                                $tab_str.forEach(($m) => {
-                                    $sql_unic_val+=$m['SYSNAME']+"_GRPNG_,["+$m['SYSNAME']+"],";
-                                });
-                            }
-                            else if ($dbt=='ora') {
-                                $tab_str.forEach(($m) => {
-                                    $sql_unic_val+=$m['SYSNAME']+"_GRPNG_,\""+$m['SYSNAME']+"\",";
-                                });
-                            }
-                        }
-                    }
-                    //не для итогов
-                    else {
-                        if ($dbt=='mssql') {
-                            $tab_str.forEach(($m) => {
+                            $tab_pok_cool.forEach(($m) => {
                                 $sql_unic_val+="["+$m['SYSNAME']+"],";
                             });
-                            if ($tab_pok.length>0) {
-                                $tab_pok_cool.forEach(($m) => {
-                                    $sql_unic_val+="["+$m['SYSNAME']+"],";
-                                });
-                            }
-                        }
-                        else if ($dbt=='ora') {
-                            $tab_str.forEach(($m) => {
-                                $sql_unic_val+="\""+$m['SYSNAME']+"\",";
-                            });
-                            if ($tab_pok.length>0) {
-                                $tab_pok_cool.forEach(($m) => {
-                                    $sql_unic_val+="\""+$m['SYSNAME']+"\",";
-                                });
-                            }
                         }
                     }
+                    else if ($dbt=='ora') {
+                        $tab_str.forEach(($m) => {
+                            $sql_unic_val+="\""+$m['SYSNAME']+"\",";
+                        });
+                        if ($tab_pok.length>0) {
+                            $tab_pok_cool.forEach(($m) => {
+                                $sql_unic_val+="\""+$m['SYSNAME']+"\",";
+                            });
+                        }
+                    }
+
                     if ($dbt=='mssql') {
                         $tab_val.forEach(($m) => {
                             $sql_unic_val+="["+$m['SYSNAME']+"],";
@@ -617,22 +431,15 @@
                     let $rows_unic_val,
                         $rowCount_unic_val;
                     if ($dbt=='mssql') {
-                        //$getRows = sqlsrv_query($conn, $sql_unic_val);
-                        //if(sqlsrv_has_rows($getRows)) {
-                        //    $i=1;
-                        //    while( $rows_unic_val[$i] = sqlsrv_fetch_array( $getRows, SQLSRV_FETCH_ASSOC)) {
-                        //        ++$i;
-                        //    }
-                        //    $rowCount_unic_val =$i-1;
-                        //    unset($rows_unic_val[$i]);
-                        //    sqlsrv_free_stmt($getRows);
-                        //}
+                        let $rows_unic_val_result = $conn.request();
+                        $rows_unic_val_result=await $rows_unic_val_result.query($sql_unic_val);
+                        $rows_unic_val=$rows_unic_val_result.recordsets[0];
                     }
                     else if ($dbt=='ora') {
                         const $rows_unic_val_result = await $conn.execute($sql_unic_val, {}, opts);
                         $rows_unic_val=$rows_unic_val_result.rows;
-                        $rowCount_unic_val=$rows_unic_val.length;
                     }
+                    $rowCount_unic_val=$rows_unic_val.length;
                     $data['$rows_unic_val']=$rows_unic_val;
                     $data['$rowCount_unic_val']=$rowCount_unic_val;
 
@@ -687,15 +494,9 @@
                                                    " FROM "+tab_temp+
                                                   " ORDER BY 1";
                             if ($dbt=='mssql') {
-                                //$getRows = sqlsrv_query($conn, $sql_unic_pok_cool_one);
-                                //if(sqlsrv_has_rows($getRows)) {
-                                //    $i=1;
-                                //    while($rows_unic_pok_one[$i] = sqlsrv_fetch_array( $getRows, SQLSRV_FETCH_ASSOC)) {
-                                //        ++$i;
-                                //    }
-                              //      unset($rows_unic_pok_one[$i]);
-                                //    sqlsrv_free_stmt($getRows);
-                                //}
+                                let $rows_unic_pok_one_result = $conn.request();
+                                $rows_unic_pok_one_result=await $rows_unic_pok_one_result.query($sql_unic_pok_cool_one);
+                                $rows_unic_pok_one=$rows_unic_pok_one_result.recordsets[0];
                             }
                             else if ($dbt=='ora') {
                                 const $rows_unic_pok_one_result = await $conn.execute($sql_unic_pok_cool_one, {}, opts);
@@ -899,20 +700,14 @@
                 next(err);
               }
               finally {
-                if ($conn) { // conn assignment worked, need to close
-                  /*try {
-                    //теперь таблица постоянная, если существуют таблицы со сроком создания больше 8 часов (время жизни куки),
-                    //то запрос на их удаление делаем на уровне приложения, чтобы работало параллельно
-                    await $conn.execute("TRUNCATE TABLE "+tab_temp);
-                    await $conn.execute("DROP TABLE "+tab_temp, {}, opts);
-                  }
-                  finally {*/
+                if ($dbt=='ora') {
+                  if ($conn) { // conn assignment worked, need to close
                     try {
                       await $conn.close();
                     } catch (err) {
                       console.log(err);
                     }
-                  //}
+                  }
                 }
               }
             }
@@ -928,3 +723,104 @@
 }
 
 module.exports.post = post;
+
+function getMSSQLTypeDecode(typeIn) {
+  let $type_decode;
+  if (typeIn===sql.Bit) {
+      $type_decode='Bit';
+  }
+  else if (typeIn===sql.BigInt) {
+      $type_decode='BigInt';
+  }
+  else if (typeIn===sql.Decimal) {
+      $type_decode='Decimal';
+  }
+  else if (typeIn===sql.Float) {
+      $type_decode='Float';
+  }
+  else if (typeIn===sql.Int) {
+      $type_decode='Int';
+  }
+  else if (typeIn===sql.Money) {
+      $type_decode='Money';
+  }
+  else if (typeIn===sql.Numeric) {
+      $type_decode='Numeric';
+  }
+  else if (typeIn===sql.SmallInt) {
+      $type_decode='SmallInt';
+  }
+  else if (typeIn===sql.SmallMoney) {
+      $type_decode='SmallMoney';
+  }
+  else if (typeIn===sql.Real) {
+      $type_decode='Real';
+  }
+  else if (typeIn===sql.TinyInt) {
+      $type_decode='TinyInt';
+  }
+  else if (typeIn===sql.Char) {
+      $type_decode='Char';
+  }
+  else if (typeIn===sql.NChar) {
+      $type_decode='NChar';
+  }
+  else if (typeIn===sql.Text) {
+      $type_decode='Text';
+  }
+  else if (typeIn===sql.NText) {
+      $type_decode='NText';
+  }
+  else if (typeIn===sql.VarChar) {
+      $type_decode='VarChar';
+  }
+  else if (typeIn===sql.NVarChar) {
+      $type_decode='NVarChar';
+  }
+  else if (typeIn===sql.Xml) {
+      $type_decode='Xml';
+  }
+  else if (typeIn===sql.Time) {
+      $type_decode='Time';
+  }
+  else if (typeIn===sql.Date) {
+      $type_decode='Date';
+  }
+  else if (typeIn===sql.DateTime) {
+      $type_decode='DateTime';
+  }
+  else if (typeIn===sql.DateTime2) {
+      $type_decode='DateTime2';
+  }
+  else if (typeIn===sql.DateTimeOffset) {
+      $type_decode='DateTimeOffset';
+  }
+  else if (typeIn===sql.SmallDateTime) {
+      $type_decode='SmallDateTime';
+  }
+  else if (typeIn===sql.UniqueIdentifier) {
+      $type_decode='UniqueIdentifier';
+  }
+  else if (typeIn===sql.Variant) {
+      $type_decode='Variant';
+  }
+  else if (typeIn===sql.Binary) {
+      $type_decode='Binary';
+  }
+  else if (typeIn===sql.VarBinary) {
+      $type_decode='VarBinary';
+  }
+  else if (typeIn===sql.Image) {
+      $type_decode='Image';
+  }
+  else if (typeIn===sql.UDT) {
+      $type_decode='UDT';
+  }
+  else if (typeIn===sql.Geography) {
+      $type_decode='Geography';
+  }
+  else if (typeIn===sql.Geometry) {
+      $type_decode='Geometry';
+  }
+  return $type_decode;
+}

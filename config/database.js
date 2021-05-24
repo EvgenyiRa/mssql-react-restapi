@@ -13,5 +13,6 @@ module.exports = {
             options: {
               encrypt: false
             }
-        }
+        },
+  dbtype:'mssql'
 };
