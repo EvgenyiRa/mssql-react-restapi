@@ -87,63 +87,16 @@
                         result.input(prop,$params_val_true[prop]);
                       }
                       result=await result.query($sql_true);
-                      $tsql="CREATE TABLE "+tab_temp+" (";
-                      //console.log(result.recordset.columns);
-                      for (let prop in result.recordset.columns) {
-                        const $m=result.recordset.columns[prop];
-                        //ставим соответствие типа
-                        const $type_decode=getMSSQLTypeDecode($m['type']);
-                        $tsql+='['+$m['name']+']'+" "+$type_decode;
-                        if (['Decimal','Numeric'].indexOf($type_decode)>-1) {
-                            if (!!$m['precision']) {
-                              if ($m['precision']>0) {
-                                let prScale=false;
-                                if (!!$m['scale']) {
-                                  if ($m['scale']>0) {
-                                      prScale=true;
-                                  }
-                                }
-                                if (prScale) {
-                                    $tsql+="("+$m['precision']+","+$m['scale']+")";
-                                }
-                                else {
-                                    $tsql+="("+$m['precision']+")";
-                                }
-                              }
-                            }
-                        }
-                        else if (['Char','NChar','VarChar','NVarChar','VarBinary'].indexOf($type_decode)>-1) {
-                          if (!!$m['length']) {
-                            if ($m['length']>0) {
-                              $tsql+="("+$m['length']+")";
-                            }
-                          }
-                        }
-                        else if (['Time','DateTime2','DateTimeOffset'].indexOf($type_decode)>-1) {
-                          if (!!$m['scale']) {
-                            if ($m['scale']>0) {
-                              $tsql+="("+$m['scale']+")";
-                            }
-                          }
-                        }
-                        $tsql+=(($m['nullable']) ? " ":" NOT")+" NULL,\r\n";
-                      }
-                      $tsql=$tsql.slice(0, -3);
-                      $tsql+=")";
-                      $data['sql_create_tab']=$tsql;
-                      let execresult = $conn.request();
-                      execresult=await execresult.batch($tsql);
                       $count_all=result.recordsets[0].length;
 
                       //объёмная вставка
-                      if (result.recordsets[0].length>0) {
+                      if ($count_all>0) {
                         const table = new sql.Table(tab_temp);
-                        table.create = false;
+                        table.create = true;
                         //делаем цикл по result.recordsets[0][0], а не по result.recordset.columns, чтобы был одинаковый порядок полей
                         //при формировании структуры для добавления и при вставке строк
                         for (let prop in result.recordsets[0][0]) {
                           const $m=result.recordset.columns[prop];
-                          //table.columns.add($m['name'], $m['type'], { nullable: $m['nullable'] });
                           table.columns.add($m['name'],
                                             {type: $m.type,
                                              length: $m.length,
@@ -746,104 +699,3 @@
 }
 
 module.exports.post = post;
-
-function getMSSQLTypeDecode(typeIn) {
-  let $type_decode;
-  if (typeIn===sql.Bit) {
-      $type_decode='Bit';
-  }
-  else if (typeIn===sql.BigInt) {
-      $type_decode='BigInt';
-  }
-  else if (typeIn===sql.Decimal) {
-      $type_decode='Decimal';
-  }
-  else if (typeIn===sql.Float) {
-      $type_decode='Float';
-  }
-  else if (typeIn===sql.Int) {
-      $type_decode='Int';
-  }
-  else if (typeIn===sql.Money) {
-      $type_decode='Money';
-  }
-  else if (typeIn===sql.Numeric) {
-      $type_decode='Numeric';
-  }
-  else if (typeIn===sql.SmallInt) {
-      $type_decode='SmallInt';
-  }
-  else if (typeIn===sql.SmallMoney) {
-      $type_decode='SmallMoney';
-  }
-  else if (typeIn===sql.Real) {
-      $type_decode='Real';
-  }
-  else if (typeIn===sql.TinyInt) {
-      $type_decode='TinyInt';
-  }
-  else if (typeIn===sql.Char) {
-      $type_decode='Char';
-  }
-  else if (typeIn===sql.NChar) {
-      $type_decode='NChar';
-  }
-  else if (typeIn===sql.Text) {
-      $type_decode='Text';
-  }
-  else if (typeIn===sql.NText) {
-      $type_decode='NText';
-  }
-  else if (typeIn===sql.VarChar) {
-      $type_decode='VarChar';
-  }
-  else if (typeIn===sql.NVarChar) {
-      $type_decode='NVarChar';
-  }
-  else if (typeIn===sql.Xml) {
-      $type_decode='Xml';
-  }
-  else if (typeIn===sql.Time) {
-      $type_decode='Time';
-  }
-  else if (typeIn===sql.Date) {
-      $type_decode='Date';
-  }
-  else if (typeIn===sql.DateTime) {
-      $type_decode='DateTime';
-  }
-  else if (typeIn===sql.DateTime2) {
-      $type_decode='DateTime2';
-  }
-  else if (typeIn===sql.DateTimeOffset) {
-      $type_decode='DateTimeOffset';
-  }
-  else if (typeIn===sql.SmallDateTime) {
-      $type_decode='SmallDateTime';
-  }
-  else if (typeIn===sql.UniqueIdentifier) {
-      $type_decode='UniqueIdentifier';
-  }
-  else if (typeIn===sql.Variant) {
-      $type_decode='Variant';
-  }
-  else if (typeIn===sql.Binary) {
-      $type_decode='Binary';
-  }
-  else if (typeIn===sql.VarBinary) {
-      $type_decode='VarBinary';
-  }
-  else if (typeIn===sql.Image) {
-      $type_decode='Image';
-  }
-  else if (typeIn===sql.UDT) {
-      $type_decode='UDT';
-  }
-  else if (typeIn===sql.Geography) {
-      $type_decode='Geography';
-  }
-  else if (typeIn===sql.Geometry) {
-      $type_decode='Geometry';
-  }
-  return $type_decode;
-}
