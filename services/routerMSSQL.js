@@ -1,12 +1,12 @@
 const express = require('express');
 const routerMSSQL = new express.Router();
-const query = require('../controllers/query.js');
-const execquery = require('../controllers/execquery.js');
+const sqlrun = require('../controllers/sqlrun.js');
+const sqlrun2 = require('../controllers/sqlrun2.js');
 
-routerMSSQL.route('/query')
-  .post(query.post);
+routerMSSQL.route('/sqlrun')
+  .post(sqlrun.post);
 
-routerMSSQL.route('/execquery')
-  .post(execquery.post);
+routerMSSQL.route('/sqlrun2')
+  .post(sqlrun2.post);
 
 module.exports = routerMSSQL;
