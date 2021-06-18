@@ -24,7 +24,7 @@ module.exports = {
  },
  jwt:{
    tokenKey : '7a9b-5c7d-5e7f-7g9h',
-   host: process.env.JWT_FRONTEND_PATH || "http://localhost:3000",
+   host: process.env.MSSQL_REACT_RESTAPI_FRONTEND_PATH || "http://localhost:3000",
    expiresIn:'8h',
    redisExpire:28800,//8часов
    verify:function(req,jwt,callback) {
