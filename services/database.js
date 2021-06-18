@@ -1,5 +1,6 @@
 const sql = require('mssql'),
-      dbConfig = require('../config/database.js');
+      configs=require('../config/configs.js'),
+      dbConfig = configs.database;
 
 const poolPromise = new sql.ConnectionPool(dbConfig.hrPool)
   .connect()
@@ -154,7 +155,8 @@ function doubleExecute(context) {
 module.exports.doubleExecute = doubleExecute;
 
 async function authUser(req,rows,context) {
-  const jwt = require('../config/jwt'),
+  const configs=require('../config/configs.js'),
+        jwt = configs.jwt,
         jwtlib = require('jsonwebtoken'),
         redis=require('../services/redis.js'),
         query = require('../db_apis/query.js'),

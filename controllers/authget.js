@@ -1,5 +1,6 @@
 /*01*/const redis=require('../services/redis.js'),
-            jwt = require('../config/jwt');
+            configs=require('../config/configs.js'),
+            jwt = configs.jwt;
 /*02*/
 /*03*/async function post(req, res, next) {
         //console.log('req.body',req.body);

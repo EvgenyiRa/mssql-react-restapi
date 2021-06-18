@@ -1,5 +1,6 @@
 /*01*/const query = require('../db_apis/query.js'),
-            jwt = require('../config/jwt'),
+            configs=require('../config/configs.js'),
+            jwt = configs.jwt,
             database = require('../services/database.js');
 /*02*/
 /*03*/async function post(req, res, next) {

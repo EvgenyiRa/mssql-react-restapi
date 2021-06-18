@@ -1,4 +1,5 @@
-const webServerConfig = require('../config/web-server.js');
+const configs=require('../config/configs.js'),
+      webServerConfig = configs.webServer;
 let https;
 if (webServerConfig.https) {
     https = require('https');
@@ -10,14 +11,13 @@ const express = require('express');
 const morgan = require('morgan');
 const fs = require('fs');
 const path = require('path');
-const router = require('./router.js');
 const routerMSSQL = require('./routerMSSQL.js');
 const routerAuth = require('./routerAuth.js');
 const routerOLAP = require('./routerOLAP.js');
 const redis=require('./redis.js');
 
 const bodyParser = require('body-parser'),
-      jwt = require('../config/jwt');
+      jwt=configs.jwt;
 
 let httpsServer;
 
@@ -53,7 +53,6 @@ function initialize() {
     });
 
     app.use(bodyParser.json({limit: '100mb', extended: true}));
-    app.use('/get', router);
     app.use('/mssql', routerMSSQL);
     app.use('/auth', routerAuth);
     app.use('/olap', routerOLAP);

@@ -1,5 +1,6 @@
-/*01*/const dbConfig = require('../config/database.js'),
-            jwt = require('../config/jwt'),
+/*01*/const configs=require('../config/configs.js'),
+            dbConfig = configs.database,
+            jwt = configs.jwt,
             { performance } = require('perf_hooks');
       let $dbt='ora',
           oracledb,sql,database;
@@ -26,10 +27,8 @@
           return s;
       }
 
-/*03*/async function post(req, res, next) {
-        //console.log('req.body',req.body);
+      async function post(req, res, next) {
         if (!!req.body.authorization) {
-          //const authorization=req.body.authorization.toString();
           jwt.verify(req,jwt,async function(resAuath,tokenOne,user) {
             if (resAuath) {
               const time00 = performance.now();

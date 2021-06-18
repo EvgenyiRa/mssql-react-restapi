@@ -1,4 +1,5 @@
-/*01*/const jwt = require('../config/jwt'),
+/*01*/const configs=require('../config/configs.js'),
+            jwt = configs.jwt,
             jwtlib = require('jsonwebtoken'),
             redis=require('../services/redis.js');
 
