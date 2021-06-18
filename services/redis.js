@@ -1,5 +1,6 @@
 const redis = require('redis'),
-      redisConfig=require('../config/redis.js');
+      configs=require('../config/configs.js'),
+      redisConfig = configs.redis;
 const client = redis.createClient(redisConfig.port,redisConfig.host);
 
 module.exports.client =client;

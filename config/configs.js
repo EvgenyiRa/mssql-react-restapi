@@ -1,6 +1,3 @@
-const jwtlib = require('jsonwebtoken'),
-      redis=require('../services/redis.js'),
-      crypto = require('crypto');
 module.exports = {
   webServer:{
     port: process.env.HTTP_PORT || 3777,
@@ -31,6 +28,9 @@ module.exports = {
    expiresIn:'8h',
    redisExpire:28800,//8часов
    verify:function(req,jwt,callback) {
+     const jwtlib = require('jsonwebtoken'),
+           redis=require('../services/redis.js'),
+           crypto = require('crypto');
      var auth=false,
          tokenOne='';
      try {
@@ -89,5 +89,10 @@ module.exports = {
           '$2a$10$e44PXCG9XUsmi1cxYSg0mQ$'
         ],
    lenTokenQueue:8
+ },
+ redis:{
+   port: process.env.MSSQL_REACT_RESTAPI_REDISPORT || 6379,
+   host: process.env.MSSQL_REACT_RESTAPI_REDISHOST || '127.0.0.1'
  }
+
 };
