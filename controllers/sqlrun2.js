@@ -27,7 +27,6 @@
                 }
                 if (!!req.body.execsql) {
                   context.execsql=req.body.execsql;
-                  context.city=user.city;
                   if (!!req.body.sql) {
                     if (!!req.body.query_params_out) {
                       context.query_params_out=req.body.query_params_out;

@@ -18,7 +18,6 @@
                 }
                 if (!!req.body.sql) {
                   context.sql=req.body.sql;
-                  context.city=user.city;
                   if (!!req.body.params_out) {
                     context.params_out=req.body.params_out;
                   }

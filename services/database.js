@@ -160,10 +160,10 @@ async function authUser(req,rows,context) {
         query = require('../db_apis/query.js'),
         crypto = require('crypto');
   //на всякий случай удаляем значения для пользователя если они есть
-  redis.client.del('user_'+context.city+'_'+rows[0]['USER_ID']);
-  redis.client.del('userToken_'+context.city+'_'+rows[0]['USER_ID']);
-  redis.client.del('userRigths_'+context.city+'_'+rows[0]['USER_ID']);
-  const user_obj_jwt={ id: rows[0]['USER_ID'], host:req.headers.origin,login:context.params.login, city:context.city},
+  redis.client.del('user_'+rows[0]['USER_ID']);
+  redis.client.del('userToken_'+rows[0]['USER_ID']);
+  redis.client.del('userRigths_'+rows[0]['USER_ID']);
+  const user_obj_jwt={ id: rows[0]['USER_ID'], host:req.headers.origin,login:context.params.login},
         user_obj={...user_obj_jwt};
   user_obj.fio=rows[0]['FIO'];
   user_obj.email=rows[0]['EMAIL'];
@@ -180,19 +180,19 @@ async function authUser(req,rows,context) {
    const resquery = await query.find(context),
          rowsR=resquery.recordsets[0];
    if (rowsR.length>0) {
-     redis.client.set('userRigths_'+context.city+'_'+rows[0]['USER_ID'], JSON.stringify(rowsR));
-     redis.client.expire('userRigths_'+context.city+'_'+rows[0]['USER_ID'], jwt.redisExpire);//установка времени действия кэша
+     redis.client.set('userRigths_'+rows[0]['USER_ID'], JSON.stringify(rowsR));
+     redis.client.expire('userRigths_'+rows[0]['USER_ID'], jwt.redisExpire);//установка времени действия кэша
      user_obj.rights=1;
    }
    else {
      user_obj.rights=0;
    }
   //console.log('user_obj',user_obj);
-  redis.client.hmset('user_'+context.city+'_'+rows[0]['USER_ID'], user_obj);
-  redis.client.expire('user_'+context.city+'_'+rows[0]['USER_ID'], jwt.redisExpire);//установка времени действия кэша
+  redis.client.hmset('user_'+rows[0]['USER_ID'], user_obj);
+  redis.client.expire('user_'+rows[0]['USER_ID'], jwt.redisExpire);//установка времени действия кэша
   var tokenOne = crypto.randomBytes(64).toString('hex'); //X-CSRF-Token
-  redis.client.rpush(['userToken_'+context.city+'_'+rows[0]['USER_ID'], tokenOne]);
-  redis.client.expire('userToken_'+context.city+'_'+rows[0]['USER_ID'], jwt.redisExpire);//установка времени действия кэша
+  redis.client.rpush(['userToken_'+rows[0]['USER_ID'], tokenOne]);
+  redis.client.expire('userToken_'+rows[0]['USER_ID'], jwt.redisExpire);//установка времени действия кэша
   return {
     token: jwtlib.sign(user_obj_jwt, jwt.tokenKey,{ expiresIn: jwt.expiresIn }),
     tokenOne:tokenOne

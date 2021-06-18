@@ -58,7 +58,7 @@
 
               try {
                 if ($dbt==='ora') {
-                  $conn = await oracledb.getConnection(user.city);
+                  $conn = await oracledb.getConnection();
                 }
                 else if ($dbt==='mssql') {
                   $conn = await database.poolPromise;

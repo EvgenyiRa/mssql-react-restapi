@@ -12,25 +12,25 @@ module.exports={tokenKey : '7a2b-3c7d-5e6f-7g8h',
                     jwtlib.verify(req.body.authorization, jwt.tokenKey, (err, payload) => {
                       if (!!payload) {
                         if (typeof payload['id']!== "undefined") {
-                          redis.client.hgetall('user_'+payload.city+'_'+payload.id, function(err, object) {
+                          redis.client.hgetall('user_'+payload.id, function(err, object) {
                           //console.log('object',object,'payload',payload);
                           if (!!object) {
                             if (typeof object['id']!== "undefined") {
-                              redis.client.lrange('userToken_'+payload.city+'_'+payload.id, 0, -1, function(err2, object2) {
+                              redis.client.lrange('userToken_'+payload.id, 0, -1, function(err2, object2) {
                                 //console.log('req.body.tokenOne',req.body.tokenOne,'redis.client.get.userToken',object2);
-                                if (payload.id==object.id && payload.login==object.login && payload.host==object.host && payload.city==object.city) {
+                                if (payload.id==object.id && payload.login==object.login && payload.host==object.host) {
                                     //наибольшая вероятность нахождения токена в очереди в её конце
                                     for (var i = (object2.length-1); i>=0 ; i--) {
                                         if (req.body.tokenOne==object2[i]) {
                                           auth=true;
                                           tokenOne = crypto.randomBytes(64).toString('hex'); //X-CSRF-Token
-                                          redis.client.rpush(['userToken_'+payload.city+'_'+payload.id,tokenOne]);
+                                          redis.client.rpush(['userToken_'+payload.id,tokenOne]);
                                           break;
                                         }
                                     };
                                     if (object2.length>=jwt.lenTokenQueue) {
                                       for (var i = 0; i <= (object2.length-jwt.lenTokenQueue); i++) {
-                                        redis.client.lrem('userToken_'+payload.city+'_'+payload.id, 0, object2[i]);
+                                        redis.client.lrem('userToken_'+payload.id, 0, object2[i]);
                                       }
                                     }
                                 }

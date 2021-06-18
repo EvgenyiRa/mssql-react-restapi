@@ -9,7 +9,7 @@
             if (resAuath) {
               if (+user.rights===1) {
                 try {
-                  redis.client.get('userRigths_'+user.city+'_'+user.id, function(err, object) {
+                  redis.client.get('userRigths_'+user.id, function(err, object) {
                     user.rights=JSON.parse(object);
                     res.status(200).json({user:user,tokenOne:tokenOne});
                   });

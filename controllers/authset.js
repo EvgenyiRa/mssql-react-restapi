@@ -4,7 +4,7 @@
 /*02*/
 /*03*/async function post(req, res, next) {
         //console.log('req.body',req.body);
-        if ((!!req.body.login) && (!!req.body.password) && (!!req.body.city)) {
+        if ((!!req.body.login) && (!!req.body.password)) {
           try {
             const context = {};
             context.params={login:req.body.login};
@@ -16,7 +16,6 @@
                                 SOL
                            FROM REP_USERS
                           WHERE LOGIN=@login`;
-            context.city=req.body.city;
             const resquery = await query.find(context),
                   rows=resquery.recordsets[0];
             if (rows.length>0) {

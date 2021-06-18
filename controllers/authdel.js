@@ -10,19 +10,19 @@
                 res.status(200).json({ message: 'Error load token' });
             }
             else if (payload) {
-              if ((typeof payload['id']!== "undefined") & (typeof payload['city']!== "undefined")) {
+              if (typeof payload['id']!== "undefined") {
                 try {
-                  redis.client.hgetall('user_'+payload.city+'_'+payload.id, function(err, object) {
+                  redis.client.hgetall('user_'+payload.id, function(err, object) {
                       //console.log(object);
                       if (!!object) {
                         if (typeof object['id']!=="undefined") {
-                          if (payload.id==object.id && payload.login==object.login && req.headers.origin==payload.host && payload.city==object.city) {
-                              redis.client.del('user_'+payload.city+'_'+object.id);
-                              redis.client.del('userToken_'+payload.city+'_'+object.id);
-                              redis.client.del('userRigths_'+payload.city+'_'+object.id);
+                          if (payload.id==object.id && payload.login==object.login && req.headers.origin==payload.host) {
+                              redis.client.del('user_'+object.id);
+                              redis.client.del('userToken_'+object.id);
+                              redis.client.del('userRigths_'+object.id);
                               res.status(200).json({ message: 'Cache del' });
                           }
-                        }  
+                        }
                       }
                   });
                 } catch (err) {
