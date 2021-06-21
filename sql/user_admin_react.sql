@@ -16,7 +16,7 @@ begin
   FROM REP_USERS U;
   SET IDENTITY_INSERT [REP_USERS] ON;
   insert into REP_USERS (USER_ID, FIO, LOGIN, PASSWORD, EMAIL, PHONE, SOL)
-  values (@USER_ID_V, N'Администратор РВК.П.Реакт', N'admin_r', N'$2a$10$d18ZjBRTh34uP2UUdQrxDeyY52L3pvLxA.Ul3/dld/yyRb/4qucA6', null, null, 3);
+  values (@USER_ID_V, N'Администратор РВК.П.Реакт', N'admin_r', N'$2a$10$u37ZiYRTq37uP2UUmQrwDeOFDqcqK8batQrKiIaSF6cAYC34ZsN.q', null, null, 3);
   SET IDENTITY_INSERT [REP_USERS] Off;
   SET IDENTITY_INSERT [REP_USERS_RIGHTS] On;
   SELECT @RUR_ID_V=(MAX(R.RUR_ID)+1)

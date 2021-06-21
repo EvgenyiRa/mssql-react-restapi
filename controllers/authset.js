@@ -22,7 +22,7 @@
             if (rows.length>0) {
               const bcrypt = require('bcrypt');
               bcrypt.hash(req.body.password, jwt.salts[rows[0]['SOL']],async function(err, hash) {
-                  //console.log('hash',hash);
+                  /*console.log('hash',hash);*/
                   if (rows[0]['PASSWORD']==hash) {
                     const resAuthUser=await database.authUser(req,rows,context);
                     return res.status(200).json(resAuthUser);

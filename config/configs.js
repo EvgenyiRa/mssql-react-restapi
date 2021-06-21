@@ -82,11 +82,11 @@ module.exports = {
        callback(auth,tokenOne,null);
      }
    },
-   salts:['$2a$10$eSb3zD5nD4diakkyY.oRNg$',
-          '$2a$10$A.6eNVSpds0uiBe6PwjgAg$',
-          '$2a$10$Lo/U/CN8Rg95Bmm8Vf2Z.w$',
-          '$2a$10$d18ZjBRTh34uP2UUdQrxDg$',
-          '$2a$10$e44PXCG9XUsmi1cxYSg0mQ$'
+   salts:['$2a$10$eSl3zD7nD7diakkyP.oRNg$',
+          '$2a$10$A.6oNVSpds0uiBe9PwjgBs$',
+          '$2a$10$Ho/U/KN8Rg75Bjj8Zf2Z.w$',
+          '$2a$10$u37ZiYRTq37uP2UUmQrwDg$',
+          '$2a$10$r88PMCG7VUnmy8czYSg0nH$'
         ],
    lenTokenQueue:8
  },
