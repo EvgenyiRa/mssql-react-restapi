@@ -62,7 +62,7 @@ INSERT [REP_RIGHTS] ([RIGHTS_ID], [NAME], [SYSNAME]) VALUES (1002, N'Удале�
 INSERT [REP_RIGHTS] ([RIGHTS_ID], [NAME], [SYSNAME]) VALUES (1004, N'Администрирование пользователей', N'Admin');
 SET IDENTITY_INSERT [REP_RIGHTS] Off;
 SET IDENTITY_INSERT [REP_USERS] ON;
-INSERT [REP_USERS] ([USER_ID], [FIO], [LOGIN], [PASSWORD], [EMAIL], [PHONE], [SOL]) VALUES (1, N'Администратор РВК.П.Реакт', N'admin_r', N'$2a$10$u37ZiYRTq37uP2UUmQrwDeOFDqcqK8batQrKiIaSF6cAYC34ZsN.q', NULL, NULL, 1);
+INSERT [REP_USERS] ([USER_ID], [FIO], [LOGIN], [PASSWORD], [EMAIL], [PHONE], [SOL]) VALUES (1, N'Администратор РВК.П.Реакт', N'admin_r', N'$2a$10$A.6oNVSpds0uiBe9PwjgBe/.HQ.r5M.4O/rFXw5Rit.uk3O6Rw06C', NULL, NULL, 1);
 SET IDENTITY_INSERT [REP_USERS] Off;
 SET IDENTITY_INSERT [REP_USERS_RIGHTS] On;
 INSERT [REP_USERS_RIGHTS] ([RUR_ID], [USER_ID], [RIGHT_ID]) VALUES (1, 1, 1);

@@ -1,7 +1,7 @@
 module.exports = {
   webServer:{
-    port: process.env.HTTP_PORT || 3777,
-    host: process.env.HTTP_BIND_IP || '127.0.0.1',
+    port: process.env.MSSQL_REACT_RESTAPI_HTTP_PORT || 3777,
+    host: process.env.MSSQL_REACT_RESTAPI_IP || '127.0.0.1',
     https:false
  },
  database:{
