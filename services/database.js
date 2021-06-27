@@ -1,23 +1,38 @@
-const sql = require('mssql'),
-      configs=require('../config/configs.js'),
+const configs=require('../config/configs.js'),
       dbConfig = configs.database;
 
-const poolPromise = new sql.ConnectionPool(dbConfig.hrPool)
-  .connect()
-  .then(pool => {
-    console.log('Connected to MSSQL')
-    return pool
-  })
-  .catch(err => console.log('Database Connection Failed! Bad Config: ', err))
+let sql,poolPromise,oracledb;
 
-module.exports.poolPromise=poolPromise;
+if (dbConfig.dbtype==='mssql') {
+    sql = require('mssql');
+    const poolPromise = new sql.ConnectionPool(dbConfig.hrPool)
+      .connect()
+      .then(pool => {
+        console.log('Connected to MSSQL')
+        return pool
+      })
+      .catch(err => console.log('Database Connection Failed! Bad Config: ', err))
+    module.exports.poolPromise=poolPromise;
+}
+else if (dbConfig.dbtype==='ora') {
+    oracledb=require('oracledb');
+}
 
 async function close() {
   const pool = await poolPromise;
   pool.close();
 }
 
-module.exports.close = close;
+async function oraClose() {
+  await oracledb.getPool().close();
+}
+
+if (dbConfig.dbtype==='mssql') {
+  module.exports.close = close;
+}
+else if (dbConfig.dbtype==='ora') {
+  module.exports.close = oraClose;
+}
 
 function getParamsOut(result,params_out) {
   if (Array.isArray(params_out)) {
@@ -154,9 +169,135 @@ function doubleExecute(context) {
 
 module.exports.doubleExecute = doubleExecute;
 
+async function oraInitialize() {
+  try {
+    await oracledb.createPool(dbConfig.oraPool);
+    oracledb.fetchAsString = [ oracledb.CLOB ];
+  } catch (err) {
+    console.log('Error create pool',err);
+  }
+}
+
+module.exports.oraInitialize = oraInitialize;
+
+function oraSimpleExecute(context) {
+  return new Promise(async (resolve, reject) => {
+    let conn,
+        statement=context.sql,
+        binds = {},
+        opts = {};
+    if (!!context.opts) {
+        opts=context.opts;
+    }
+    opts.outFormat = oracledb.OUT_FORMAT_OBJECT;
+    opts.autoCommit = true;
+    if (!!context.params) {
+        binds=context.params;
+    }
+    try {
+      conn = await oracledb.getConnection(context.city);
+
+      const result = await conn.execute(statement, binds, opts);
+
+      resolve(result);
+    } catch (err) {
+      reject(err);
+    } finally {
+      if (conn) { // conn assignment worked, need to close
+        try {
+          await conn.close();
+        } catch (err) {
+          console.log(err);
+        }
+      }
+    }
+  });
+}
+
+module.exports.oraSimpleExecute = oraSimpleExecute;
+
+function oraDoubleExecute(context) {
+  return new Promise(async (resolve, reject) => {
+    let conn;
+    if (!!!context.opts) {
+      context.opts={};
+      context.opts.outFormat = oracledb.OUT_FORMAT_OBJECT;
+      context.opts.autoCommit = true;
+    }
+    let execbinds = Object.assign({}, context.exec_params_in);
+    if (!!context.exec_params_out) {
+      context.exec_params_out.forEach(function(item) {
+          execbinds[item.name]= {
+                            dir: oracledb.BIND_OUT
+                          };
+          if (item.type=='number') {
+              execbinds[item.name]['type']=oracledb.NUMBER;
+          }
+          else if (item.type=='string') {
+              execbinds[item.name]['type']=oracledb.STRING;
+          }
+          else if (item.type=='blob') {
+              execbinds[item.name]['type']=oracledb.BLOB;
+          }
+          else if (item.type=='buffer') {
+              execbinds[item.name]['type']=oracledb.BUFFER;
+          }
+          else if (item.type=='clob') {
+              execbinds[item.name]['type']=oracledb.CLOB;
+          }
+          else if (item.type=='cursor') {
+              execbinds[item.name]['type']=oracledb.CURSOR;
+          }
+          else if (item.type=='date') {
+              execbinds[item.name]['type']=oracledb.DATE;
+          }
+          else if (item.type=='default') {
+              execbinds[item.name]['type']=oracledb.DEFAULT;
+          }
+          else if (item.type=='nclob') {
+              execbinds[item.name]['type']=oracledb.NCLOB;
+          }
+          else {
+             execbinds[item.name]['type']=oracledb.STRING;
+          }
+      });
+    }
+
+
+    try {
+      conn = await oracledb.getConnection(context.city);
+      let result={};
+      //console.log('execbinds',execbinds);
+      const execresult = await conn.execute(context.execsql, execbinds, context.opts);
+      if (!!context.exec_params_out) {
+          result.execout=execresult.outBinds;
+      }
+      else {
+          result.execout='ok';
+      }
+      if (!!context.sql) {
+        const queryresult = await conn.execute(context.sql, context.query_params, context.opts);
+        result.sqlrows=queryresult.rows;
+      }
+      resolve(result);
+    } catch (err) {
+      reject(err);
+    } finally {
+      if (conn) { // conn assignment worked, need to close
+        try {
+          await conn.close();
+        } catch (err) {
+          console.log(err);
+        }
+      }
+    }
+  });
+}
+
+module.exports.oraDoubleExecute = oraDoubleExecute;
+
 async function authUser(req,rows,context) {
-  const configs=require('../config/configs.js'),
-        jwt = configs.jwt,
+  const jwt = configs.jwt,
         jwtlib = require('jsonwebtoken'),
         redis=require('../services/redis.js'),
         query = require('../db_apis/query.js'),
