@@ -5,7 +5,7 @@ let sql,poolPromise,oracledb;
 
 if (dbConfig.dbtype==='mssql') {
     sql = require('mssql');
-    const poolPromise = new sql.ConnectionPool(dbConfig.hrPool)
+    poolPromise = new sql.ConnectionPool(dbConfig.hrPool)
       .connect()
       .then(pool => {
         console.log('Connected to MSSQL')
