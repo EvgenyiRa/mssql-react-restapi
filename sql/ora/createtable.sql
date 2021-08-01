@@ -102,7 +102,7 @@ BEGIN
 						increment by 1
 						cache 20';              
           
---create data          
+--create data           
   EXECUTE IMMEDIATE 'INSERT INTO REP_RIGHTS (RIGHTS_ID, NAME, SYSNAME) VALUES (1, ''Редактирование формы'', ''Edite'')';
   EXECUTE IMMEDIATE 'INSERT INTO REP_RIGHTS (RIGHTS_ID, NAME, SYSNAME) VALUES (2, ''Просмотр формы'', ''View'')';
   EXECUTE IMMEDIATE 'INSERT INTO REP_RIGHTS (RIGHTS_ID, NAME, SYSNAME) VALUES (1002, ''Удаление формы'', ''Delete'')';
