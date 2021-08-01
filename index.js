@@ -2,10 +2,6 @@ const webServer = require('./services/web-server.js');
 const database = require('./services/database.js');
 const configs=require('./config/configs.js'),
       dbConfig = configs.database;
-const defaultThreadPoolSize = 10;
-
-// Increase thread pool size by poolMax
-process.env.UV_THREADPOOL_SIZE = dbConfig.hrPool.poolMax + defaultThreadPoolSize;
 
 async function startup() {
   console.log('Starting application');
