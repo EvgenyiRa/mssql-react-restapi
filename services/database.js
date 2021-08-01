@@ -116,55 +116,169 @@ function getParamsOut(result,params_out) {
 }
 
 function simpleExecute(context) {
-  return new Promise(async (resolve, reject) => {
-    let conn,
-        statement=context.sql,
-        binds = {};
-    if (!!context.params) {
-        binds=context.params;
-    }
-    try {
-      const pool = await poolPromise;
-      let result = pool.request();
-      for (var prop in binds) {
-        result.input(prop,binds[prop]);
+  if (dbConfig.dbtype==='mssql') {
+    return new Promise(async (resolve, reject) => {
+      let conn,
+          statement=context.sql,
+          binds = {};
+      if (!!context.params) {
+          binds=context.params;
       }
-      result=getParamsOut(result,context.params_out);
-      result=await result.query(statement);
-      //resolve(result.recordset);
-      resolve(result);
-    } catch (err) {
-      reject(err);
-    }
-  });
+      try {
+        const pool = await poolPromise;
+        let result = pool.request();
+        for (var prop in binds) {
+          result.input(prop,binds[prop]);
+        }
+        result=getParamsOut(result,context.params_out);
+        result=await result.query(statement);
+        //resolve(result.recordset);
+        resolve(result);
+      } catch (err) {
+        reject(err);
+      }
+    });
+  }
+  else if (dbConfig.dbtype==='ora') {
+    return new Promise(async (resolve, reject) => {
+      let conn,
+          statement=context.sql,
+          binds = {},
+          opts = {};
+      if (!!context.opts) {
+          opts=context.opts;
+      }
+      opts.outFormat = oracledb.OUT_FORMAT_OBJECT;
+      opts.autoCommit = true;
+      if (!!context.params) {
+          binds=context.params;
+      }
+      try {
+        conn = await oracledb.getConnection();
+
+        const result = await conn.execute(statement, binds, opts);
+
+        resolve(result.rows);
+      } catch (err) {
+        reject(err);
+      } finally {
+        if (conn) { // conn assignment worked, need to close
+          try {
+            await conn.close();
+          } catch (err) {
+            console.log(err);
+          }
+        }
+      }
+    });
+  }
 }
 
 module.exports.simpleExecute = simpleExecute;
 
 function doubleExecute(context) {
-  return new Promise(async (resolve, reject) => {
-    try {
-      const pool = await poolPromise;
+  if (dbConfig.dbtype==='mssql') {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const pool = await poolPromise;
 
-      let execresult = pool.request();
-      let result={};
-      result.execout=await execresult.batch(context.execsql);
-      if (!!context.sql) {
-        let resultsql = pool.request();
-        if (!!context.query_params) {
-          for (var prop in context.query_params) {
-            resultsql.input(prop,context.query_params[prop]);
+        let execresult = pool.request();
+        let result={};
+        result.execout=await execresult.batch(context.execsql);
+        if (!!context.sql) {
+          let resultsql = pool.request();
+          if (!!context.query_params) {
+            for (var prop in context.query_params) {
+              resultsql.input(prop,context.query_params[prop]);
+            }
+          }
+          resultsql=getParamsOut(resultsql,context.query_params_out);
+          resultsql=await resultsql.query(context.sql);
+          result.sqlout=resultsql;
+        }
+        resolve(result);
+      } catch (err) {
+        reject(err);
+      }
+    });
+  }
+  else if (dbConfig.dbtype==='ora') {
+    return new Promise(async (resolve, reject) => {
+      let conn;
+      if (!!!context.opts) {
+        context.opts={};
+        context.opts.outFormat = oracledb.OUT_FORMAT_OBJECT;
+        context.opts.autoCommit = true;
+      }
+      let execbinds = Object.assign({}, context.exec_params_in);
+      if (!!context.exec_params_out) {
+        context.exec_params_out.forEach(function(item) {
+            execbinds[item.name]= {
+                              dir: oracledb.BIND_OUT
+                            };
+            if (item.type=='number') {
+                execbinds[item.name]['type']=oracledb.NUMBER;
+            }
+            else if (item.type=='string') {
+                execbinds[item.name]['type']=oracledb.STRING;
+            }
+            else if (item.type=='blob') {
+                execbinds[item.name]['type']=oracledb.BLOB;
+            }
+            else if (item.type=='buffer') {
+                execbinds[item.name]['type']=oracledb.BUFFER;
+            }
+            else if (item.type=='clob') {
+                execbinds[item.name]['type']=oracledb.CLOB;
+            }
+            else if (item.type=='cursor') {
+                execbinds[item.name]['type']=oracledb.CURSOR;
+            }
+            else if (item.type=='date') {
+                execbinds[item.name]['type']=oracledb.DATE;
+            }
+            else if (item.type=='default') {
+                execbinds[item.name]['type']=oracledb.DEFAULT;
+            }
+            else if (item.type=='nclob') {
+                execbinds[item.name]['type']=oracledb.NCLOB;
+            }
+            else {
+               execbinds[item.name]['type']=oracledb.STRING;
+            }
+        });
+      }
+
+
+      try {
+        conn = await oracledb.getConnection();
+        let result={};
+        //console.log('execbinds',execbinds);
+        const execresult = await conn.execute(context.execsql, execbinds, context.opts);
+        if (!!context.exec_params_out) {
+            result.execout=execresult.outBinds;
+        }
+        else {
+            result.execout='ok';
+        }
+        if (!!context.sql) {
+          const queryresult = await conn.execute(context.sql, context.query_params, context.opts);
+          result.sqlrows=queryresult.rows;
+        }
+        resolve(result);
+      } catch (err) {
+        reject(err);
+      } finally {
+        if (conn) { // conn assignment worked, need to close
+          try {
+            await conn.close();
+          } catch (err) {
+            console.log(err);
           }
         }
-        resultsql=getParamsOut(resultsql,context.query_params_out);
-        resultsql=await resultsql.query(context.sql);
-        result.sqlout=resultsql;
       }
-      resolve(result);
-    } catch (err) {
-      reject(err);
-    }
-  });
+    });
+  }
 }
 
 module.exports.doubleExecute = doubleExecute;
@@ -179,122 +293,6 @@ async function oraInitialize() {
 }
 
 module.exports.oraInitialize = oraInitialize;
-
-function oraSimpleExecute(context) {
-  return new Promise(async (resolve, reject) => {
-    let conn,
-        statement=context.sql,
-        binds = {},
-        opts = {};
-    if (!!context.opts) {
-        opts=context.opts;
-    }
-    opts.outFormat = oracledb.OUT_FORMAT_OBJECT;
-    opts.autoCommit = true;
-    if (!!context.params) {
-        binds=context.params;
-    }
-    try {
-      conn = await oracledb.getConnection(context.city);
-
-      const result = await conn.execute(statement, binds, opts);
-
-      resolve(result);
-    } catch (err) {
-      reject(err);
-    } finally {
-      if (conn) { // conn assignment worked, need to close
-        try {
-          await conn.close();
-        } catch (err) {
-          console.log(err);
-        }
-      }
-    }
-  });
-}
-
-module.exports.oraSimpleExecute = oraSimpleExecute;
-
-function oraDoubleExecute(context) {
-  return new Promise(async (resolve, reject) => {
-    let conn;
-    if (!!!context.opts) {
-      context.opts={};
-      context.opts.outFormat = oracledb.OUT_FORMAT_OBJECT;
-      context.opts.autoCommit = true;
-    }
-    let execbinds = Object.assign({}, context.exec_params_in);
-    if (!!context.exec_params_out) {
-      context.exec_params_out.forEach(function(item) {
-          execbinds[item.name]= {
-                            dir: oracledb.BIND_OUT
-                          };
-          if (item.type=='number') {
-              execbinds[item.name]['type']=oracledb.NUMBER;
-          }
-          else if (item.type=='string') {
-              execbinds[item.name]['type']=oracledb.STRING;
-          }
-          else if (item.type=='blob') {
-              execbinds[item.name]['type']=oracledb.BLOB;
-          }
-          else if (item.type=='buffer') {
-              execbinds[item.name]['type']=oracledb.BUFFER;
-          }
-          else if (item.type=='clob') {
-              execbinds[item.name]['type']=oracledb.CLOB;
-          }
-          else if (item.type=='cursor') {
-              execbinds[item.name]['type']=oracledb.CURSOR;
-          }
-          else if (item.type=='date') {
-              execbinds[item.name]['type']=oracledb.DATE;
-          }
-          else if (item.type=='default') {
-              execbinds[item.name]['type']=oracledb.DEFAULT;
-          }
-          else if (item.type=='nclob') {
-              execbinds[item.name]['type']=oracledb.NCLOB;
-          }
-          else {
-             execbinds[item.name]['type']=oracledb.STRING;
-          }
-      });
-    }
-
-
-    try {
-      conn = await oracledb.getConnection(context.city);
-      let result={};
-      //console.log('execbinds',execbinds);
-      const execresult = await conn.execute(context.execsql, execbinds, context.opts);
-      if (!!context.exec_params_out) {
-          result.execout=execresult.outBinds;
-      }
-      else {
-          result.execout='ok';
-      }
-      if (!!context.sql) {
-        const queryresult = await conn.execute(context.sql, context.query_params, context.opts);
-        result.sqlrows=queryresult.rows;
-      }
-      resolve(result);
-    } catch (err) {
-      reject(err);
-    } finally {
-      if (conn) { // conn assignment worked, need to close
-        try {
-          await conn.close();
-        } catch (err) {
-          console.log(err);
-        }
-      }
-    }
-  });
-}
-
-module.exports.oraDoubleExecute = oraDoubleExecute;
 
 async function authUser(req,rows,context) {
   const jwt = configs.jwt,
@@ -319,9 +317,22 @@ async function authUser(req,rows,context) {
                    ON UR.USER_ID=U.USER_ID
                  JOIN REP_RIGHTS R
                    ON R.RIGHTS_ID=UR.RIGHT_ID
-                WHERE U.USER_ID=@user_id`;
-   const resquery = await query.find(context),
-         rowsR=resquery.recordsets[0];
+                WHERE U.USER_ID=`;
+   if (dbConfig.dbtype==='mssql') {
+     context.sql+=`@`;
+   }
+   else if (dbConfig.dbtype==='ora') {
+      context.sql+=`:`;
+   }
+   context.sql+=`user_id`;
+   const resquery = await query.find(context);
+   let rowsR;
+   if (dbConfig.dbtype==='mssql') {
+     rowsR=resquery.recordsets[0];
+   }
+   else if (dbConfig.dbtype==='ora') {
+      rowsR=resquery;
+   }
    if (rowsR.length>0) {
      redis.client.set('userRigths_'+rows[0]['USER_ID'], JSON.stringify(rowsR));
      redis.client.expire('userRigths_'+rows[0]['USER_ID'], jwt.redisExpire);//установка времени действия кэша

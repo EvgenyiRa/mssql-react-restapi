@@ -1,7 +1,8 @@
 /*01*/const query = require('../db_apis/query.js'),
             configs=require('../config/configs.js'),
             jwt = configs.jwt,
-            database = require('../services/database.js');
+            database = require('../services/database.js'),
+            dbConfig = configs.database;;
 /*02*/
 /*03*/async function post(req, res, next) {
         //console.log('req.body',req.body);
@@ -11,14 +12,27 @@
             context.params={login:req.body.login};
             context.sql=`SELECT USER_ID,
                                 PASSWORD,
-                                ISNULL(FIO,'null') FIO,
-                                ISNULL(EMAIL,'null') EMAIL,
-                                ISNULL(PHONE,'null') PHONE,
+                                COALESCE(FIO,'null') FIO,
+                                COALESCE(EMAIL,'null') EMAIL,
+                                COALESCE(PHONE,'null') PHONE,
                                 SOL
                            FROM REP_USERS
-                          WHERE LOGIN=@login`;
-            const resquery = await query.find(context),
-                  rows=resquery.recordsets[0];
+                          WHERE LOGIN=`;
+            if (dbConfig.dbtype==='mssql') {
+              context.sql+=`@`;
+            }
+            else if (dbConfig.dbtype==='ora') {
+               context.sql+=`:`;
+            }
+            context.sql+=`login`;
+            const resquery = await query.find(context);
+            let rows;
+            if (dbConfig.dbtype==='mssql') {
+              rows=resquery.recordsets[0];
+            }
+            else if (dbConfig.dbtype==='ora') {
+               rows=resquery;
+            }
             if (rows.length>0) {
               const bcrypt = require('bcrypt');
               bcrypt.hash(req.body.password, jwt.salts[rows[0]['SOL']],async function(err, hash) {

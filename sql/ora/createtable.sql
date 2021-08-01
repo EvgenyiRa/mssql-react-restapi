@@ -21,11 +21,11 @@ BEGIN
 	EXECUTE IMMEDIATE 'create table REP_USERS
 						(
 						  user_id  NUMBER(17) not null,
-						  fio      NVARCHAR2(500) not null,
-						  login    NVARCHAR2(200) not null,
-						  password NVARCHAR2(200) not null,
-						  email    NVARCHAR2(500),
-						  phone    NVARCHAR2(100),
+						  fio      VARCHAR2(500) not null,
+						  login    VARCHAR2(200) not null,
+						  password VARCHAR2(200) not null,
+						  email    VARCHAR2(500),
+						  phone    VARCHAR2(100),
 						  sol      NUMBER(3)
 						)';
 -- Create/Recreate indexes
@@ -38,8 +38,8 @@ BEGIN
 	EXECUTE IMMEDIATE 'create table REP_RIGHTS
 						(
 						  rights_id NUMBER(5) not null,
-						  name      NVARCHAR2(500) not null,
-						  sysname   NVARCHAR2(500) not null
+						  name      VARCHAR2(500) not null,
+						  sysname   VARCHAR2(500) not null
 						)';
 -- Create/Recreate primary, unique and foreign key constraints
 	EXECUTE IMMEDIATE 'alter table REP_RIGHTS
@@ -61,17 +61,17 @@ BEGIN
   -- Create table
   EXECUTE IMMEDIATE 'create table REP_CALC_OLAP
   (
-    contract_refid NVARCHAR2(10),
-    jur_ls_refid   NVARCHAR2(20),
-    payer_sname    NVARCHAR2(21),
+    contract_refid VARCHAR2(20),
+    jur_ls_refid   VARCHAR2(40),
+    payer_sname    VARCHAR2(42),
     accdate        DATE,
     endaccdate     DATE,
     invoice_date   DATE,
-    service        NVARCHAR2(17),
+    service        VARCHAR2(37),
     calc_volume    NUMBER(19,2),
     calc_cost      NUMBER(19,2),
     calc_net       NUMBER(19,2),
-    tariff         NVARCHAR2(4),
+    tariff         VARCHAR2(4),
     vat_rate       NUMBER(7,2)
   )'; 
   EXECUTE IMMEDIATE 'comment on table REP_CALC_OLAP
