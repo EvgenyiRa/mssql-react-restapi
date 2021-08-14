@@ -4,9 +4,9 @@ const orasqlrun = require('../controllers/orasqlrun.js');
 const orasqlrun2 = require('../controllers/orasqlrun2.js');
 
 routerPost.route('/sqlrun')
-  .post(query.post);
+  .post(orasqlrun.post);
 
 routerPost.route('/sqlrun2')
-    .post(execquery.post);
+    .post(orasqlrun2.post);
 
 module.exports = routerPost;

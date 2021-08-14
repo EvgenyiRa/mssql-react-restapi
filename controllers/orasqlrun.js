@@ -1,5 +1,6 @@
-/*01*/const query = require('../db_apis/oraquery.js'),
-            jwt = require('../config/jwt');
+/*01*/const query = require('../db_apis/query.js'),
+            configs=require('../config/configs.js'),
+            jwt = configs.jwt;
 
 /*02*/
 /*03*/async function post(req, res, next) {

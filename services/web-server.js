@@ -1,5 +1,6 @@
 const configs=require('../config/configs.js'),
-      webServerConfig = configs.webServer;
+      webServerConfig = configs.webServer,
+      dbConfig = configs.database;
 let https;
 if (webServerConfig.https) {
     https = require('https');
@@ -11,10 +12,17 @@ const express = require('express');
 const morgan = require('morgan');
 const fs = require('fs');
 const path = require('path');
-const routerMSSQL = require('./routerMSSQL.js');
 const routerAuth = require('./routerAuth.js');
 const routerOLAP = require('./routerOLAP.js');
 const redis=require('./redis.js');
+
+let routerDB;
+if (dbConfig.dbtype==='mssql') {
+    routerDB = require('./routerMSSQL.js');
+}
+else if (dbConfig.dbtype==='ora') {
+    routerDB = require('./routerOra.js');
+}
 
 const bodyParser = require('body-parser'),
       jwt=configs.jwt;
@@ -47,13 +55,14 @@ function initialize() {
           let origin = req.headers.origin;
           if(jwt.host.indexOf(origin) >= 0){
               res.header("Access-Control-Allow-Origin", origin);
+              res.header("Access-Control-Allow-Methods", "*");
+              res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
           }
-          res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
           next();
     });
 
     app.use(bodyParser.json({limit: '100mb', extended: true}));
-    app.use('/mssql', routerMSSQL);
+    app.use('/'+dbConfig.dbtype, routerDB);
     app.use('/auth', routerAuth);
     app.use('/olap', routerOLAP);
 

@@ -1,5 +1,6 @@
-/*01*/const execquery = require('../db_apis/oraexecquery.js'),
-            jwt = require('../config/jwt');
+/*01*/const execquery = require('../db_apis/execquery.js'),
+            configs=require('../config/configs.js'),
+            jwt = configs.jwt;
 
 /*02*/
 /*03*/async function post(req, res, next) {

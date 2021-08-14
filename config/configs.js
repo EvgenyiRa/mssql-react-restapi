@@ -1,7 +1,7 @@
 module.exports = {
   webServer:{
-    port: process.env.MSSQL_REACT_RESTAPI_HTTP_PORT || 3777,
-    host: process.env.MSSQL_REACT_RESTAPI_IP || '127.0.0.1',
+    port: process.env.WEBOLAP_RESTAPI_HTTP_PORT || 3777,
+    host: process.env.WEBOLAP_RESTAPI_IP || '127.0.0.1',
     https:false
  },
  database:{
@@ -24,7 +24,7 @@ module.exports = {
  },
  jwt:{
    tokenKey : '7a9b-5c7d-5e7f-7g9h',
-   host: process.env.MSSQL_REACT_RESTAPI_FRONTEND_PATH || "http://localhost:3000",
+   host: process.env.WEBOLAP_RESTAPI_FRONTEND_PATH || "http://localhost:3000",
    expiresIn:'8h',
    redisExpire:28800,//8часов
    verify:function(req,jwt,callback) {
@@ -91,8 +91,8 @@ module.exports = {
    lenTokenQueue:8
  },
  redis:{
-   port: process.env.MSSQL_REACT_RESTAPI_REDISPORT || 6379,
-   host: process.env.MSSQL_REACT_RESTAPI_REDISHOST || '127.0.0.1'
+   port: process.env.WEBOLAP_RESTAPI_REDISPORT || 6379,
+   host: process.env.WEBOLAP_RESTAPI_REDISHOST || '127.0.0.1'
  }
 
 };
