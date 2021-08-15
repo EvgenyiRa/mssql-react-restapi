@@ -5,7 +5,7 @@ module.exports = {
     https:false
  },
  database:{
-   hrPool: {
+   pool: {
      user: process.env.MSSQL_USER || 'user',
      password: process.env.MSSQL_PWD || 'pwd',
      server: process.env.MSSQL_SERVER || 'localhost',
@@ -20,7 +20,7 @@ module.exports = {
        encrypt: false
      }
    },
-   dbtype:'mssql'
+   dbtype:'ora'
  },
  jwt:{
    tokenKey : '7a9b-5c7d-5e7f-7g9h',

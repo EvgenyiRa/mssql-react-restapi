@@ -5,7 +5,7 @@ let sql,poolPromise,oracledb;
 
 if (dbConfig.dbtype==='mssql') {
     sql = require('mssql');
-    poolPromise = new sql.ConnectionPool(dbConfig.hrPool)
+    poolPromise = new sql.ConnectionPool(dbConfig.pool)
       .connect()
       .then(pool => {
         console.log('Connected to MSSQL')
@@ -285,7 +285,7 @@ module.exports.doubleExecute = doubleExecute;
 
 async function oraInitialize() {
   try {
-    await oracledb.createPool(dbConfig.oraPool);
+    await oracledb.createPool(dbConfig.pool);
     oracledb.fetchAsString = [ oracledb.CLOB ];
   } catch (err) {
     console.log('Error create pool',err);
