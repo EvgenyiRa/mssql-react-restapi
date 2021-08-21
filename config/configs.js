@@ -20,7 +20,7 @@ module.exports = {
        encrypt: false
      }
    },
-   dbtype:'ora'
+   dbtype:'mssql'
  },
  jwt:{
    tokenKey : '7a9b-5c7d-5e7f-7g9h',
