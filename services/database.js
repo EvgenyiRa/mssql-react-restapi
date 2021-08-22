@@ -18,11 +18,12 @@ if (dbConfig.dbtype==='mysql') {
     sql = require('mysql2/promise');
     try {
       poolPromise = sql.createPool(dbConfig.pool);
-      /*const test=async ()=>{
-        const result=await poolPromise.execute('select * from new_table');
-        console.log(result[0][0]);
+      const test=async ()=>{
+        const result=await poolPromise.execute('select * from new_table',[]);
+        //update new_table set new_tablecol=555 where idnew_table=1
+        console.log(result);
       }
-      test();*/
+      test();
       module.exports.poolPromise=poolPromise;
       console.log('Connected to MYSQL');
     } catch (err) {
@@ -133,8 +134,7 @@ function getParamsOut(result,params_out) {
 function simpleExecute(context) {
   if (dbConfig.dbtype==='mssql') {
     return new Promise(async (resolve, reject) => {
-      let conn,
-          statement=context.sql,
+      let statement=context.sql,
           binds = {};
       if (!!context.params) {
           binds=context.params;
@@ -148,6 +148,21 @@ function simpleExecute(context) {
         result=getParamsOut(result,context.params_out);
         result=await result.query(statement);
         //resolve(result.recordset);
+        resolve(result);
+      } catch (err) {
+        reject(err);
+      }
+    });
+  }
+  else if (dbConfig.dbtype==='mysql') {
+    return new Promise(async (resolve, reject) => {
+      let statement=context.sql,
+          binds = [];
+      if (!!context.params) {
+          binds=context.params;
+      }
+      try {
+        const result = await poolPromise.execute(statement,binds);
         resolve(result);
       } catch (err) {
         reject(err);

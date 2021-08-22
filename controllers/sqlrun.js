@@ -22,7 +22,6 @@
                   if (!!req.body.params_out) {
                     context.params_out=req.body.params_out;
                   }
-                  context.sql=req.body.sql;
                   const rows = await query.find(context);
                   let resObj={tokenOne:tokenOne};
                   if (!!rows.recordsets) {

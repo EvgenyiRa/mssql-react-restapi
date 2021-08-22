@@ -15,21 +15,19 @@
                     context.params=req.body.params;
                 }
                 else {
-                    context.params={};
+                    context.params=[];
                 }
                 if (!!req.body.sql) {
                   context.sql=req.body.sql;
-                  if (!!req.body.params_out) {
-                    context.params_out=req.body.params_out;
-                  }
-                  context.sql=req.body.sql;
                   const rows = await query.find(context);
                   let resObj={tokenOne:tokenOne};
-                  if (!!rows.recordsets) {
-                      resObj.rows=rows.recordsets[0];
-                  }
-                  if (!!rows.output) {
-                      resObj.output=rows.output;
+                  if (Array.isArray(rows)) {
+                    if (!!rows[0]) {
+                        resObj.rows=rows[0];
+                    }
+                    if (!!rows[1]) {
+                        resObj.data=rows[1];
+                    }
                   }
                   res.status(200).json(resObj);
                 }
