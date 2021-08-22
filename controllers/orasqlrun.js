@@ -19,7 +19,6 @@
                 }
                 if (!!req.body.sql) {
                   context.sql=req.body.sql;
-                  context.city=user.city;
                   const rows = await query.find(context);
                   res.status(200).json({rows:rows,tokenOne:tokenOne});
                 }

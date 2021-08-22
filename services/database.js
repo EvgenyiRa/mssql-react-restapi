@@ -185,9 +185,7 @@ function simpleExecute(context) {
       }
       try {
         conn = await oracledb.getConnection();
-
         const result = await conn.execute(statement, binds, opts);
-
         resolve(result.rows);
       } catch (err) {
         reject(err);
@@ -225,6 +223,32 @@ function doubleExecute(context) {
           resultsql=getParamsOut(resultsql,context.query_params_out);
           resultsql=await resultsql.query(context.sql);
           result.sqlout=resultsql;
+        }
+        resolve(result);
+      } catch (err) {
+        reject(err);
+      }
+    });
+  }
+  else if (dbConfig.dbtype==='mysql') {
+    return new Promise(async (resolve, reject) => {
+      let statement=context.execsql,
+          binds = [];
+      if (!!context.exec_params_in) {
+          binds=context.exec_params_in;
+      }
+      try {
+        const result={};
+        result.execout=await poolPromise.execute(statement,binds);
+        if (!!context.sql) {
+          statement=context.sql;
+          if (!!context.query_params) {
+            binds=context.query_params;
+          }
+          else {
+            binds=[];
+          }
+          result.sqlout=await poolPromise.execute(statement,binds);
         }
         resolve(result);
       } catch (err) {

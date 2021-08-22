@@ -12,23 +12,17 @@ async function post(req, res, next) {
               context.exec_params_in=req.body.exec_params_in;
           }
           else {
-              context.exec_params_in={};
-          }
-          if (!!req.body.exec_params_out) {
-              context.exec_params_out=req.body.exec_params_out;
+              context.exec_params_in=[];
           }
           if (!!req.body.query_params) {
               context.query_params=req.body.query_params;
           }
           else {
-              context.query_params={};
+              context.query_params=[];
           }
           if (!!req.body.execsql) {
             context.execsql=req.body.execsql;
             if (!!req.body.sql) {
-              if (!!req.body.query_params_out) {
-                context.query_params_out=req.body.query_params_out;
-              }
               context.sql=req.body.sql;
             }
             const resexecquery = await execquery.find(context);
