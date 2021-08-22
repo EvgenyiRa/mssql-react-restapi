@@ -14,6 +14,21 @@ if (dbConfig.dbtype==='mssql') {
       .catch(err => console.log('Database Connection Failed! Bad Config: ', err))
     module.exports.poolPromise=poolPromise;
 }
+if (dbConfig.dbtype==='mysql') {
+    sql = require('mysql2/promise');
+    try {
+      poolPromise = sql.createPool(dbConfig.pool);
+      /*const test=async ()=>{
+        const result=await poolPromise.execute('select * from new_table');
+        console.log(result[0][0]);
+      }
+      test();*/
+      module.exports.poolPromise=poolPromise;
+      console.log('Connected to MYSQL');
+    } catch (err) {
+      console.log('Database Connection Failed! Bad Config: ', err)
+    }
+}
 else if (dbConfig.dbtype==='ora') {
     oracledb=require('oracledb');
 }

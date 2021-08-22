@@ -20,6 +20,9 @@ let routerDB;
 if (dbConfig.dbtype==='mssql') {
     routerDB = require('./routerMSSQL.js');
 }
+else if (dbConfig.dbtype==='mysql') {
+    routerDB = require('./routerMYSQL.js');
+}
 else if (dbConfig.dbtype==='ora') {
     routerDB = require('./routerOra.js');
 }
