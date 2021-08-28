@@ -18,12 +18,12 @@ if (dbConfig.dbtype==='mysql') {
     sql = require('mysql2/promise');
     try {
       poolPromise = sql.createPool(dbConfig.pool);
-      const test=async ()=>{
+      /*const test=async ()=>{
         const result=await poolPromise.execute('select * from new_table',[]);
         //update new_table set new_tablecol=555 where idnew_table=1
         console.log(result);
       }
-      test();
+      test();*/
       module.exports.poolPromise=poolPromise;
       console.log('Connected to MYSQL');
     } catch (err) {
