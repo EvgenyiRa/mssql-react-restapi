@@ -32,7 +32,7 @@ CREATE TABLE `rep_users_rights` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
-CREATE TABLE `rep_calc_olap` (
+/*CREATE TABLE `rep_calc_olap` (
   `CONTRACT_REFID` VARCHAR(10) NULL,
   `JUR_LS_REFID` VARCHAR(10) NULL,
   `PAYER_SNAME` VARCHAR(10) NULL,
@@ -46,4 +46,18 @@ CREATE TABLE `rep_calc_olap` (
   `TARIFF` VARCHAR(4) NULL,
   `VAT_RATE` DECIMAL(28,2) NULL)
 ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
+DEFAULT CHARACTER SET = utf8;*/
+
+INSERT INTO REP_RIGHTS (RIGHTS_ID, NAME, SYSNAME)
+   VALUES (1, 'Редактирование формы', 'Edite'),
+		  (1002, 'Удаление формы', 'Delete'),
+		  (1004, 'Администрирование пользователей', 'Admin');
+INSERT INTO REP_USERS (FIO, LOGIN, PASSWORD, EMAIL, PHONE, SOL)
+   VALUES ('admin', 'admin', '$2a$10$A.6oNVSpds0uiBe9PwjgBe/.HQ.r5M.4O/rFXw5Rit.uk3O6Rw06C', NULL, NULL, 1);
+SET @USER_ID_V := LAST_INSERT_ID();
+INSERT INTO REP_USERS_RIGHTS (USER_ID, RIGHT_ID)
+   VALUES (@USER_ID_V, 1),
+		  (@USER_ID_V, 2),
+		  (@USER_ID_V, 1002),
+		  (@USER_ID_V, 1004);
+             
