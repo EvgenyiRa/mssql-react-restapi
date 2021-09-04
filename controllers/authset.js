@@ -9,7 +9,12 @@
         if ((!!req.body.login) && (!!req.body.password)) {
           try {
             const context = {};
-            context.params={login:req.body.login};
+            if (dbConfig.dbtype==='mysql') {
+               context.params=[req.body.login];
+            }
+            else {
+              context.params={login:req.body.login};
+            }
             context.sql=`SELECT USER_ID,
                                 PASSWORD,
                                 COALESCE(FIO,'null') FIO,
@@ -19,16 +24,21 @@
                            FROM REP_USERS
                           WHERE LOGIN=`;
             if (dbConfig.dbtype==='mssql') {
-              context.sql+=`@`;
+              context.sql+=`@login`;
             }
             else if (dbConfig.dbtype==='ora') {
-               context.sql+=`:`;
+               context.sql+=`:login`;
             }
-            context.sql+=`login`;
+            else if (dbConfig.dbtype==='mysql') {
+               context.sql+=`?`;
+            }
             const resquery = await query.find(context);
             let rows;
             if (dbConfig.dbtype==='mssql') {
               rows=resquery.recordsets[0];
+            }
+            else if (dbConfig.dbtype==='mysql') {
+               rows=resquery[0];
             }
             else if (dbConfig.dbtype==='ora') {
                rows=resquery;

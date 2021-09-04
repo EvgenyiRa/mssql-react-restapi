@@ -19,7 +19,7 @@ if (dbConfig.dbtype==='mysql') {
     try {
       poolPromise = sql.createPool(dbConfig.pool);
       /*const test=async ()=>{
-        const result=await poolPromise.execute('select * from new_table',[]);
+        const result=await poolPromise.execute('select * from REP_USERS',[]);
         //update new_table set new_tablecol=555 where idnew_table=1
         console.log(result);
       }
@@ -43,11 +43,20 @@ async function oraClose() {
   await oracledb.getPool().close();
 }
 
+async function mysqlClose() {
+  //для mysql не требуется закрывать пул соединения, фунция
+  //создана для единообразия кода
+  console.log('mysql pool close');
+}
+
 if (dbConfig.dbtype==='mssql') {
   module.exports.close = close;
 }
 else if (dbConfig.dbtype==='ora') {
   module.exports.close = oraClose;
+}
+else if (dbConfig.dbtype==='mysql') {
+  module.exports.close = mysqlClose;
 }
 
 function getParamsOut(result,params_out) {
@@ -358,13 +367,20 @@ async function authUser(req,rows,context) {
   redis.client.del('user_'+rows[0]['USER_ID']);
   redis.client.del('userToken_'+rows[0]['USER_ID']);
   redis.client.del('userRigths_'+rows[0]['USER_ID']);
-  const user_obj_jwt={ id: rows[0]['USER_ID'], host:req.headers.origin,login:context.params.login},
-        user_obj={...user_obj_jwt};
+  const user_obj_jwt={ id: rows[0]['USER_ID'], host:req.headers.origin};
+  if (dbConfig.dbtype==='mysql') {
+      user_obj_jwt.login=context.params[0];
+      context.params=[rows[0]['USER_ID']];
+  }
+  else {
+      user_obj_jwt.login=context.params.login;
+      context.params={user_id:rows[0]['USER_ID']};
+  }
+  const user_obj={...user_obj_jwt};
   user_obj.fio=rows[0]['FIO'];
   user_obj.email=rows[0]['EMAIL'];
   user_obj.phone=rows[0]['PHONE'];
   //получаем права пользователя
-   context.params={user_id:rows[0]['USER_ID']};
    context.sql=`SELECT UR.RIGHT_ID,R.NAME RIGHT_NAME,R.SYSNAME RIGHT_SYSNAME
                  FROM REP_USERS U
                  JOIN REP_USERS_RIGHTS UR
@@ -373,16 +389,21 @@ async function authUser(req,rows,context) {
                    ON R.RIGHTS_ID=UR.RIGHT_ID
                 WHERE U.USER_ID=`;
    if (dbConfig.dbtype==='mssql') {
-     context.sql+=`@`;
+     context.sql+=`@user_id`;
+   }
+   else if (dbConfig.dbtype==='mysql') {
+      context.sql+=`?`;
    }
    else if (dbConfig.dbtype==='ora') {
-      context.sql+=`:`;
+      context.sql+=`:user_id`;
    }
-   context.sql+=`user_id`;
    const resquery = await query.find(context);
    let rowsR;
    if (dbConfig.dbtype==='mssql') {
      rowsR=resquery.recordsets[0];
+   }
+   else if (dbConfig.dbtype==='mysql') {
+      rowsR=resquery[0];
    }
    else if (dbConfig.dbtype==='ora') {
       rowsR=resquery;
