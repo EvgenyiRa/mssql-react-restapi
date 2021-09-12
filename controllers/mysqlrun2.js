@@ -8,23 +8,8 @@ async function post(req, res, next) {
       if (resAuath) {
         try {
           const context = {};
-          if (!!req.body.exec_params_in) {
-              context.exec_params_in=req.body.exec_params_in;
-          }
-          else {
-              context.exec_params_in=[];
-          }
-          if (!!req.body.query_params) {
-              context.query_params=req.body.query_params;
-          }
-          else {
-              context.query_params=[];
-          }
           if (!!req.body.execsql) {
             context.execsql=req.body.execsql;
-            if (!!req.body.sql) {
-              context.sql=req.body.sql;
-            }
             const resexecquery = await execquery.find(context);
             res.status(200).json({result:resexecquery,tokenOne:tokenOne});
           }
