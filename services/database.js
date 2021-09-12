@@ -243,23 +243,24 @@ function doubleExecute(context) {
     return new Promise(async (resolve, reject) => {
       let statement=context.execsql,
           binds = [];
-      if (!!context.exec_params_in) {
-          binds=context.exec_params_in;
-      }
       try {
-        const result={};
-        result.execout=await poolPromise.execute(statement,binds);
-        if (!!context.sql) {
-          statement=context.sql;
-          if (!!context.query_params) {
-            binds=context.query_params;
-          }
-          else {
-            binds=[];
-          }
-          result.sqlout=await poolPromise.execute(statement,binds);
-        }
-        resolve(result);
+        poolPromise.getConnection(function(err, conn) {
+         try  {
+            result=[];
+            statement.forEach(async (item, i) => {
+                binds = [];
+                if (!!item.params) {
+                    binds=item.params;
+                }
+                result.push(await conn.execute(item.sql,binds));
+            });
+            resolve(result);
+         } catch (err) {
+           reject(err);
+         } finally {
+           poolPromise.releaseConnection(conn);
+         }
+       });
       } catch (err) {
         reject(err);
       }
