@@ -14,7 +14,7 @@ if (dbConfig.dbtype==='mssql') {
       .catch(err => console.log('Database Connection Failed! Bad Config: ', err))
     module.exports.poolPromise=poolPromise;
 }
-if (dbConfig.dbtype==='mysql') {
+else if (dbConfig.dbtype==='mysql') {
     sql = require('mysql2/promise');
     try {
       poolPromise = sql.createPool(dbConfig.pool);
@@ -244,23 +244,23 @@ function doubleExecute(context) {
       let statement=context.execsql,
           binds = [];
       try {
-        poolPromise.getConnection(function(err, conn) {
+        const conn=await poolPromise.getConnection();
          try  {
             result=[];
-            statement.forEach(async (item, i) => {
-                binds = [];
-                if (!!item.params) {
-                    binds=item.params;
-                }
-                result.push(await conn.execute(item.sql,binds));
-            });
+            for (var i = 0; i < statement.length; i++) {
+              binds = [];
+              const item=statement[i];
+              if (!!item.params) {
+                  binds=item.params;
+              }
+              const resultOne=await conn.execute(item.sql,binds);
+              result.push(resultOne);
+            }
             resolve(result);
-         } catch (err) {
-           reject(err);
          } finally {
            poolPromise.releaseConnection(conn);
          }
-       });
+       //});
       } catch (err) {
         reject(err);
       }
