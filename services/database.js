@@ -256,9 +256,11 @@ function doubleExecute(context) {
               const resultOne=await conn.execute(item.sql,binds);
               result.push(resultOne);
             }
+            conn.release();
             resolve(result);
-         } finally {
-           poolPromise.releaseConnection(conn);
+         } catch (err) {
+           conn.release();
+           reject(err);
          }
        //});
       } catch (err) {
