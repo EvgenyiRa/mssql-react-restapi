@@ -8,10 +8,10 @@ if (dbConfig.dbtype==='mssql') {
     poolPromise = new sql.ConnectionPool(dbConfig.pool)
       .connect()
       .then(pool => {
-        console.log('Connected to MSSQL')
-        return pool
+        console.log('Connected to MSSQL');
+        return pool;
       })
-      .catch(err => console.log('Database Connection Failed! Bad Config: ', err))
+      .catch(err => console.log('MSSQL Connection Failed! Bad Config: ', err))
     module.exports.poolPromise=poolPromise;
 }
 else if (dbConfig.dbtype==='mysql') {
@@ -27,7 +27,7 @@ else if (dbConfig.dbtype==='mysql') {
       module.exports.poolPromise=poolPromise;
       console.log('Connected to MYSQL');
     } catch (err) {
-      console.log('Database Connection Failed! Bad Config: ', err)
+      console.log('MYSQL Connection Failed! Bad Config: ', err)
     }
 }
 else if (dbConfig.dbtype==='ora') {
@@ -35,7 +35,21 @@ else if (dbConfig.dbtype==='ora') {
 }
 else if (dbConfig.dbtype==='pg') {
     const { Pool } = require('pg');
-    poolPromise=new Pool(dbConfig.pool);
+    try {
+      poolPromise=new Pool(dbConfig.pool);
+      poolPromise.connect()
+        .then(client => {
+          console.log('Connected to PostgreSQL');
+          client.release();
+        })
+        .catch(err => {
+          console.log('PostgreSQL connection Failed! Bad Config: ', err)
+        })
+      module.exports.poolPromise=poolPromise;
+
+    } catch (err) {
+      console.log('PostgreSQL connection Failed! Bad Config: ', err)
+    }
 }
 
 async function close() {
