@@ -26,6 +26,9 @@ else if (dbConfig.dbtype==='mysql') {
 else if (dbConfig.dbtype==='ora') {
     routerDB = require('./routerOra.js');
 }
+else if (dbConfig.dbtype==='pg') {
+    routerDB = require('./routerPG.js');
+}
 
 const bodyParser = require('body-parser'),
       jwt=configs.jwt;
@@ -60,8 +63,8 @@ function initialize() {
               res.header("Access-Control-Allow-Origin", origin);
               res.header("Access-Control-Allow-Methods", "*");
               res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+              next();
           }
-          next();
     });
 
     app.use(bodyParser.json({limit: '100mb', extended: true}));
