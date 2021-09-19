@@ -33,6 +33,10 @@ else if (dbConfig.dbtype==='mysql') {
 else if (dbConfig.dbtype==='ora') {
     oracledb=require('oracledb');
 }
+else if (dbConfig.dbtype==='pg') {
+    const { Pool } = require('pg');
+    poolPromise=new Pool(dbConfig.pool);
+}
 
 async function close() {
   const pool = await poolPromise;
@@ -49,6 +53,12 @@ async function mysqlClose() {
   console.log('mysql pool close');
 }
 
+async function pgClose() {
+  poolPromise.end(() => {
+    console.log('pool Postgres has ended')
+  })
+}
+
 if (dbConfig.dbtype==='mssql') {
   module.exports.close = close;
 }
@@ -57,6 +67,9 @@ else if (dbConfig.dbtype==='ora') {
 }
 else if (dbConfig.dbtype==='mysql') {
   module.exports.close = mysqlClose;
+}
+else if (dbConfig.dbtype==='pg') {
+  module.exports.close = pgClose;
 }
 
 function getParamsOut(result,params_out) {
@@ -209,6 +222,21 @@ function simpleExecute(context) {
       }
     });
   }
+  else if (dbConfig.dbtype==='pg') {
+    return new Promise(async (resolve, reject) => {
+      let statement=context.sql,
+          binds = [];
+      if (!!context.params) {
+          binds=context.params;
+      }
+      try {
+        const result = await poolPromise.query(statement,binds);
+        resolve(result);
+      } catch (err) {
+        reject(err);
+      }
+    });
+  }
 }
 
 module.exports.simpleExecute = simpleExecute;
@@ -246,7 +274,7 @@ function doubleExecute(context) {
       try {
         const conn=await poolPromise.getConnection();
          try  {
-            result=[];
+            const result=[];
             for (var i = 0; i < statement.length; i++) {
               binds = [];
               const item=statement[i];
@@ -342,6 +370,35 @@ function doubleExecute(context) {
             console.log(err);
           }
         }
+      }
+    });
+  }
+  else if (dbConfig.dbtype==='pg') {
+    return new Promise(async (resolve, reject) => {
+      let statement=context.execsql,
+          binds = [];
+      try {
+        const conn=await poolPromise.connect();
+         try  {
+            const result=[];
+            for (var i = 0; i < statement.length; i++) {
+              binds = [];
+              const item=statement[i];
+              if (!!item.params) {
+                  binds=item.params;
+              }
+              const resultOne=await conn.query(item.sql,binds);
+              result.push(resultOne);
+            }
+            conn.release();
+            resolve(result);
+         } catch (err) {
+           conn.release();
+           reject(err);
+         }
+       //});
+      } catch (err) {
+        reject(err);
       }
     });
   }
