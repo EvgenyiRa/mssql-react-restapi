@@ -20,9 +20,8 @@
               if (!!req.body.sql) {
                 context.sql=req.body.sql;
                 const rows = await query.find(context);
-                let resObj={tokenOne:tokenOne};
-                resObj.rows=rows.rows;
-                res.status(200).json(resObj);
+                rows.tokenOne=tokenOne;
+                res.status(200).json(rows);
               }
               else {
                   res.status(404).end();
