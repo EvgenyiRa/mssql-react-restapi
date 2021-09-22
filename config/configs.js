@@ -33,7 +33,7 @@ module.exports = {
           '$2a$10$u37ZiYRTq37uP2UUmQrwDg$',
           '$2a$10$r88PMCG7VUnmy8czYSg0nH$'
         ],
-   lenTokenQueue:8
+   tokenQueueCount:8
  },
  redis:{
    port: process.env.WEBOLAP_RESTAPI_REDISPORT || 6379,

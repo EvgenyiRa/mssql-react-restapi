@@ -7,54 +7,55 @@ module.exports =
   (req)=>{
       return new Promise((resolve, reject) => {
         var auth=false,
-            tokenOne='';
+            tokenSingle='';
         try {
-          jwtlib.verify(req.body.authorization, jwt.tokenKey, (err, payload) => {
-            if (!!payload) {
-              if (typeof payload['id']!== "undefined") {
-                redis.client.hgetall('user_'+payload.id, function(err, object) {
+          jwtlib.verify(req.body.authorization, jwt.tokenKey, (err, authval) => {
+            if (!!authval) {
+              if (typeof authval['id']!== "undefined") {
+                redis.client.hgetall('user_'+authval.id, function(err, object) {
                 if (!!object) {
                   if (typeof object['id']!== "undefined") {
-                    redis.client.lrange('userToken_'+payload.id, 0, -1, function(err2, object2) {
-                      if (payload.id==object.id && payload.login==object.login && payload.host==object.host) {
-                          //наибольшая вероятность нахождения токена в очереди в её конце
+                    redis.client.lrange('userToken_'+authval.id, 0, -1, function(err2, object2) {
+                      if (authval.id==object.id && authval.login==object.login && authval.host==object.host) {
+                          //вероятность положения токена в массиве в конце максимальна
                           for (var i = (object2.length-1); i>=0 ; i--) {
                               if (req.body.tokenOne==object2[i]) {
                                 auth=true;
-                                tokenOne = crypto.randomBytes(64).toString('hex'); //X-CSRF-Token
-                                redis.client.rpush(['userToken_'+payload.id,tokenOne]);
+                                //Генерируем X-CSRF-Token (единичный токен)
+                                tokenSingle = crypto.randomBytes(64).toString('hex');
+                                redis.client.rpush(['userToken_'+authval.id,tokenSingle]);
                                 break;
                               }
                           };
-                          if (object2.length>=jwt.lenTokenQueue) {
-                            for (var i = 0; i <= (object2.length-jwt.lenTokenQueue); i++) {
-                              redis.client.lrem('userToken_'+payload.id, 0, object2[i]);
+                          if (object2.length>=jwt.tokenQueueCount) {
+                            for (var i = 0; i <= (object2.length-jwt.tokenQueueCount); i++) {
+                              redis.client.lrem('userToken_'+authval.id, 0, object2[i]);
                             }
                           }
                       }
-                      resolve([auth,tokenOne,object]);
+                      resolve([auth,tokenSingle,object]);
                     });
                   }
                   else {
-                      resolve([auth,tokenOne,null]);
+                      resolve([auth,tokenSingle,null]);
                   }
                 }
                 else {
-                    resolve([auth,tokenOne,null]);
+                    resolve([auth,tokenSingle,null]);
                 }
             });
               }
               else {
-                  resolve([auth,tokenOne,null]);
+                  resolve([auth,tokenSingle,null]);
               }
             }
             else {
-                resolve([auth,tokenOne,null]);
+                resolve([auth,tokenSingle,null]);
             }
           });
         } catch (err) {
           console.log('error authchech',err);
-          resolve([auth,tokenOne,null]);
+          resolve([auth,tokenSingle,null]);
         }
       });
     }
