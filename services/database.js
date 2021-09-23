@@ -18,14 +18,16 @@ else if (dbConfig.dbtype==='mysql') {
     sql = require('mysql2/promise');
     try {
       poolPromise = sql.createPool(dbConfig.pool);
-      /*const test=async ()=>{
-        const result=await poolPromise.execute('select * from REP_USERS',[]);
-        //update new_table set new_tablecol=555 where idnew_table=1
-        console.log(result);
-      }
-      test();*/
+      poolPromise.getConnection().then((conn)=>{
+        if (!!!conn) {
+            console.log('MYSQL Connection Failed! Bad Config')
+        }
+        else {
+            console.log('Connected to MYSQL');
+            conn.release();
+        }
+      });      
       module.exports.poolPromise=poolPromise;
-      console.log('Connected to MYSQL');
     } catch (err) {
       console.log('MYSQL Connection Failed! Bad Config: ', err)
     }
