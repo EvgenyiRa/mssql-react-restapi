@@ -13,10 +13,10 @@ module.exports =
             if (!!authval) {
               if (typeof authval['id']!== "undefined") {
                 redis.client.hgetall('user_'+authval.id, function(err, object) {
-                if (!!object) {
-                  if (typeof object['id']!== "undefined") {
-                    redis.client.lrange('userToken_'+authval.id, 0, -1, function(err2, object2) {
+                  if (!!object) {
+                    if (typeof object['id']!== "undefined") {
                       if (authval.id==object.id && authval.login==object.login && authval.host==object.host) {
+                        redis.client.lrange('userToken_'+authval.id, 0, -1, function(err2, object2) {
                           //вероятность положения токена в массиве в конце максимальна
                           for (var i = (object2.length-1); i>=0 ; i--) {
                               if (req.body.tokenOne==object2[i]) {
@@ -32,18 +32,21 @@ module.exports =
                               redis.client.lrem('userToken_'+authval.id, 0, object2[i]);
                             }
                           }
+                          resolve([auth,tokenSingle,object]);
+                        });
                       }
-                      resolve([auth,tokenSingle,object]);
-                    });
+                      else {
+                          resolve([auth,tokenSingle,null]);
+                      }
+                    }
+                    else {
+                        resolve([auth,tokenSingle,null]);
+                    }
                   }
                   else {
                       resolve([auth,tokenSingle,null]);
                   }
-                }
-                else {
-                    resolve([auth,tokenSingle,null]);
-                }
-            });
+                });
               }
               else {
                   resolve([auth,tokenSingle,null]);
