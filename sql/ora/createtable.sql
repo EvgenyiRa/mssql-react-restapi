@@ -1,20 +1,3 @@
-/*WEB-OLAP v1.0
-Copyright 2020 Rassadnikov Evgeniy Alekseevich
-
-This file is part of WEB-OLAP.
-
-WEB-OLAP is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-WEB-OLAP is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with WEB-OLAP.  If not, see <https://www.gnu.org/licenses/>.*/
 DECLARE USER_ID_V NUMBER;
 BEGIN
 -- Create table
@@ -57,7 +40,7 @@ BEGIN
 -- Create/Recreate primary, unique and foreign key constraints
 	EXECUTE IMMEDIATE 'alter table REP_USERS_RIGHTS
 						  add constraint PK_REP_USERS_RIGHTS primary key (RUR_ID)';
-              
+
   -- Create table
   EXECUTE IMMEDIATE 'create table REP_CALC_OLAP
   (
@@ -73,9 +56,9 @@ BEGIN
     calc_net       NUMBER(19,2),
     tariff         VARCHAR2(4),
     vat_rate       NUMBER(7,2)
-  )'; 
+  )';
   EXECUTE IMMEDIATE 'comment on table REP_CALC_OLAP
-          is ''Òàáëèöà äëÿ äåìîíñòðàöèè êîìïîíåíòà TableOLAP''';                         
+          is ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ TableOLAP''';
 
 -- Create sequence
 	EXECUTE IMMEDIATE 'create sequence REP_USERS_ID_SQ
@@ -100,3311 +83,3311 @@ BEGIN
 						maxvalue 9999999999999999999999999999
 						start with 1
 						increment by 1
-						cache 20';              
-          
---create data           
-  EXECUTE IMMEDIATE 'INSERT INTO REP_RIGHTS (RIGHTS_ID, NAME, SYSNAME) VALUES (1, ''Ðåäàêòèðîâàíèå ôîðìû'', ''Edite'')';
-  EXECUTE IMMEDIATE 'INSERT INTO REP_RIGHTS (RIGHTS_ID, NAME, SYSNAME) VALUES (2, ''Ïðîñìîòð ôîðìû'', ''View'')';
-  EXECUTE IMMEDIATE 'INSERT INTO REP_RIGHTS (RIGHTS_ID, NAME, SYSNAME) VALUES (1002, ''Óäàëåíèå ôîðìû'', ''Delete'')';
-  EXECUTE IMMEDIATE 'INSERT INTO REP_RIGHTS (RIGHTS_ID, NAME, SYSNAME) VALUES (1004, ''Àäìèíèñòðèðîâàíèå ïîëüçîâàòåëåé'', ''Admin'')';
-  
+						cache 20';
+
+--create data
+  EXECUTE IMMEDIATE 'INSERT INTO REP_RIGHTS (RIGHTS_ID, NAME, SYSNAME) VALUES (1, ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½'', ''Edite'')';
+  EXECUTE IMMEDIATE 'INSERT INTO REP_RIGHTS (RIGHTS_ID, NAME, SYSNAME) VALUES (2, ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½'', ''View'')';
+  EXECUTE IMMEDIATE 'INSERT INTO REP_RIGHTS (RIGHTS_ID, NAME, SYSNAME) VALUES (1002, ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½'', ''Delete'')';
+  EXECUTE IMMEDIATE 'INSERT INTO REP_RIGHTS (RIGHTS_ID, NAME, SYSNAME) VALUES (1004, ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', ''Admin'')';
+
   EXECUTE IMMEDIATE 'SELECT REP_USERS_ID_SQ.NEXTVAL INTO :USER_ID_V FROM DUAL' INTO  USER_ID_V;
-  
+
   EXECUTE IMMEDIATE 'INSERT INTO REP_USERS (USER_ID, FIO, LOGIN, PASSWORD, EMAIL, PHONE, SOL) VALUES (:USER_ID_V, ''admin'', ''admin'', ''$2a$10$A.6oNVSpds0uiBe9PwjgBe/.HQ.r5M.4O/rFXw5Rit.uk3O6Rw06C'', NULL, NULL, 1)' USING USER_ID_V;
   EXECUTE IMMEDIATE 'INSERT INTO REP_USERS_RIGHTS (RUR_ID, USER_ID, RIGHT_ID) VALUES (REP_USERS_RIGHTS_ID_SQ.NEXTVAL, :USER_ID_V, 1)' USING USER_ID_V;
   EXECUTE IMMEDIATE 'INSERT INTO REP_USERS_RIGHTS (RUR_ID, USER_ID, RIGHT_ID) VALUES (REP_USERS_RIGHTS_ID_SQ.NEXTVAL, :USER_ID_V, 2)' USING USER_ID_V;
   EXECUTE IMMEDIATE 'INSERT INTO REP_USERS_RIGHTS (RUR_ID, USER_ID, RIGHT_ID) VALUES (REP_USERS_RIGHTS_ID_SQ.NEXTVAL, :USER_ID_V, 1002)' USING USER_ID_V;
-  EXECUTE IMMEDIATE 'INSERT INTO REP_USERS_RIGHTS (RUR_ID, USER_ID, RIGHT_ID) VALUES (REP_USERS_RIGHTS_ID_SQ.NEXTVAL, :USER_ID_V, 1004)' USING USER_ID_V;                                      
-    
+  EXECUTE IMMEDIATE 'INSERT INTO REP_USERS_RIGHTS (RUR_ID, USER_ID, RIGHT_ID) VALUES (REP_USERS_RIGHTS_ID_SQ.NEXTVAL, :USER_ID_V, 1004)' USING USER_ID_V;
+
   EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833823049'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-MAR-20'', ''01-APR-20'', ''31-MAR-20'', ''Çâîíêè'', 21.00, 0.00, 58.22, ''2.77'', 0.20)';
+values (''5488833'', ''5488833823049'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-MAR-20'', ''01-APR-20'', ''31-MAR-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 21.00, 0.00, 58.22, ''2.77'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833823049'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-MAR-20'', ''01-APR-20'', ''31-MAR-20'', ''ÑÌÑ'', 21.00, 0.00, 62.97, ''2.99'', 0.20)';
+values (''5488833'', ''5488833823049'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-MAR-20'', ''01-APR-20'', ''31-MAR-20'', ''ï¿½ï¿½ï¿½'', 21.00, 0.00, 62.97, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833823049'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-FEB-20'', ''01-MAR-20'', ''29-FEB-20'', ''Çâîíêè'', 56.00, 0.00, 155.28, ''2.77'', 0.20)';
+values (''5488833'', ''5488833823049'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-20'', ''01-MAR-20'', ''29-FEB-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 56.00, 0.00, 155.28, ''2.77'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833823049'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-FEB-20'', ''01-MAR-20'', ''29-FEB-20'', ''ÑÌÑ'', 56.00, 0.00, 167.92, ''2.99'', 0.20)';
+values (''5488833'', ''5488833823049'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-20'', ''01-MAR-20'', ''29-FEB-20'', ''ï¿½ï¿½ï¿½'', 56.00, 0.00, 167.92, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833823049'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''ÑÌÑ'', 35.00, 0.00, 104.95, ''2.99'', 0.20)';
+values (''5488833'', ''5488833823049'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''ï¿½ï¿½ï¿½'', 35.00, 0.00, 104.95, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833823049'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''Çâîíêè'', 14.00, 0.00, 41.73, ''2.98'', 0.20)';
+values (''5488833'', ''5488833823049'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 14.00, 0.00, 41.73, ''2.98'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833823049'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''ÑÌÑ'', 21.00, 0.00, 65.73, ''3.13'', 0.20)';
+values (''5488833'', ''5488833823049'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''ï¿½ï¿½ï¿½'', 21.00, 0.00, 65.73, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833823049'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''Çâîíêè'', 21.00, 0.00, 62.60, ''2.98'', 0.20)';
+values (''5488833'', ''5488833823049'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 21.00, 0.00, 62.60, ''2.98'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833823049'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''Äåíåæíûå ïåðåâîäû'', 0.00, 0.00, 0.00, ''2.98'', 0.20)';
+values (''5488833'', ''5488833823049'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''2.98'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833823049'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''ÑÌÑ'', 28.00, 0.00, 87.64, ''3.13'', 0.20)';
+values (''5488833'', ''5488833823049'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''ï¿½ï¿½ï¿½'', 28.00, 0.00, 87.64, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833823049'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''Çâîíêè'', 71.00, 0.00, 211.68, ''2.98'', 0.20)';
+values (''5488833'', ''5488833823049'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 71.00, 0.00, 211.68, ''2.98'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833823049'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''Äåíåæíûå ïåðåâîäû'', 0.00, 0.00, 0.00, ''2.98'', 0.20)';
+values (''5488833'', ''5488833823049'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''2.98'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833823049'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''ÑÌÑ'', 71.00, 0.00, 222.23, ''3.13'', 0.20)';
+values (''5488833'', ''5488833823049'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''ï¿½ï¿½ï¿½'', 71.00, 0.00, 222.23, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833823049'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''ÑÌÑ'', 21.00, 0.00, 65.73, ''3.13'', 0.20)';
+values (''5488833'', ''5488833823049'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''ï¿½ï¿½ï¿½'', 21.00, 0.00, 65.73, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833823049'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''Çâîíêè'', 21.00, 0.00, 62.60, ''2.98'', 0.20)';
+values (''5488833'', ''5488833823049'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 21.00, 0.00, 62.60, ''2.98'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833823049'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''Äåíåæíûå ïåðåâîäû'', 0.00, 0.00, 0.00, ''2.98'', 0.20)';
+values (''5488833'', ''5488833823049'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''2.98'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833823049'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''Çâîíêè'', 14.00, 0.00, 41.73, ''2.98'', 0.20)';
+values (''5488833'', ''5488833823049'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 14.00, 0.00, 41.73, ''2.98'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833823049'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''Äåíåæíûå ïåðåâîäû'', 0.00, 0.00, 0.00, ''2.98'', 0.20)';
+values (''5488833'', ''5488833823049'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''2.98'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833823049'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''ÑÌÑ'', 14.00, 0.00, 43.82, ''3.13'', 0.20)';
+values (''5488833'', ''5488833823049'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''ï¿½ï¿½ï¿½'', 14.00, 0.00, 43.82, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833823049'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''ÑÌÑ'', 21.00, 0.00, 65.73, ''3.13'', 0.20)';
+values (''5488833'', ''5488833823049'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''ï¿½ï¿½ï¿½'', 21.00, 0.00, 65.73, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833823049'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''Çâîíêè'', 21.00, 0.00, 62.60, ''2.98'', 0.20)';
+values (''5488833'', ''5488833823049'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 21.00, 0.00, 62.60, ''2.98'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833823049'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''Äåíåæíûå ïåðåâîäû'', 0.00, 0.00, 0.00, ''2.98'', 0.20)';
+values (''5488833'', ''5488833823049'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''2.98'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833823049'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-JAN-20'', ''01-FEB-20'', ''31-JAN-20'', ''ÑÌÑ'', 21.00, 0.00, 62.97, ''2.99'', 0.20)';
+values (''5488833'', ''5488833823049'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JAN-20'', ''01-FEB-20'', ''31-JAN-20'', ''ï¿½ï¿½ï¿½'', 21.00, 0.00, 62.97, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833823049'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-JAN-20'', ''01-FEB-20'', ''31-JAN-20'', ''Çâîíêè'', 21.00, 0.00, 58.22, ''2.77'', 0.20)';
+values (''5488833'', ''5488833823049'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JAN-20'', ''01-FEB-20'', ''31-JAN-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 21.00, 0.00, 58.22, ''2.77'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833823049'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-FEB-20'', ''01-MAR-20'', ''29-FEB-20'', ''Çâîíêè'', -21.00, 0.00, -58.22, ''2.77'', 0.20)';
+values (''5488833'', ''5488833823049'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-20'', ''01-MAR-20'', ''29-FEB-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', -21.00, 0.00, -58.22, ''2.77'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833823049'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-FEB-20'', ''01-MAR-20'', ''29-FEB-20'', ''ÑÌÑ'', -21.00, 0.00, -62.97, ''2.99'', 0.20)';
+values (''5488833'', ''5488833823049'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-20'', ''01-MAR-20'', ''29-FEB-20'', ''ï¿½ï¿½ï¿½'', -21.00, 0.00, -62.97, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833823049'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''Çâîíêè'', 26.00, 0.00, 77.51, ''2.98'', 0.20)';
+values (''5488833'', ''5488833823049'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 26.00, 0.00, 77.51, ''2.98'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833823049'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''Äåíåæíûå ïåðåâîäû'', 0.00, 0.00, 0.00, ''2.98'', 0.20)';
+values (''5488833'', ''5488833823049'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''2.98'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833823049'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''ÑÌÑ'', 26.00, 0.00, 81.38, ''3.13'', 0.20)';
+values (''5488833'', ''5488833823049'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''ï¿½ï¿½ï¿½'', 26.00, 0.00, 81.38, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833823049'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''Äåíåæíûå ïåðåâîäû'', 0.00, 0.00, 0.00, ''2.98'', 0.20)';
+values (''5488833'', ''5488833823049'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''2.98'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833243947'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''Çâîíêè'', 217.00, 0.00, 426.87, ''1.96'', 0.20)';
+values (''5488833'', ''5488833243947'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 217.00, 0.00, 426.87, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833243947'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''ÑÌÑ'', 203.00, 0.00, 608.71, ''2.99'', 0.20)';
+values (''5488833'', ''5488833243947'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''ï¿½ï¿½ï¿½'', 203.00, 0.00, 608.71, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833243947'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''Çâîíêè'', 168.00, 0.00, 379.68, ''2.26'', 0.20)';
+values (''5488833'', ''5488833243947'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 168.00, 0.00, 379.68, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833243947'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-JAN-20'', ''01-FEB-20'', ''31-JAN-20'', ''Çâîíêè'', 203.00, 0.00, 399.33, ''1.96'', 0.20)';
+values (''5488833'', ''5488833243947'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JAN-20'', ''01-FEB-20'', ''31-JAN-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 203.00, 0.00, 399.33, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833243947'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-JAN-20'', ''01-FEB-20'', ''31-JAN-20'', ''ÑÌÑ'', 203.00, 0.00, 608.71, ''2.99'', 0.20)';
+values (''5488833'', ''5488833243947'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JAN-20'', ''01-FEB-20'', ''31-JAN-20'', ''ï¿½ï¿½ï¿½'', 203.00, 0.00, 608.71, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833243947'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''Çâîíêè'', 203.00, 0.00, 399.33, ''1.96'', 0.20)';
+values (''5488833'', ''5488833243947'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 203.00, 0.00, 399.33, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833243947'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''ÑÌÑ'', 203.00, 0.00, 635.39, ''3.13'', 0.20)';
+values (''5488833'', ''5488833243947'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''ï¿½ï¿½ï¿½'', 203.00, 0.00, 635.39, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833243947'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-APR-20'', ''01-MAY-20'', ''30-APR-20'', ''Çâîíêè'', 217.00, 0.00, 426.87, ''1.96'', 0.20)';
+values (''5488833'', ''5488833243947'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-APR-20'', ''01-MAY-20'', ''30-APR-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 217.00, 0.00, 426.87, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833243947'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-APR-20'', ''01-MAY-20'', ''30-APR-20'', ''ÑÌÑ'', 217.00, 0.00, 650.69, ''2.99'', 0.20)';
+values (''5488833'', ''5488833243947'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-APR-20'', ''01-MAY-20'', ''30-APR-20'', ''ï¿½ï¿½ï¿½'', 217.00, 0.00, 650.69, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833243947'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-MAR-20'', ''01-APR-20'', ''31-MAR-20'', ''ÑÌÑ'', 224.00, 0.00, 671.68, ''2.99'', 0.20)';
+values (''5488833'', ''5488833243947'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-MAR-20'', ''01-APR-20'', ''31-MAR-20'', ''ï¿½ï¿½ï¿½'', 224.00, 0.00, 671.68, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833243947'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-MAR-20'', ''01-APR-20'', ''31-MAR-20'', ''Çâîíêè'', 224.00, 0.00, 440.64, ''1.96'', 0.20)';
+values (''5488833'', ''5488833243947'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-MAR-20'', ''01-APR-20'', ''31-MAR-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 224.00, 0.00, 440.64, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833243947'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-FEB-20'', ''01-MAR-20'', ''29-FEB-20'', ''ÑÌÑ'', 203.00, 0.00, 608.71, ''2.99'', 0.20)';
+values (''5488833'', ''5488833243947'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-20'', ''01-MAR-20'', ''29-FEB-20'', ''ï¿½ï¿½ï¿½'', 203.00, 0.00, 608.71, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833243947'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-FEB-20'', ''01-MAR-20'', ''29-FEB-20'', ''Çâîíêè'', 203.00, 0.00, 399.33, ''1.96'', 0.20)';
+values (''5488833'', ''5488833243947'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-20'', ''01-MAR-20'', ''29-FEB-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 203.00, 0.00, 399.33, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833243947'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''ÑÌÑ'', 135.00, 0.00, 422.55, ''3.13'', 0.20)';
+values (''5488833'', ''5488833243947'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''ï¿½ï¿½ï¿½'', 135.00, 0.00, 422.55, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833243947'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''Çâîíêè'', 203.00, 0.00, 458.78, ''2.26'', 0.20)';
+values (''5488833'', ''5488833243947'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 203.00, 0.00, 458.78, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833243947'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''ÑÌÑ'', 210.00, 0.00, 657.30, ''3.13'', 0.20)';
+values (''5488833'', ''5488833243947'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''ï¿½ï¿½ï¿½'', 210.00, 0.00, 657.30, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833243947'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''Çâîíêè'', 210.00, 0.00, 474.60, ''2.26'', 0.20)';
+values (''5488833'', ''5488833243947'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 210.00, 0.00, 474.60, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833243947'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''ÑÌÑ'', 168.00, 0.00, 525.84, ''3.13'', 0.20)';
+values (''5488833'', ''5488833243947'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''ï¿½ï¿½ï¿½'', 168.00, 0.00, 525.84, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833243947'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''Çâîíêè'', 135.00, 0.00, 305.10, ''2.26'', 0.20)';
+values (''5488833'', ''5488833243947'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 135.00, 0.00, 305.10, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833243947'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''ÑÌÑ'', 280.00, 0.00, 876.40, ''3.13'', 0.20)';
+values (''5488833'', ''5488833243947'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''ï¿½ï¿½ï¿½'', 280.00, 0.00, 876.40, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833243947'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''Çâîíêè'', 280.00, 0.00, 632.80, ''2.26'', 0.20)';
+values (''5488833'', ''5488833243947'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 280.00, 0.00, 632.80, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833243947'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''ÑÌÑ'', 189.00, 0.00, 591.57, ''3.13'', 0.20)';
+values (''5488833'', ''5488833243947'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''ï¿½ï¿½ï¿½'', 189.00, 0.00, 591.57, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833243947'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''Çâîíêè'', 189.00, 0.00, 427.14, ''2.26'', 0.20)';
+values (''5488833'', ''5488833243947'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 189.00, 0.00, 427.14, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833243947'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''ÑÌÑ'', 252.00, 0.00, 788.76, ''3.13'', 0.20)';
+values (''5488833'', ''5488833243947'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''ï¿½ï¿½ï¿½'', 252.00, 0.00, 788.76, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833243947'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''Çâîíêè'', 252.00, 0.00, 569.52, ''2.26'', 0.20)';
+values (''5488833'', ''5488833243947'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 252.00, 0.00, 569.52, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833243947'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''ÑÌÑ'', 193.00, 0.00, 604.09, ''3.13'', 0.20)';
+values (''5488833'', ''5488833243947'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''ï¿½ï¿½ï¿½'', 193.00, 0.00, 604.09, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833243947'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''Çâîíêè'', 193.00, 0.00, 436.18, ''2.26'', 0.20)';
+values (''5488833'', ''5488833243947'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 193.00, 0.00, 436.18, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833116392'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''Çâîíêè'', 28.00, 0.00, 55.08, ''1.96'', 0.20)';
+values (''5488833'', ''5488833116392'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 28.00, 0.00, 55.08, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833116392'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''Çâîíêè'', 0.00, 0.00, 0.00, ''1.96'', 0.20)';
+values (''5488833'', ''5488833116392'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833116392'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''ÑÌÑ'', 42.00, 0.00, 125.94, ''2.99'', 0.20)';
+values (''5488833'', ''5488833116392'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''ï¿½ï¿½ï¿½'', 42.00, 0.00, 125.94, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833116392'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-SEP-20'', ''03-SEP-20'', ''01-SEP-20'', ''Çâîíêè'', 3.00, 0.00, 6.78, ''2.26'', 0.20)';
+values (''5488833'', ''5488833116392'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-SEP-20'', ''03-SEP-20'', ''01-SEP-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 3.00, 0.00, 6.78, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833116392'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''03-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''Çâîíêè'', 45.00, 0.00, 101.70, ''2.26'', 0.20)';
+values (''5488833'', ''5488833116392'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''03-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 45.00, 0.00, 101.70, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833116392'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''03-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''Çâîíêè'', 0.00, 0.00, 0.00, ''2.26'', 0.20)';
+values (''5488833'', ''5488833116392'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''03-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833116392'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-JAN-20'', ''01-FEB-20'', ''31-JAN-20'', ''ÑÌÑ'', 7.00, 0.00, 20.99, ''2.99'', 0.20)';
+values (''5488833'', ''5488833116392'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JAN-20'', ''01-FEB-20'', ''31-JAN-20'', ''ï¿½ï¿½ï¿½'', 7.00, 0.00, 20.99, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833116392'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-JAN-20'', ''01-FEB-20'', ''31-JAN-20'', ''Çâîíêè'', 35.00, 0.00, 68.85, ''1.96'', 0.20)';
+values (''5488833'', ''5488833116392'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JAN-20'', ''01-FEB-20'', ''31-JAN-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 35.00, 0.00, 68.85, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833116392'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-JAN-20'', ''01-FEB-20'', ''31-JAN-20'', ''Çâîíêè'', 7.00, 0.00, 13.77, ''1.96'', 0.20)';
+values (''5488833'', ''5488833116392'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JAN-20'', ''01-FEB-20'', ''31-JAN-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 7.00, 0.00, 13.77, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833116392'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-JAN-20'', ''01-FEB-20'', ''31-JAN-20'', ''ÑÌÑ'', 35.00, 0.00, 104.95, ''2.99'', 0.20)';
+values (''5488833'', ''5488833116392'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JAN-20'', ''01-FEB-20'', ''31-JAN-20'', ''ï¿½ï¿½ï¿½'', 35.00, 0.00, 104.95, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833116392'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''Çâîíêè'', 42.00, 0.00, 82.62, ''1.96'', 0.20)';
+values (''5488833'', ''5488833116392'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 42.00, 0.00, 82.62, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833116392'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''ÑÌÑ'', 42.00, 0.00, 131.46, ''3.13'', 0.20)';
+values (''5488833'', ''5488833116392'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''ï¿½ï¿½ï¿½'', 42.00, 0.00, 131.46, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833116392'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-APR-20'', ''01-MAY-20'', ''30-APR-20'', ''ÑÌÑ'', 21.00, 0.00, 62.97, ''2.99'', 0.20)';
+values (''5488833'', ''5488833116392'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-APR-20'', ''01-MAY-20'', ''30-APR-20'', ''ï¿½ï¿½ï¿½'', 21.00, 0.00, 62.97, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833116392'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-APR-20'', ''01-MAY-20'', ''30-APR-20'', ''Çâîíêè'', 21.00, 0.00, 41.31, ''1.96'', 0.20)';
+values (''5488833'', ''5488833116392'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-APR-20'', ''01-MAY-20'', ''30-APR-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 21.00, 0.00, 41.31, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833116392'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-MAR-20'', ''01-APR-20'', ''31-MAR-20'', ''ÑÌÑ'', 49.00, 0.00, 146.93, ''2.99'', 0.20)';
+values (''5488833'', ''5488833116392'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-MAR-20'', ''01-APR-20'', ''31-MAR-20'', ''ï¿½ï¿½ï¿½'', 49.00, 0.00, 146.93, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833116392'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-MAR-20'', ''01-APR-20'', ''31-MAR-20'', ''Çâîíêè'', 49.00, 0.00, 96.39, ''1.96'', 0.20)';
+values (''5488833'', ''5488833116392'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-MAR-20'', ''01-APR-20'', ''31-MAR-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 49.00, 0.00, 96.39, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833116392'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-FEB-20'', ''01-MAR-20'', ''29-FEB-20'', ''ÑÌÑ'', 42.00, 0.00, 125.94, ''2.99'', 0.20)';
+values (''5488833'', ''5488833116392'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-20'', ''01-MAR-20'', ''29-FEB-20'', ''ï¿½ï¿½ï¿½'', 42.00, 0.00, 125.94, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833116392'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-FEB-20'', ''01-MAR-20'', ''29-FEB-20'', ''Çâîíêè'', 42.00, 0.00, 82.62, ''1.96'', 0.20)';
+values (''5488833'', ''5488833116392'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-20'', ''01-MAR-20'', ''29-FEB-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 42.00, 0.00, 82.62, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833116392'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''ÑÌÑ'', 40.00, 0.00, 125.20, ''3.13'', 0.20)';
+values (''5488833'', ''5488833116392'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''ï¿½ï¿½ï¿½'', 40.00, 0.00, 125.20, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833116392'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''5488833'', ''5488833116392'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833116392'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''ÑÌÑ'', 28.00, 0.00, 83.96, ''2.99'', 0.20)';
+values (''5488833'', ''5488833116392'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''ï¿½ï¿½ï¿½'', 28.00, 0.00, 83.96, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833116392'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''2.99'', 0.20)';
+values (''5488833'', ''5488833116392'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833116392'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''Çâîíêè'', 42.00, 0.00, 94.92, ''2.26'', 0.20)';
+values (''5488833'', ''5488833116392'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 42.00, 0.00, 94.92, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833116392'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-AUG-20'', ''23-AUG-20'', ''01-AUG-20'', ''ÑÌÑ'', 54.00, 0.00, 169.02, ''3.13'', 0.20)';
+values (''5488833'', ''5488833116392'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-AUG-20'', ''23-AUG-20'', ''01-AUG-20'', ''ï¿½ï¿½ï¿½'', 54.00, 0.00, 169.02, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833116392'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''23-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''ÑÌÑ'', 22.00, 0.00, 68.86, ''3.13'', 0.20)';
+values (''5488833'', ''5488833116392'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''23-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''ï¿½ï¿½ï¿½'', 22.00, 0.00, 68.86, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833116392'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-AUG-20'', ''23-AUG-20'', ''01-AUG-20'', ''Çâîíêè'', 54.00, 0.00, 122.04, ''2.26'', 0.20)';
+values (''5488833'', ''5488833116392'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-AUG-20'', ''23-AUG-20'', ''01-AUG-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 54.00, 0.00, 122.04, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833116392'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''23-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''Çâîíêè'', 22.00, 0.00, 49.72, ''2.26'', 0.20)';
+values (''5488833'', ''5488833116392'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''23-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 22.00, 0.00, 49.72, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833243947'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''ÑÌÑ'', 217.00, 0.00, 650.69, ''2.99'', 0.20)';
+values (''5488833'', ''5488833243947'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''ï¿½ï¿½ï¿½'', 217.00, 0.00, 650.69, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833116392'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-SEP-20'', ''03-SEP-20'', ''01-SEP-20'', ''ÑÌÑ'', 3.00, 0.00, 9.39, ''3.13'', 0.20)';
+values (''5488833'', ''5488833116392'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-SEP-20'', ''03-SEP-20'', ''01-SEP-20'', ''ï¿½ï¿½ï¿½'', 3.00, 0.00, 9.39, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833116392'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''03-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''ÑÌÑ'', 45.00, 0.00, 140.85, ''3.13'', 0.20)';
+values (''5488833'', ''5488833116392'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''03-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''ï¿½ï¿½ï¿½'', 45.00, 0.00, 140.85, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833116392'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''03-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''5488833'', ''5488833116392'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''03-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833116392'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''Çâîíêè'', 40.00, 0.00, 90.40, ''2.26'', 0.20)';
+values (''5488833'', ''5488833116392'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 40.00, 0.00, 90.40, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833116392'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''Çâîíêè'', 0.00, 0.00, 0.00, ''2.26'', 0.20)';
+values (''5488833'', ''5488833116392'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833622899'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''ÑÌÑ'', 84.00, 0.00, 262.92, ''3.13'', 0.20)';
+values (''5488833'', ''5488833622899'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''ï¿½ï¿½ï¿½'', 84.00, 0.00, 262.92, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833622899'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''ÑÌÑ'', 21.00, 0.00, 65.73, ''3.13'', 0.20)';
+values (''5488833'', ''5488833622899'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''ï¿½ï¿½ï¿½'', 21.00, 0.00, 65.73, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833622899'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-APR-20'', ''01-MAY-20'', ''30-APR-20'', ''ÑÌÑ'', 35.00, 0.00, 104.95, ''2.99'', 0.20)';
+values (''5488833'', ''5488833622899'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-APR-20'', ''01-MAY-20'', ''30-APR-20'', ''ï¿½ï¿½ï¿½'', 35.00, 0.00, 104.95, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833622899'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-APR-20'', ''01-MAY-20'', ''30-APR-20'', ''Çâîíêè'', 14.00, 0.00, 27.54, ''1.96'', 0.20)';
+values (''5488833'', ''5488833622899'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-APR-20'', ''01-MAY-20'', ''30-APR-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 14.00, 0.00, 27.54, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833622899'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-APR-20'', ''01-MAY-20'', ''30-APR-20'', ''Çâîíêè'', 35.00, 0.00, 68.85, ''1.96'', 0.20)';
+values (''5488833'', ''5488833622899'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-APR-20'', ''01-MAY-20'', ''30-APR-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 35.00, 0.00, 68.85, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833622899'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-APR-20'', ''01-MAY-20'', ''30-APR-20'', ''ÑÌÑ'', 14.00, 0.00, 41.98, ''2.99'', 0.20)';
+values (''5488833'', ''5488833622899'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-APR-20'', ''01-MAY-20'', ''30-APR-20'', ''ï¿½ï¿½ï¿½'', 14.00, 0.00, 41.98, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833622899'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-MAR-20'', ''01-APR-20'', ''31-MAR-20'', ''Çâîíêè'', 210.00, 0.00, 413.10, ''1.96'', 0.20)';
+values (''5488833'', ''5488833622899'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-MAR-20'', ''01-APR-20'', ''31-MAR-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 210.00, 0.00, 413.10, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833622899'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-MAR-20'', ''01-APR-20'', ''31-MAR-20'', ''ÑÌÑ'', 7.00, 0.00, 20.99, ''2.99'', 0.20)';
+values (''5488833'', ''5488833622899'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-MAR-20'', ''01-APR-20'', ''31-MAR-20'', ''ï¿½ï¿½ï¿½'', 7.00, 0.00, 20.99, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833622899'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-MAR-20'', ''01-APR-20'', ''31-MAR-20'', ''Çâîíêè'', 7.00, 0.00, 13.77, ''1.96'', 0.20)';
+values (''5488833'', ''5488833622899'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-MAR-20'', ''01-APR-20'', ''31-MAR-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 7.00, 0.00, 13.77, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833622899'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-MAR-20'', ''01-APR-20'', ''31-MAR-20'', ''ÑÌÑ'', 210.00, 0.00, 629.70, ''2.99'', 0.20)';
+values (''5488833'', ''5488833622899'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-MAR-20'', ''01-APR-20'', ''31-MAR-20'', ''ï¿½ï¿½ï¿½'', 210.00, 0.00, 629.70, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833622899'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-FEB-20'', ''01-MAR-20'', ''29-FEB-20'', ''ÑÌÑ'', 77.00, 0.00, 230.89, ''2.99'', 0.20)';
+values (''5488833'', ''5488833622899'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-20'', ''01-MAR-20'', ''29-FEB-20'', ''ï¿½ï¿½ï¿½'', 77.00, 0.00, 230.89, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833622899'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-FEB-20'', ''01-MAR-20'', ''29-FEB-20'', ''Çâîíêè'', 77.00, 0.00, 151.47, ''1.96'', 0.20)';
+values (''5488833'', ''5488833622899'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-20'', ''01-MAR-20'', ''29-FEB-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 77.00, 0.00, 151.47, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833622899'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-FEB-20'', ''01-MAR-20'', ''29-FEB-20'', ''Çâîíêè'', 7.00, 0.00, 13.77, ''1.96'', 0.20)';
+values (''5488833'', ''5488833622899'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-20'', ''01-MAR-20'', ''29-FEB-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 7.00, 0.00, 13.77, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833622899'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-FEB-20'', ''01-MAR-20'', ''29-FEB-20'', ''ÑÌÑ'', 7.00, 0.00, 20.99, ''2.99'', 0.20)';
+values (''5488833'', ''5488833622899'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-20'', ''01-MAR-20'', ''29-FEB-20'', ''ï¿½ï¿½ï¿½'', 7.00, 0.00, 20.99, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833622899'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''Çâîíêè'', 54.00, 0.00, 122.04, ''2.26'', 0.20)';
+values (''5488833'', ''5488833622899'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 54.00, 0.00, 122.04, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833622899'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''Çâîíêè'', 24.00, 0.00, 54.24, ''2.26'', 0.20)';
+values (''5488833'', ''5488833622899'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 24.00, 0.00, 54.24, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833622899'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''ÑÌÑ'', 54.00, 0.00, 169.02, ''3.13'', 0.20)';
+values (''5488833'', ''5488833622899'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''ï¿½ï¿½ï¿½'', 54.00, 0.00, 169.02, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833622899'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''ÑÌÑ'', 24.00, 0.00, 75.12, ''3.13'', 0.20)';
+values (''5488833'', ''5488833622899'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''ï¿½ï¿½ï¿½'', 24.00, 0.00, 75.12, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833622899'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''ÑÌÑ'', 35.00, 0.00, 104.95, ''2.99'', 0.20)';
+values (''5488833'', ''5488833622899'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''ï¿½ï¿½ï¿½'', 35.00, 0.00, 104.95, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833622899'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''ÑÌÑ'', 14.00, 0.00, 41.98, ''2.99'', 0.20)';
+values (''5488833'', ''5488833622899'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''ï¿½ï¿½ï¿½'', 14.00, 0.00, 41.98, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833622899'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''Çâîíêè'', 84.00, 0.00, 189.84, ''2.26'', 0.20)';
+values (''5488833'', ''5488833622899'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 84.00, 0.00, 189.84, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833622899'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''Çâîíêè'', 21.00, 0.00, 47.46, ''2.26'', 0.20)';
+values (''5488833'', ''5488833622899'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 21.00, 0.00, 47.46, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833622899'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''ÑÌÑ'', 112.00, 0.00, 350.56, ''3.13'', 0.20)';
+values (''5488833'', ''5488833622899'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''ï¿½ï¿½ï¿½'', 112.00, 0.00, 350.56, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833622899'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''ÑÌÑ'', 21.00, 0.00, 65.73, ''3.13'', 0.20)';
+values (''5488833'', ''5488833622899'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''ï¿½ï¿½ï¿½'', 21.00, 0.00, 65.73, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833622899'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''Çâîíêè'', 21.00, 0.00, 47.46, ''2.26'', 0.20)';
+values (''5488833'', ''5488833622899'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 21.00, 0.00, 47.46, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833622899'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''Çâîíêè'', 112.00, 0.00, 253.12, ''2.26'', 0.20)';
+values (''5488833'', ''5488833622899'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 112.00, 0.00, 253.12, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833622899'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''ÑÌÑ'', 154.00, 0.00, 482.02, ''3.13'', 0.20)';
+values (''5488833'', ''5488833622899'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''ï¿½ï¿½ï¿½'', 154.00, 0.00, 482.02, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833622899'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''ÑÌÑ'', 7.00, 0.00, 21.91, ''3.13'', 0.20)';
+values (''5488833'', ''5488833622899'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''ï¿½ï¿½ï¿½'', 7.00, 0.00, 21.91, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833622899'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''ÑÌÑ'', 84.00, 0.00, 262.92, ''3.13'', 0.20)';
+values (''5488833'', ''5488833622899'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''ï¿½ï¿½ï¿½'', 84.00, 0.00, 262.92, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833622899'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''ÑÌÑ'', 21.00, 0.00, 65.73, ''3.13'', 0.20)';
+values (''5488833'', ''5488833622899'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''ï¿½ï¿½ï¿½'', 21.00, 0.00, 65.73, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833622899'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''Çâîíêè'', 84.00, 0.00, 189.84, ''2.26'', 0.20)';
+values (''5488833'', ''5488833622899'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 84.00, 0.00, 189.84, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833622899'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''Çâîíêè'', 21.00, 0.00, 47.46, ''2.26'', 0.20)';
+values (''5488833'', ''5488833622899'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 21.00, 0.00, 47.46, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833622899'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''ÑÌÑ'', 77.00, 0.00, 241.01, ''3.13'', 0.20)';
+values (''5488833'', ''5488833622899'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''ï¿½ï¿½ï¿½'', 77.00, 0.00, 241.01, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833622899'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''ÑÌÑ'', 21.00, 0.00, 65.73, ''3.13'', 0.20)';
+values (''5488833'', ''5488833622899'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''ï¿½ï¿½ï¿½'', 21.00, 0.00, 65.73, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833622899'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''Çâîíêè'', 77.00, 0.00, 174.02, ''2.26'', 0.20)';
+values (''5488833'', ''5488833622899'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 77.00, 0.00, 174.02, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833622899'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''Çâîíêè'', 21.00, 0.00, 47.46, ''2.26'', 0.20)';
+values (''5488833'', ''5488833622899'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 21.00, 0.00, 47.46, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833622899'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''Çâîíêè'', 56.00, 0.00, 126.56, ''2.26'', 0.20)';
+values (''5488833'', ''5488833622899'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 56.00, 0.00, 126.56, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833622899'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''Çâîíêè'', 28.00, 0.00, 63.28, ''2.26'', 0.20)';
+values (''5488833'', ''5488833622899'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 28.00, 0.00, 63.28, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833622899'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''ÑÌÑ'', 56.00, 0.00, 175.28, ''3.13'', 0.20)';
+values (''5488833'', ''5488833622899'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''ï¿½ï¿½ï¿½'', 56.00, 0.00, 175.28, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833622899'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''ÑÌÑ'', 28.00, 0.00, 87.64, ''3.13'', 0.20)';
+values (''5488833'', ''5488833622899'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''ï¿½ï¿½ï¿½'', 28.00, 0.00, 87.64, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833622899'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''5488833'', ''5488833622899'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833622899'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''2.99'', 0.20)';
+values (''5488833'', ''5488833622899'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833622899'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''5488833'', ''5488833622899'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833622899'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''5488833'', ''5488833622899'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833622899'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''5488833'', ''5488833622899'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833622899'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''5488833'', ''5488833622899'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833622899'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''5488833'', ''5488833622899'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833622899'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''5488833'', ''5488833622899'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833622899'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''5488833'', ''5488833622899'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833622899'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''ÑÌÑ'', 113.00, 0.00, 353.69, ''3.13'', 0.20)';
+values (''5488833'', ''5488833622899'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''ï¿½ï¿½ï¿½'', 113.00, 0.00, 353.69, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833622899'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''ÑÌÑ'', 10.00, 0.00, 31.30, ''3.13'', 0.20)';
+values (''5488833'', ''5488833622899'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''ï¿½ï¿½ï¿½'', 10.00, 0.00, 31.30, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833622899'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''Çâîíêè'', 113.00, 0.00, 255.38, ''2.26'', 0.20)';
+values (''5488833'', ''5488833622899'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 113.00, 0.00, 255.38, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833622899'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''Çâîíêè'', 10.00, 0.00, 22.60, ''2.26'', 0.20)';
+values (''5488833'', ''5488833622899'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 10.00, 0.00, 22.60, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833947386'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''Çâîíêè'', 70.00, 0.00, 137.70, ''1.96'', 0.20)';
+values (''5488833'', ''5488833947386'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 70.00, 0.00, 137.70, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833947386'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''Çâîíêè'', 56.00, 0.00, 126.56, ''2.26'', 0.20)';
+values (''5488833'', ''5488833947386'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 56.00, 0.00, 126.56, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833947386'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-JAN-20'', ''01-FEB-20'', ''31-JAN-20'', ''Çâîíêè'', 98.00, 0.00, 192.78, ''1.96'', 0.20)';
+values (''5488833'', ''5488833947386'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JAN-20'', ''01-FEB-20'', ''31-JAN-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 98.00, 0.00, 192.78, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833947386'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-JAN-20'', ''01-FEB-20'', ''31-JAN-20'', ''ÑÌÑ'', 98.00, 0.00, 293.86, ''2.99'', 0.20)';
+values (''5488833'', ''5488833947386'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JAN-20'', ''01-FEB-20'', ''31-JAN-20'', ''ï¿½ï¿½ï¿½'', 98.00, 0.00, 293.86, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833947386'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''ÑÌÑ'', 32.00, 0.00, 100.16, ''3.13'', 0.20)';
+values (''5488833'', ''5488833947386'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''ï¿½ï¿½ï¿½'', 32.00, 0.00, 100.16, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833947386'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-APR-20'', ''01-MAY-20'', ''30-APR-20'', ''Çâîíêè'', 63.00, 0.00, 123.93, ''1.96'', 0.20)';
+values (''5488833'', ''5488833947386'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-APR-20'', ''01-MAY-20'', ''30-APR-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 63.00, 0.00, 123.93, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833947386'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-APR-20'', ''01-MAY-20'', ''30-APR-20'', ''ÑÌÑ'', 63.00, 0.00, 188.91, ''2.99'', 0.20)';
+values (''5488833'', ''5488833947386'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-APR-20'', ''01-MAY-20'', ''30-APR-20'', ''ï¿½ï¿½ï¿½'', 63.00, 0.00, 188.91, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833947386'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-MAR-20'', ''01-APR-20'', ''31-MAR-20'', ''ÑÌÑ'', 70.00, 0.00, 209.90, ''2.99'', 0.20)';
+values (''5488833'', ''5488833947386'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-MAR-20'', ''01-APR-20'', ''31-MAR-20'', ''ï¿½ï¿½ï¿½'', 70.00, 0.00, 209.90, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833947386'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-MAR-20'', ''01-APR-20'', ''31-MAR-20'', ''Çâîíêè'', 70.00, 0.00, 137.70, ''1.96'', 0.20)';
+values (''5488833'', ''5488833947386'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-MAR-20'', ''01-APR-20'', ''31-MAR-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 70.00, 0.00, 137.70, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833947386'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-FEB-20'', ''01-MAR-20'', ''29-FEB-20'', ''Çâîíêè'', 98.00, 0.00, 192.78, ''1.96'', 0.20)';
+values (''5488833'', ''5488833947386'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-20'', ''01-MAR-20'', ''29-FEB-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 98.00, 0.00, 192.78, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833947386'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-FEB-20'', ''01-MAR-20'', ''29-FEB-20'', ''ÑÌÑ'', 98.00, 0.00, 293.86, ''2.99'', 0.20)';
+values (''5488833'', ''5488833947386'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-20'', ''01-MAR-20'', ''29-FEB-20'', ''ï¿½ï¿½ï¿½'', 98.00, 0.00, 293.86, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833947386'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''Çâîíêè'', 100.00, 0.00, 226.00, ''2.26'', 0.20)';
+values (''5488833'', ''5488833947386'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 100.00, 0.00, 226.00, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833947386'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''ÑÌÑ'', 100.00, 0.00, 313.00, ''3.13'', 0.20)';
+values (''5488833'', ''5488833947386'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''ï¿½ï¿½ï¿½'', 100.00, 0.00, 313.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833947386'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''ÑÌÑ'', 70.00, 0.00, 209.90, ''2.99'', 0.20)';
+values (''5488833'', ''5488833947386'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''ï¿½ï¿½ï¿½'', 70.00, 0.00, 209.90, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833947386'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''Çâîíêè'', 32.00, 0.00, 72.32, ''2.26'', 0.20)';
+values (''5488833'', ''5488833947386'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 32.00, 0.00, 72.32, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833947386'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''ÑÌÑ'', 49.00, 0.00, 153.37, ''3.13'', 0.20)';
+values (''5488833'', ''5488833947386'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''ï¿½ï¿½ï¿½'', 49.00, 0.00, 153.37, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833947386'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''Çâîíêè'', 49.00, 0.00, 110.74, ''2.26'', 0.20)';
+values (''5488833'', ''5488833947386'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 49.00, 0.00, 110.74, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833947386'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''ÑÌÑ'', 56.00, 0.00, 175.28, ''3.13'', 0.20)';
+values (''5488833'', ''5488833947386'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''ï¿½ï¿½ï¿½'', 56.00, 0.00, 175.28, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833947386'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''Çâîíêè'', 77.00, 0.00, 174.02, ''2.26'', 0.20)';
+values (''5488833'', ''5488833947386'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 77.00, 0.00, 174.02, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833947386'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''ÑÌÑ'', 77.00, 0.00, 241.01, ''3.13'', 0.20)';
+values (''5488833'', ''5488833947386'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''ï¿½ï¿½ï¿½'', 77.00, 0.00, 241.01, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833947386'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''Çâîíêè'', 63.00, 0.00, 142.38, ''2.26'', 0.20)';
+values (''5488833'', ''5488833947386'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 63.00, 0.00, 142.38, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833947386'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''ÑÌÑ'', 63.00, 0.00, 197.19, ''3.13'', 0.20)';
+values (''5488833'', ''5488833947386'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''ï¿½ï¿½ï¿½'', 63.00, 0.00, 197.19, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833947386'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''Çâîíêè'', 63.00, 0.00, 142.38, ''2.26'', 0.20)';
+values (''5488833'', ''5488833947386'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 63.00, 0.00, 142.38, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833947386'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''ÑÌÑ'', 63.00, 0.00, 197.19, ''3.13'', 0.20)';
+values (''5488833'', ''5488833947386'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''ï¿½ï¿½ï¿½'', 63.00, 0.00, 197.19, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833947386'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''ÑÌÑ'', 60.00, 0.00, 187.80, ''3.13'', 0.20)';
+values (''5488833'', ''5488833947386'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''ï¿½ï¿½ï¿½'', 60.00, 0.00, 187.80, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833947386'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''Çâîíêè'', 60.00, 0.00, 135.60, ''2.26'', 0.20)';
+values (''5488833'', ''5488833947386'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 60.00, 0.00, 135.60, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833947386'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''ÑÌÑ'', 79.00, 0.00, 236.88, ''2.99'', 0.20)';
+values (''5488833'', ''5488833947386'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''ï¿½ï¿½ï¿½'', 79.00, 0.00, 236.88, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833947386'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''Çâîíêè'', 79.00, 0.00, 155.40, ''1.96'', 0.20)';
+values (''5488833'', ''5488833947386'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 79.00, 0.00, 155.40, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833622899'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''2.99'', 0.20)';
+values (''5488833'', ''5488833622899'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833116392'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''ÑÌÑ'', 42.00, 0.00, 131.46, ''3.13'', 0.20)';
+values (''5488833'', ''5488833116392'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''ï¿½ï¿½ï¿½'', 42.00, 0.00, 131.46, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833116392'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''5488833'', ''5488833116392'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833116392'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''Çâîíêè'', 42.00, 0.00, 94.92, ''2.26'', 0.20)';
+values (''5488833'', ''5488833116392'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 42.00, 0.00, 94.92, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833116392'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''Çâîíêè'', 0.00, 0.00, 0.00, ''2.26'', 0.20)';
+values (''5488833'', ''5488833116392'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833116392'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''ÑÌÑ'', 35.00, 0.00, 109.55, ''3.13'', 0.20)';
+values (''5488833'', ''5488833116392'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''ï¿½ï¿½ï¿½'', 35.00, 0.00, 109.55, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833116392'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''5488833'', ''5488833116392'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833116392'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''Çâîíêè'', 35.00, 0.00, 79.10, ''2.26'', 0.20)';
+values (''5488833'', ''5488833116392'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 35.00, 0.00, 79.10, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833116392'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''Çâîíêè'', 0.00, 0.00, 0.00, ''2.26'', 0.20)';
+values (''5488833'', ''5488833116392'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833116392'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''ÑÌÑ'', 35.00, 0.00, 109.55, ''3.13'', 0.20)';
+values (''5488833'', ''5488833116392'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''ï¿½ï¿½ï¿½'', 35.00, 0.00, 109.55, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833116392'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''ÑÌÑ'', 6.00, 0.00, 18.78, ''3.13'', 0.20)';
+values (''5488833'', ''5488833116392'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''ï¿½ï¿½ï¿½'', 6.00, 0.00, 18.78, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833116392'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''Çâîíêè'', 35.00, 0.00, 79.10, ''2.26'', 0.20)';
+values (''5488833'', ''5488833116392'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 35.00, 0.00, 79.10, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833116392'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''Çâîíêè'', 6.00, 0.00, 13.56, ''2.26'', 0.20)';
+values (''5488833'', ''5488833116392'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 6.00, 0.00, 13.56, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833116392'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''23-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''ÑÌÑ'', 1153.00, 0.00, 3608.89, ''3.13'', 0.20)';
+values (''5488833'', ''5488833116392'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''23-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''ï¿½ï¿½ï¿½'', 1153.00, 0.00, 3608.89, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833116392'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''23-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''Çâîíêè'', 1153.00, 0.00, 2605.78, ''2.26'', 0.20)';
+values (''5488833'', ''5488833116392'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''23-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 1153.00, 0.00, 2605.78, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833116392'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''2.99'', 0.20)';
+values (''5488833'', ''5488833116392'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833116392'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''5488833'', ''5488833116392'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833116392'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''5488833'', ''5488833116392'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833116392'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''5488833'', ''5488833116392'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833116392'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''2.99'', 0.20)';
+values (''5488833'', ''5488833116392'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833116392'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-AUG-20'', ''23-AUG-20'', ''01-AUG-20'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''5488833'', ''5488833116392'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-AUG-20'', ''23-AUG-20'', ''01-AUG-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833116392'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''23-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''5488833'', ''5488833116392'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''23-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833116392'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-SEP-20'', ''03-SEP-20'', ''01-SEP-20'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''5488833'', ''5488833116392'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-SEP-20'', ''03-SEP-20'', ''01-SEP-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833116392'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''03-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''5488833'', ''5488833116392'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''03-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833116392'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''5488833'', ''5488833116392'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833116392'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''5488833'', ''5488833116392'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833116392'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''5488833'', ''5488833116392'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833116392'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''ÑÌÑ'', 1.00, 0.00, 2.99, ''2.99'', 0.20)';
+values (''5488833'', ''5488833116392'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''ï¿½ï¿½ï¿½'', 1.00, 0.00, 2.99, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833116392'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-SEP-20'', ''03-SEP-20'', ''01-SEP-20'', ''Çâîíêè'', 0.00, 0.00, 0.00, ''2.26'', 0.20)';
+values (''5488833'', ''5488833116392'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-SEP-20'', ''03-SEP-20'', ''01-SEP-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833116392'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''ÑÌÑ'', 43.00, 0.00, 134.59, ''3.13'', 0.20)';
+values (''5488833'', ''5488833116392'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''ï¿½ï¿½ï¿½'', 43.00, 0.00, 134.59, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833116392'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''5488833'', ''5488833116392'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833116392'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''Çâîíêè'', 43.00, 0.00, 97.18, ''2.26'', 0.20)';
+values (''5488833'', ''5488833116392'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 43.00, 0.00, 97.18, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833116392'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''Çâîíêè'', 0.00, 0.00, 0.00, ''2.26'', 0.20)';
+values (''5488833'', ''5488833116392'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833116392'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''Çâîíêè'', 1.00, 0.00, 1.96, ''1.96'', 0.20)';
+values (''5488833'', ''5488833116392'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 1.00, 0.00, 1.96, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833116392'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''ÑÌÑ'', 1.00, 0.00, 3.13, ''3.13'', 0.20)';
+values (''5488833'', ''5488833116392'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''ï¿½ï¿½ï¿½'', 1.00, 0.00, 3.13, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833116392'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''Çâîíêè'', 1.00, 0.00, 2.26, ''2.26'', 0.20)';
+values (''5488833'', ''5488833116392'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 1.00, 0.00, 2.26, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833116392'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-AUG-20'', ''23-AUG-20'', ''01-AUG-20'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''5488833'', ''5488833116392'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-AUG-20'', ''23-AUG-20'', ''01-AUG-20'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833116392'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-AUG-20'', ''23-AUG-20'', ''01-AUG-20'', ''Çâîíêè'', 0.00, 0.00, 0.00, ''2.26'', 0.20)';
+values (''5488833'', ''5488833116392'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-AUG-20'', ''23-AUG-20'', ''01-AUG-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833116392'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-SEP-20'', ''03-SEP-20'', ''01-SEP-20'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''5488833'', ''5488833116392'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-SEP-20'', ''03-SEP-20'', ''01-SEP-20'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833326550'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''Çâîíêè'', 0.00, 0.00, 0.00, ''1.96'', 0.20)';
+values (''5488833'', ''5488833326550'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833326550'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''Çâîíêè'', 56.00, 0.00, 110.16, ''1.96'', 0.20)';
+values (''5488833'', ''5488833326550'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 56.00, 0.00, 110.16, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833326550'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''Çâîíêè'', 0.00, 0.00, 0.00, ''2.26'', 0.20)';
+values (''5488833'', ''5488833326550'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833326550'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''Çâîíêè'', 84.00, 0.00, 189.84, ''2.26'', 0.20)';
+values (''5488833'', ''5488833326550'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 84.00, 0.00, 189.84, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833326550'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''5488833'', ''5488833326550'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833326550'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''ÑÌÑ'', 84.00, 0.00, 262.92, ''3.13'', 0.20)';
+values (''5488833'', ''5488833326550'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''ï¿½ï¿½ï¿½'', 84.00, 0.00, 262.92, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833326550'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-JAN-20'', ''01-FEB-20'', ''31-JAN-20'', ''ÑÌÑ'', 49.00, 0.00, 146.93, ''2.99'', 0.20)';
+values (''5488833'', ''5488833326550'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JAN-20'', ''01-FEB-20'', ''31-JAN-20'', ''ï¿½ï¿½ï¿½'', 49.00, 0.00, 146.93, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833326550'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-JAN-20'', ''01-FEB-20'', ''31-JAN-20'', ''Çâîíêè'', 49.00, 0.00, 96.39, ''1.96'', 0.20)';
+values (''5488833'', ''5488833326550'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JAN-20'', ''01-FEB-20'', ''31-JAN-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 49.00, 0.00, 96.39, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833326550'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''2.99'', 0.20)';
+values (''5488833'', ''5488833326550'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833326550'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''ÑÌÑ'', 56.00, 0.00, 167.92, ''2.99'', 0.20)';
+values (''5488833'', ''5488833326550'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''ï¿½ï¿½ï¿½'', 56.00, 0.00, 167.92, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833326550'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''5488833'', ''5488833326550'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833326550'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''ÑÌÑ'', 56.00, 0.00, 175.28, ''3.13'', 0.20)';
+values (''5488833'', ''5488833326550'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''ï¿½ï¿½ï¿½'', 56.00, 0.00, 175.28, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833326550'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''Çâîíêè'', 0.00, 0.00, 0.00, ''1.96'', 0.20)';
+values (''5488833'', ''5488833326550'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833326550'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''Çâîíêè'', 56.00, 0.00, 110.16, ''1.96'', 0.20)';
+values (''5488833'', ''5488833326550'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 56.00, 0.00, 110.16, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833326550'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-APR-20'', ''01-MAY-20'', ''30-APR-20'', ''ÑÌÑ'', 77.00, 0.00, 230.89, ''2.99'', 0.20)';
+values (''5488833'', ''5488833326550'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-APR-20'', ''01-MAY-20'', ''30-APR-20'', ''ï¿½ï¿½ï¿½'', 77.00, 0.00, 230.89, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833326550'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-APR-20'', ''01-MAY-20'', ''30-APR-20'', ''Çâîíêè'', 77.00, 0.00, 151.47, ''1.96'', 0.20)';
+values (''5488833'', ''5488833326550'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-APR-20'', ''01-MAY-20'', ''30-APR-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 77.00, 0.00, 151.47, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833326550'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-MAR-20'', ''01-APR-20'', ''31-MAR-20'', ''Çâîíêè'', 63.00, 0.00, 123.93, ''1.96'', 0.20)';
+values (''5488833'', ''5488833326550'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-MAR-20'', ''01-APR-20'', ''31-MAR-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 63.00, 0.00, 123.93, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833326550'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-MAR-20'', ''01-APR-20'', ''31-MAR-20'', ''ÑÌÑ'', 63.00, 0.00, 188.91, ''2.99'', 0.20)';
+values (''5488833'', ''5488833326550'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-MAR-20'', ''01-APR-20'', ''31-MAR-20'', ''ï¿½ï¿½ï¿½'', 63.00, 0.00, 188.91, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833326550'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-FEB-20'', ''01-MAR-20'', ''29-FEB-20'', ''Çâîíêè'', 49.00, 0.00, 96.39, ''1.96'', 0.20)';
+values (''5488833'', ''5488833326550'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-20'', ''01-MAR-20'', ''29-FEB-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 49.00, 0.00, 96.39, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833326550'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-FEB-20'', ''01-MAR-20'', ''29-FEB-20'', ''ÑÌÑ'', 49.00, 0.00, 146.93, ''2.99'', 0.20)';
+values (''5488833'', ''5488833326550'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-20'', ''01-MAR-20'', ''29-FEB-20'', ''ï¿½ï¿½ï¿½'', 49.00, 0.00, 146.93, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833326550'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''2.99'', 0.20)';
+values (''5488833'', ''5488833326550'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833326550'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''ÑÌÑ'', 56.00, 0.00, 167.92, ''2.99'', 0.20)';
+values (''5488833'', ''5488833326550'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''ï¿½ï¿½ï¿½'', 56.00, 0.00, 167.92, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833326550'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''Çâîíêè'', 0.00, 0.00, 0.00, ''2.26'', 0.20)';
+values (''5488833'', ''5488833326550'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833326550'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''Çâîíêè'', 56.00, 0.00, 126.56, ''2.26'', 0.20)';
+values (''5488833'', ''5488833326550'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 56.00, 0.00, 126.56, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833326550'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''5488833'', ''5488833326550'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833326550'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''ÑÌÑ'', 70.00, 0.00, 219.10, ''3.13'', 0.20)';
+values (''5488833'', ''5488833326550'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''ï¿½ï¿½ï¿½'', 70.00, 0.00, 219.10, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833326550'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''Çâîíêè'', 0.00, 0.00, 0.00, ''2.26'', 0.20)';
+values (''5488833'', ''5488833326550'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833326550'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''Çâîíêè'', 70.00, 0.00, 158.20, ''2.26'', 0.20)';
+values (''5488833'', ''5488833326550'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 70.00, 0.00, 158.20, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833326550'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''Çâîíêè'', 0.00, 0.00, 0.00, ''2.26'', 0.20)';
+values (''5488833'', ''5488833326550'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833326550'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''Çâîíêè'', 68.00, 0.00, 153.68, ''2.26'', 0.20)';
+values (''5488833'', ''5488833326550'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 68.00, 0.00, 153.68, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833326550'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''5488833'', ''5488833326550'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833326550'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''ÑÌÑ'', 68.00, 0.00, 212.84, ''3.13'', 0.20)';
+values (''5488833'', ''5488833326550'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''ï¿½ï¿½ï¿½'', 68.00, 0.00, 212.84, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833326550'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''Çâîíêè'', 0.00, 0.00, 0.00, ''2.26'', 0.20)';
+values (''5488833'', ''5488833326550'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833326550'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''Çâîíêè'', 112.00, 0.00, 253.12, ''2.26'', 0.20)';
+values (''5488833'', ''5488833326550'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 112.00, 0.00, 253.12, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833326550'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''5488833'', ''5488833326550'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833326550'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''ÑÌÑ'', 112.00, 0.00, 350.56, ''3.13'', 0.20)';
+values (''5488833'', ''5488833326550'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''ï¿½ï¿½ï¿½'', 112.00, 0.00, 350.56, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833326550'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''5488833'', ''5488833326550'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833326550'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''ÑÌÑ'', 77.00, 0.00, 241.01, ''3.13'', 0.20)';
+values (''5488833'', ''5488833326550'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''ï¿½ï¿½ï¿½'', 77.00, 0.00, 241.01, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833326550'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''Çâîíêè'', 0.00, 0.00, 0.00, ''2.26'', 0.20)';
+values (''5488833'', ''5488833326550'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833326550'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''Çâîíêè'', 77.00, 0.00, 174.02, ''2.26'', 0.20)';
+values (''5488833'', ''5488833326550'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 77.00, 0.00, 174.02, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833326550'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''5488833'', ''5488833326550'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833326550'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''ÑÌÑ'', 77.00, 0.00, 241.01, ''3.13'', 0.20)';
+values (''5488833'', ''5488833326550'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''ï¿½ï¿½ï¿½'', 77.00, 0.00, 241.01, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833326550'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''Çâîíêè'', 0.00, 0.00, 0.00, ''2.26'', 0.20)';
+values (''5488833'', ''5488833326550'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833326550'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''Çâîíêè'', 77.00, 0.00, 174.02, ''2.26'', 0.20)';
+values (''5488833'', ''5488833326550'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 77.00, 0.00, 174.02, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833326550'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''5488833'', ''5488833326550'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833326550'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''ÑÌÑ'', 57.00, 0.00, 178.41, ''3.13'', 0.20)';
+values (''5488833'', ''5488833326550'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''ï¿½ï¿½ï¿½'', 57.00, 0.00, 178.41, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833326550'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''Çâîíêè'', 0.00, 0.00, 0.00, ''2.26'', 0.20)';
+values (''5488833'', ''5488833326550'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833326550'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''Çâîíêè'', 57.00, 0.00, 128.82, ''2.26'', 0.20)';
+values (''5488833'', ''5488833326550'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 57.00, 0.00, 128.82, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833522898'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''Çâîíêè'', 35.00, 0.00, 68.85, ''1.96'', 0.20)';
+values (''5488833'', ''5488833522898'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 35.00, 0.00, 68.85, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833522898'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''Çâîíêè'', 42.00, 0.00, 94.92, ''2.26'', 0.20)';
+values (''5488833'', ''5488833522898'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 42.00, 0.00, 94.92, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833522898'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-JAN-20'', ''01-FEB-20'', ''31-JAN-20'', ''ÑÌÑ'', 28.00, 0.00, 83.96, ''2.99'', 0.20)';
+values (''5488833'', ''5488833522898'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JAN-20'', ''01-FEB-20'', ''31-JAN-20'', ''ï¿½ï¿½ï¿½'', 28.00, 0.00, 83.96, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833522898'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-JAN-20'', ''01-FEB-20'', ''31-JAN-20'', ''Çâîíêè'', 28.00, 0.00, 55.08, ''1.96'', 0.20)';
+values (''5488833'', ''5488833522898'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JAN-20'', ''01-FEB-20'', ''31-JAN-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 28.00, 0.00, 55.08, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833522898'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''ÑÌÑ'', 42.00, 0.00, 125.94, ''2.99'', 0.20)';
+values (''5488833'', ''5488833522898'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''ï¿½ï¿½ï¿½'', 42.00, 0.00, 125.94, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833522898'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''Çâîíêè'', 42.00, 0.00, 82.62, ''1.96'', 0.20)';
+values (''5488833'', ''5488833522898'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 42.00, 0.00, 82.62, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833522898'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''ÑÌÑ'', 28.00, 0.00, 87.64, ''3.13'', 0.20)';
+values (''5488833'', ''5488833522898'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''ï¿½ï¿½ï¿½'', 28.00, 0.00, 87.64, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833522898'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-APR-20'', ''01-MAY-20'', ''30-APR-20'', ''ÑÌÑ'', 42.00, 0.00, 125.94, ''2.99'', 0.20)';
+values (''5488833'', ''5488833522898'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-APR-20'', ''01-MAY-20'', ''30-APR-20'', ''ï¿½ï¿½ï¿½'', 42.00, 0.00, 125.94, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833522898'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-APR-20'', ''01-MAY-20'', ''30-APR-20'', ''Çâîíêè'', 42.00, 0.00, 82.62, ''1.96'', 0.20)';
+values (''5488833'', ''5488833522898'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-APR-20'', ''01-MAY-20'', ''30-APR-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 42.00, 0.00, 82.62, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833522898'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-MAR-20'', ''01-APR-20'', ''31-MAR-20'', ''ÑÌÑ'', 42.00, 0.00, 125.94, ''2.99'', 0.20)';
+values (''5488833'', ''5488833522898'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-MAR-20'', ''01-APR-20'', ''31-MAR-20'', ''ï¿½ï¿½ï¿½'', 42.00, 0.00, 125.94, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833522898'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-MAR-20'', ''01-APR-20'', ''31-MAR-20'', ''Çâîíêè'', 42.00, 0.00, 82.62, ''1.96'', 0.20)';
+values (''5488833'', ''5488833522898'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-MAR-20'', ''01-APR-20'', ''31-MAR-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 42.00, 0.00, 82.62, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833522898'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-FEB-20'', ''01-MAR-20'', ''29-FEB-20'', ''Çâîíêè'', 35.00, 0.00, 68.85, ''1.96'', 0.20)';
+values (''5488833'', ''5488833522898'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-20'', ''01-MAR-20'', ''29-FEB-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 35.00, 0.00, 68.85, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833522898'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-FEB-20'', ''01-MAR-20'', ''29-FEB-20'', ''ÑÌÑ'', 35.00, 0.00, 104.95, ''2.99'', 0.20)';
+values (''5488833'', ''5488833522898'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-20'', ''01-MAR-20'', ''29-FEB-20'', ''ï¿½ï¿½ï¿½'', 35.00, 0.00, 104.95, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833522898'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''Çâîíêè'', 60.00, 0.00, 135.60, ''2.26'', 0.20)';
+values (''5488833'', ''5488833522898'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 60.00, 0.00, 135.60, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833522898'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''ÑÌÑ'', 60.00, 0.00, 187.80, ''3.13'', 0.20)';
+values (''5488833'', ''5488833522898'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''ï¿½ï¿½ï¿½'', 60.00, 0.00, 187.80, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833522898'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''ÑÌÑ'', 35.00, 0.00, 104.95, ''2.99'', 0.20)';
+values (''5488833'', ''5488833522898'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''ï¿½ï¿½ï¿½'', 35.00, 0.00, 104.95, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833522898'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''Çâîíêè'', 28.00, 0.00, 63.28, ''2.26'', 0.20)';
+values (''5488833'', ''5488833522898'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 28.00, 0.00, 63.28, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833522898'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''ÑÌÑ'', 35.00, 0.00, 109.55, ''3.13'', 0.20)';
+values (''5488833'', ''5488833522898'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''ï¿½ï¿½ï¿½'', 35.00, 0.00, 109.55, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833522898'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''Çâîíêè'', 35.00, 0.00, 79.10, ''2.26'', 0.20)';
+values (''5488833'', ''5488833522898'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 35.00, 0.00, 79.10, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833522898'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''ÑÌÑ'', 42.00, 0.00, 131.46, ''3.13'', 0.20)';
+values (''5488833'', ''5488833522898'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''ï¿½ï¿½ï¿½'', 42.00, 0.00, 131.46, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833522898'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''ÑÌÑ'', 49.00, 0.00, 153.37, ''3.13'', 0.20)';
+values (''5488833'', ''5488833522898'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''ï¿½ï¿½ï¿½'', 49.00, 0.00, 153.37, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833522898'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''Çâîíêè'', 49.00, 0.00, 110.74, ''2.26'', 0.20)';
+values (''5488833'', ''5488833522898'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 49.00, 0.00, 110.74, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833522898'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''ÑÌÑ'', 28.00, 0.00, 87.64, ''3.13'', 0.20)';
+values (''5488833'', ''5488833522898'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''ï¿½ï¿½ï¿½'', 28.00, 0.00, 87.64, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833522898'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''Çâîíêè'', 28.00, 0.00, 63.28, ''2.26'', 0.20)';
+values (''5488833'', ''5488833522898'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 28.00, 0.00, 63.28, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833522898'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''Çâîíêè'', 21.00, 0.00, 47.46, ''2.26'', 0.20)';
+values (''5488833'', ''5488833522898'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 21.00, 0.00, 47.46, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833522898'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''ÑÌÑ'', 21.00, 0.00, 65.73, ''3.13'', 0.20)';
+values (''5488833'', ''5488833522898'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''ï¿½ï¿½ï¿½'', 21.00, 0.00, 65.73, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833522898'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''5488833'', ''5488833522898'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833522898'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''2.99'', 0.20)';
+values (''5488833'', ''5488833522898'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833522898'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''5488833'', ''5488833522898'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833522898'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''5488833'', ''5488833522898'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833522898'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''2.99'', 0.20)';
+values (''5488833'', ''5488833522898'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833522898'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''5488833'', ''5488833522898'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833522898'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''5488833'', ''5488833522898'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833522898'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''5488833'', ''5488833522898'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833522898'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''5488833'', ''5488833522898'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833522898'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''5488833'', ''5488833522898'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833522898'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''ÑÌÑ'', 37.00, 0.00, 115.81, ''3.13'', 0.20)';
+values (''5488833'', ''5488833522898'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''ï¿½ï¿½ï¿½'', 37.00, 0.00, 115.81, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833522898'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''Çâîíêè'', 37.00, 0.00, 83.62, ''2.26'', 0.20)';
+values (''5488833'', ''5488833522898'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 37.00, 0.00, 83.62, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833622899'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''Çâîíêè'', 35.00, 0.00, 68.85, ''1.96'', 0.20)';
+values (''5488833'', ''5488833622899'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 35.00, 0.00, 68.85, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833622899'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''Çâîíêè'', 14.00, 0.00, 27.54, ''1.96'', 0.20)';
+values (''5488833'', ''5488833622899'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 14.00, 0.00, 27.54, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833622899'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''Çâîíêè'', 7.00, 0.00, 15.82, ''2.26'', 0.20)';
+values (''5488833'', ''5488833622899'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 7.00, 0.00, 15.82, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833622899'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''Çâîíêè'', 154.00, 0.00, 348.04, ''2.26'', 0.20)';
+values (''5488833'', ''5488833622899'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 154.00, 0.00, 348.04, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833622899'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-JAN-20'', ''01-FEB-20'', ''31-JAN-20'', ''Çâîíêè'', 133.00, 0.00, 261.63, ''1.96'', 0.20)';
+values (''5488833'', ''5488833622899'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JAN-20'', ''01-FEB-20'', ''31-JAN-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 133.00, 0.00, 261.63, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833622899'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-JAN-20'', ''01-FEB-20'', ''31-JAN-20'', ''ÑÌÑ'', 133.00, 0.00, 398.81, ''2.99'', 0.20)';
+values (''5488833'', ''5488833622899'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JAN-20'', ''01-FEB-20'', ''31-JAN-20'', ''ï¿½ï¿½ï¿½'', 133.00, 0.00, 398.81, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833622899'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-JAN-20'', ''01-FEB-20'', ''31-JAN-20'', ''Çâîíêè'', 7.00, 0.00, 13.77, ''1.96'', 0.20)';
+values (''5488833'', ''5488833622899'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JAN-20'', ''01-FEB-20'', ''31-JAN-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 7.00, 0.00, 13.77, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833622899'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-JAN-20'', ''01-FEB-20'', ''31-JAN-20'', ''ÑÌÑ'', 7.00, 0.00, 20.99, ''2.99'', 0.20)';
+values (''5488833'', ''5488833622899'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JAN-20'', ''01-FEB-20'', ''31-JAN-20'', ''ï¿½ï¿½ï¿½'', 7.00, 0.00, 20.99, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833622899'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''ÑÌÑ'', 77.00, 0.00, 230.89, ''2.99'', 0.20)';
+values (''5488833'', ''5488833622899'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''ï¿½ï¿½ï¿½'', 77.00, 0.00, 230.89, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833622899'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''2.99'', 0.20)';
+values (''5488833'', ''5488833622899'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833622899'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''Çâîíêè'', 0.00, 0.00, 0.00, ''1.96'', 0.20)';
+values (''5488833'', ''5488833622899'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833622899'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''Çâîíêè'', 77.00, 0.00, 151.47, ''1.96'', 0.20)';
+values (''5488833'', ''5488833622899'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 77.00, 0.00, 151.47, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111611153942'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''ÑÌÑ'', 2142.00, 0.00, 6704.46, ''3.13'', 0.20)';
+values (''4011161'', ''40111611153942'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''ï¿½ï¿½ï¿½'', 2142.00, 0.00, 6704.46, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111611153942'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''40111611153942'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5100002'', ''5100002229024'', ''ÎÎÎ "ÄÅËÀÉ"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''ÑÌÑ'', 4529.00, 0.00, 13580.53, ''2.99'', 0.20)';
+values (''5100002'', ''5100002229024'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''ï¿½ï¿½ï¿½'', 4529.00, 0.00, 13580.53, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5100002'', ''5100002229024'', ''ÎÎÎ "ÄÅËÀÉ"'', ''01-APR-20'', ''01-MAY-20'', ''30-APR-20'', ''ÑÌÑ'', 3150.00, 0.00, 9445.50, ''2.99'', 0.20)';
+values (''5100002'', ''5100002229024'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-APR-20'', ''01-MAY-20'', ''30-APR-20'', ''ï¿½ï¿½ï¿½'', 3150.00, 0.00, 9445.50, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5100002'', ''5100002229024'', ''ÎÎÎ "ÄÅËÀÉ"'', ''01-APR-20'', ''01-MAY-20'', ''30-APR-20'', ''Çâîíêè'', 3150.00, 0.00, 6196.50, ''1.96'', 0.20)';
+values (''5100002'', ''5100002229024'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-APR-20'', ''01-MAY-20'', ''30-APR-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 3150.00, 0.00, 6196.50, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5100002'', ''5100002229024'', ''ÎÎÎ "ÄÅËÀÉ"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''Çâîíêè'', 4529.00, 0.00, 8909.19, ''1.96'', 0.20)';
+values (''5100002'', ''5100002229024'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 4529.00, 0.00, 8909.19, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5100002'', ''5100002229024'', ''ÎÎÎ "ÄÅËÀÉ"'', ''01-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''ÑÌÑ'', 27930.00, 0.00, 87420.90, ''3.13'', 0.20)';
+values (''5100002'', ''5100002229024'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''ï¿½ï¿½ï¿½'', 27930.00, 0.00, 87420.90, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5100002'', ''5100002229024'', ''ÎÎÎ "ÄÅËÀÉ"'', ''01-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''Çâîíêè'', 27930.00, 0.00, 63121.80, ''2.26'', 0.20)';
+values (''5100002'', ''5100002229024'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 27930.00, 0.00, 63121.80, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5100002'', ''5100002229024'', ''ÎÎÎ "ÄÅËÀÉ"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''ÑÌÑ'', 23975.00, 0.00, 75041.75, ''3.13'', 0.20)';
+values (''5100002'', ''5100002229024'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''ï¿½ï¿½ï¿½'', 23975.00, 0.00, 75041.75, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5100002'', ''5100002229024'', ''ÎÎÎ "ÄÅËÀÉ"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''Çâîíêè'', 23975.00, 0.00, 54183.50, ''2.26'', 0.20)';
+values (''5100002'', ''5100002229024'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 23975.00, 0.00, 54183.50, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5100002'', ''5100002229024'', ''ÎÎÎ "ÄÅËÀÉ"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''ÑÌÑ'', 8568.00, 0.00, 25691.76, ''2.99'', 0.20)';
+values (''5100002'', ''5100002229024'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''ï¿½ï¿½ï¿½'', 8568.00, 0.00, 25691.76, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5100002'', ''5100002229024'', ''ÎÎÎ "ÄÅËÀÉ"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''Çâîíêè'', 8568.00, 0.00, 16854.48, ''1.96'', 0.20)';
+values (''5100002'', ''5100002229024'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 8568.00, 0.00, 16854.48, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5100002'', ''5100002229024'', ''ÎÎÎ "ÄÅËÀÉ"'', ''01-JAN-20'', ''01-FEB-20'', ''31-JAN-20'', ''Çâîíêè'', 20692.00, 0.00, 40704.12, ''1.96'', 0.20)';
+values (''5100002'', ''5100002229024'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JAN-20'', ''01-FEB-20'', ''31-JAN-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 20692.00, 0.00, 40704.12, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5100002'', ''5100002229024'', ''ÎÎÎ "ÄÅËÀÉ"'', ''01-JAN-20'', ''01-FEB-20'', ''31-JAN-20'', ''ÑÌÑ'', 20692.00, 0.00, 62046.44, ''2.99'', 0.20)';
+values (''5100002'', ''5100002229024'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JAN-20'', ''01-FEB-20'', ''31-JAN-20'', ''ï¿½ï¿½ï¿½'', 20692.00, 0.00, 62046.44, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5100002'', ''5100002229024'', ''ÎÎÎ "ÄÅËÀÉ"'', ''01-MAR-20'', ''01-APR-20'', ''31-MAR-20'', ''Çâîíêè'', 23548.00, 0.00, 46322.28, ''1.96'', 0.20)';
+values (''5100002'', ''5100002229024'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-MAR-20'', ''01-APR-20'', ''31-MAR-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 23548.00, 0.00, 46322.28, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5100002'', ''5100002229024'', ''ÎÎÎ "ÄÅËÀÉ"'', ''01-MAR-20'', ''01-APR-20'', ''31-MAR-20'', ''ÑÌÑ'', 23548.00, 0.00, 70610.36, ''2.99'', 0.20)';
+values (''5100002'', ''5100002229024'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-MAR-20'', ''01-APR-20'', ''31-MAR-20'', ''ï¿½ï¿½ï¿½'', 23548.00, 0.00, 70610.36, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5100002'', ''5100002229024'', ''ÎÎÎ "ÄÅËÀÉ"'', ''01-FEB-20'', ''01-MAR-20'', ''29-FEB-20'', ''ÑÌÑ'', 20104.00, 0.00, 60283.28, ''2.99'', 0.20)';
+values (''5100002'', ''5100002229024'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-20'', ''01-MAR-20'', ''29-FEB-20'', ''ï¿½ï¿½ï¿½'', 20104.00, 0.00, 60283.28, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5100002'', ''5100002229024'', ''ÎÎÎ "ÄÅËÀÉ"'', ''01-FEB-20'', ''01-MAR-20'', ''29-FEB-20'', ''Çâîíêè'', 20104.00, 0.00, 39547.44, ''1.96'', 0.20)';
+values (''5100002'', ''5100002229024'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-20'', ''01-MAR-20'', ''29-FEB-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 20104.00, 0.00, 39547.44, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5100002'', ''5100002229024'', ''ÎÎÎ "ÄÅËÀÉ"'', ''01-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''Çâîíêè'', 18165.00, 0.00, 41052.90, ''2.26'', 0.20)';
+values (''5100002'', ''5100002229024'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 18165.00, 0.00, 41052.90, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5100002'', ''5100002229024'', ''ÎÎÎ "ÄÅËÀÉ"'', ''01-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''ÑÌÑ'', 18165.00, 0.00, 56856.45, ''3.13'', 0.20)';
+values (''5100002'', ''5100002229024'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''ï¿½ï¿½ï¿½'', 18165.00, 0.00, 56856.45, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5100002'', ''5100002229024'', ''ÎÎÎ "ÄÅËÀÉ"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''ÑÌÑ'', 28350.00, 0.00, 88735.50, ''3.13'', 0.20)';
+values (''5100002'', ''5100002229024'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''ï¿½ï¿½ï¿½'', 28350.00, 0.00, 88735.50, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5100002'', ''5100002229024'', ''ÎÎÎ "ÄÅËÀÉ"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''Çâîíêè'', 28350.00, 0.00, 64071.00, ''2.26'', 0.20)';
+values (''5100002'', ''5100002229024'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 28350.00, 0.00, 64071.00, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5100002'', ''5100002229024'', ''ÎÎÎ "ÄÅËÀÉ"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''ÑÌÑ'', 24521.00, 0.00, 76750.73, ''3.13'', 0.20)';
+values (''5100002'', ''5100002229024'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''ï¿½ï¿½ï¿½'', 24521.00, 0.00, 76750.73, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5100002'', ''5100002229024'', ''ÎÎÎ "ÄÅËÀÉ"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''Çâîíêè'', 24521.00, 0.00, 55417.46, ''2.26'', 0.20)';
+values (''5100002'', ''5100002229024'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 24521.00, 0.00, 55417.46, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5100002'', ''5100002229024'', ''ÎÎÎ "ÄÅËÀÉ"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''ÑÌÑ'', 27440.00, 0.00, 85887.20, ''3.13'', 0.20)';
+values (''5100002'', ''5100002229024'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''ï¿½ï¿½ï¿½'', 27440.00, 0.00, 85887.20, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5100002'', ''5100002229024'', ''ÎÎÎ "ÄÅËÀÉ"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''Çâîíêè'', 27440.00, 0.00, 62014.40, ''2.26'', 0.20)';
+values (''5100002'', ''5100002229024'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 27440.00, 0.00, 62014.40, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5100002'', ''5100002229024'', ''ÎÎÎ "ÄÅËÀÉ"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''Çâîíêè'', 29008.00, 0.00, 65558.08, ''2.26'', 0.20)';
+values (''5100002'', ''5100002229024'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 29008.00, 0.00, 65558.08, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5100002'', ''5100002229024'', ''ÎÎÎ "ÄÅËÀÉ"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''ÑÌÑ'', 29008.00, 0.00, 90795.04, ''3.13'', 0.20)';
+values (''5100002'', ''5100002229024'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''ï¿½ï¿½ï¿½'', 29008.00, 0.00, 90795.04, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5100002'', ''5100002229024'', ''ÎÎÎ "ÄÅËÀÉ"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''Çâîíêè'', 42210.00, 0.00, 95394.60, ''2.26'', 0.20)';
+values (''5100002'', ''5100002229024'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 42210.00, 0.00, 95394.60, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5100002'', ''5100002229024'', ''ÎÎÎ "ÄÅËÀÉ"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''ÑÌÑ'', 42210.00, 0.00, 132117.30, ''3.13'', 0.20)';
+values (''5100002'', ''5100002229024'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''ï¿½ï¿½ï¿½'', 42210.00, 0.00, 132117.30, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5100002'', ''5100002115137'', ''ÎÎÎ "ÄÅËÀÉ"'', ''01-APR-20'', ''01-MAY-20'', ''30-APR-20'', ''ÑÌÑ'', 42.00, 0.00, 125.94, ''2.99'', 0.20)';
+values (''5100002'', ''5100002115137'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-APR-20'', ''01-MAY-20'', ''30-APR-20'', ''ï¿½ï¿½ï¿½'', 42.00, 0.00, 125.94, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5100002'', ''5100002115137'', ''ÎÎÎ "ÄÅËÀÉ"'', ''27-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''ÑÌÑ'', 858.00, 0.00, 2685.54, ''3.13'', 0.20)';
+values (''5100002'', ''5100002115137'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''27-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''ï¿½ï¿½ï¿½'', 858.00, 0.00, 2685.54, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5100002'', ''5100002115137'', ''ÎÎÎ "ÄÅËÀÉ"'', ''27-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''Çâîíêè'', 858.00, 0.00, 1939.08, ''2.26'', 0.20)';
+values (''5100002'', ''5100002115137'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''27-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 858.00, 0.00, 1939.08, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5100002'', ''5100002115137'', ''ÎÎÎ "ÄÅËÀÉ"'', ''01-JAN-20'', ''01-FEB-20'', ''31-JAN-20'', ''ÑÌÑ'', 42.00, 0.00, 125.94, ''2.99'', 0.20)';
+values (''5100002'', ''5100002115137'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JAN-20'', ''01-FEB-20'', ''31-JAN-20'', ''ï¿½ï¿½ï¿½'', 42.00, 0.00, 125.94, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5100002'', ''5100002115137'', ''ÎÎÎ "ÄÅËÀÉ"'', ''01-MAR-20'', ''01-APR-20'', ''31-MAR-20'', ''ÑÌÑ'', 42.00, 0.00, 125.94, ''2.99'', 0.20)';
+values (''5100002'', ''5100002115137'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-MAR-20'', ''01-APR-20'', ''31-MAR-20'', ''ï¿½ï¿½ï¿½'', 42.00, 0.00, 125.94, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5100002'', ''5100002115137'', ''ÎÎÎ "ÄÅËÀÉ"'', ''01-FEB-20'', ''01-MAR-20'', ''29-FEB-20'', ''ÑÌÑ'', 42.00, 0.00, 125.94, ''2.99'', 0.20)';
+values (''5100002'', ''5100002115137'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-20'', ''01-MAR-20'', ''29-FEB-20'', ''ï¿½ï¿½ï¿½'', 42.00, 0.00, 125.94, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5100002'', ''5100002115137'', ''ÎÎÎ "ÄÅËÀÉ"'', ''01-APR-20'', ''01-MAY-20'', ''30-APR-20'', ''ÑÌÑ'', 2842.00, 0.00, 8521.94, ''2.99'', 0.20)';
+values (''5100002'', ''5100002115137'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-APR-20'', ''01-MAY-20'', ''30-APR-20'', ''ï¿½ï¿½ï¿½'', 2842.00, 0.00, 8521.94, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5100002'', ''5100002115137'', ''ÎÎÎ "ÄÅËÀÉ"'', ''01-APR-20'', ''01-MAY-20'', ''30-APR-20'', ''Çâîíêè'', 2842.00, 0.00, 5590.62, ''1.96'', 0.20)';
+values (''5100002'', ''5100002115137'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-APR-20'', ''01-MAY-20'', ''30-APR-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 2842.00, 0.00, 5590.62, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5100002'', ''5100002115137'', ''ÎÎÎ "ÄÅËÀÉ"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''Çâîíêè'', 2891.00, 0.00, 5687.01, ''1.96'', 0.20)';
+values (''5100002'', ''5100002115137'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 2891.00, 0.00, 5687.01, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5100002'', ''5100002115137'', ''ÎÎÎ "ÄÅËÀÉ"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''ÑÌÑ'', 4249.00, 0.00, 12740.93, ''2.99'', 0.20)';
+values (''5100002'', ''5100002115137'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''ï¿½ï¿½ï¿½'', 4249.00, 0.00, 12740.93, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5100002'', ''5100002115137'', ''ÎÎÎ "ÄÅËÀÉ"'', ''01-SEP-20'', ''16-SEP-20'', ''01-SEP-20'', ''Çâîíêè'', 3990.00, 0.00, 9017.40, ''2.26'', 0.20)';
+values (''5100002'', ''5100002115137'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-SEP-20'', ''16-SEP-20'', ''01-SEP-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 3990.00, 0.00, 9017.40, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5100002'', ''5100002115137'', ''ÎÎÎ "ÄÅËÀÉ"'', ''16-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''Çâîíêè'', 1757.00, 0.00, 3970.82, ''2.26'', 0.20)';
+values (''5100002'', ''5100002115137'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''16-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 1757.00, 0.00, 3970.82, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5100002'', ''5100002115137'', ''ÎÎÎ "ÄÅËÀÉ"'', ''01-OCT-20'', ''27-OCT-20'', ''01-OCT-20'', ''ÑÌÑ'', 546.00, 0.00, 1708.98, ''3.13'', 0.20)';
+values (''5100002'', ''5100002115137'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-OCT-20'', ''27-OCT-20'', ''01-OCT-20'', ''ï¿½ï¿½ï¿½'', 546.00, 0.00, 1708.98, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5100002'', ''5100002115137'', ''ÎÎÎ "ÄÅËÀÉ"'', ''01-OCT-20'', ''27-OCT-20'', ''01-OCT-20'', ''Çâîíêè'', 546.00, 0.00, 1233.96, ''2.26'', 0.20)';
+values (''5100002'', ''5100002115137'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-OCT-20'', ''27-OCT-20'', ''01-OCT-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 546.00, 0.00, 1233.96, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5100002'', ''5100002115137'', ''ÎÎÎ "ÄÅËÀÉ"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''Çâîíêè'', 4249.00, 0.00, 8358.39, ''1.96'', 0.20)';
+values (''5100002'', ''5100002115137'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 4249.00, 0.00, 8358.39, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5100002'', ''5100002115137'', ''ÎÎÎ "ÄÅËÀÉ"'', ''01-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''ÑÌÑ'', 4823.00, 0.00, 15095.99, ''3.13'', 0.20)';
+values (''5100002'', ''5100002115137'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''ï¿½ï¿½ï¿½'', 4823.00, 0.00, 15095.99, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5100002'', ''5100002115137'', ''ÎÎÎ "ÄÅËÀÉ"'', ''01-JAN-20'', ''01-FEB-20'', ''31-JAN-20'', ''Çâîíêè'', 5110.00, 0.00, 10052.10, ''1.96'', 0.20)';
+values (''5100002'', ''5100002115137'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JAN-20'', ''01-FEB-20'', ''31-JAN-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 5110.00, 0.00, 10052.10, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5100002'', ''5100002115137'', ''ÎÎÎ "ÄÅËÀÉ"'', ''01-JAN-20'', ''01-FEB-20'', ''31-JAN-20'', ''ÑÌÑ'', 5110.00, 0.00, 15322.70, ''2.99'', 0.20)';
+values (''5100002'', ''5100002115137'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JAN-20'', ''01-FEB-20'', ''31-JAN-20'', ''ï¿½ï¿½ï¿½'', 5110.00, 0.00, 15322.70, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5100002'', ''5100002115137'', ''ÎÎÎ "ÄÅËÀÉ"'', ''01-MAR-20'', ''01-APR-20'', ''31-MAR-20'', ''ÑÌÑ'', 7000.00, 0.00, 20990.00, ''2.99'', 0.20)';
+values (''5100002'', ''5100002115137'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-MAR-20'', ''01-APR-20'', ''31-MAR-20'', ''ï¿½ï¿½ï¿½'', 7000.00, 0.00, 20990.00, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5100002'', ''5100002115137'', ''ÎÎÎ "ÄÅËÀÉ"'', ''01-MAR-20'', ''01-APR-20'', ''31-MAR-20'', ''Çâîíêè'', 7000.00, 0.00, 13770.00, ''1.96'', 0.20)';
+values (''5100002'', ''5100002115137'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-MAR-20'', ''01-APR-20'', ''31-MAR-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 7000.00, 0.00, 13770.00, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5100002'', ''5100002115137'', ''ÎÎÎ "ÄÅËÀÉ"'', ''01-FEB-20'', ''01-MAR-20'', ''29-FEB-20'', ''Çâîíêè'', 7602.00, 0.00, 14954.22, ''1.96'', 0.20)';
+values (''5100002'', ''5100002115137'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-20'', ''01-MAR-20'', ''29-FEB-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 7602.00, 0.00, 14954.22, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5100002'', ''5100002115137'', ''ÎÎÎ "ÄÅËÀÉ"'', ''01-FEB-20'', ''01-MAR-20'', ''29-FEB-20'', ''ÑÌÑ'', 7602.00, 0.00, 22795.14, ''2.99'', 0.20)';
+values (''5100002'', ''5100002115137'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-20'', ''01-MAR-20'', ''29-FEB-20'', ''ï¿½ï¿½ï¿½'', 7602.00, 0.00, 22795.14, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5100002'', ''5100002115137'', ''ÎÎÎ "ÄÅËÀÉ"'', ''01-NOV-20'', ''30-NOV-20'', ''01-NOV-20'', ''ÑÌÑ'', 2797.00, 0.00, 8754.61, ''3.13'', 0.20)';
+values (''5100002'', ''5100002115137'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-NOV-20'', ''30-NOV-20'', ''01-NOV-20'', ''ï¿½ï¿½ï¿½'', 2797.00, 0.00, 8754.61, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5100002'', ''5100002115137'', ''ÎÎÎ "ÄÅËÀÉ"'', ''30-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''ÑÌÑ'', 96.00, 0.00, 300.48, ''3.13'', 0.20)';
+values (''5100002'', ''5100002115137'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''30-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''ï¿½ï¿½ï¿½'', 96.00, 0.00, 300.48, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5100002'', ''5100002115137'', ''ÎÎÎ "ÄÅËÀÉ"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''ÑÌÑ'', 2891.00, 0.00, 8668.87, ''2.99'', 0.20)';
+values (''5100002'', ''5100002115137'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''ï¿½ï¿½ï¿½'', 2891.00, 0.00, 8668.87, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5100002'', ''5100002115137'', ''ÎÎÎ "ÄÅËÀÉ"'', ''01-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''Çâîíêè'', 4823.00, 0.00, 10899.98, ''2.26'', 0.20)';
+values (''5100002'', ''5100002115137'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 4823.00, 0.00, 10899.98, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5100002'', ''5100002115137'', ''ÎÎÎ "ÄÅËÀÉ"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''ÑÌÑ'', 5873.00, 0.00, 18382.49, ''3.13'', 0.20)';
+values (''5100002'', ''5100002115137'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''ï¿½ï¿½ï¿½'', 5873.00, 0.00, 18382.49, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5100002'', ''5100002115137'', ''ÎÎÎ "ÄÅËÀÉ"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''Çâîíêè'', 5873.00, 0.00, 13272.98, ''2.26'', 0.20)';
+values (''5100002'', ''5100002115137'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 5873.00, 0.00, 13272.98, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5100002'', ''5100002115137'', ''ÎÎÎ "ÄÅËÀÉ"'', ''01-SEP-20'', ''15-SEP-20'', ''01-SEP-20'', ''ÑÌÑ'', 3990.00, 0.00, 12488.70, ''3.13'', 0.20)';
+values (''5100002'', ''5100002115137'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-SEP-20'', ''15-SEP-20'', ''01-SEP-20'', ''ï¿½ï¿½ï¿½'', 3990.00, 0.00, 12488.70, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5100002'', ''5100002115137'', ''ÎÎÎ "ÄÅËÀÉ"'', ''16-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''ÑÌÑ'', 1757.00, 0.00, 5499.41, ''3.13'', 0.20)';
+values (''5100002'', ''5100002115137'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''16-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''ï¿½ï¿½ï¿½'', 1757.00, 0.00, 5499.41, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5100002'', ''5100002115137'', ''ÎÎÎ "ÄÅËÀÉ"'', ''01-NOV-20'', ''30-NOV-20'', ''01-NOV-20'', ''Çâîíêè'', 2797.00, 0.00, 6321.22, ''2.26'', 0.20)';
+values (''5100002'', ''5100002115137'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-NOV-20'', ''30-NOV-20'', ''01-NOV-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 2797.00, 0.00, 6321.22, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5100002'', ''5100002115137'', ''ÎÎÎ "ÄÅËÀÉ"'', ''30-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''Çâîíêè'', 96.00, 0.00, 216.96, ''2.26'', 0.20)';
+values (''5100002'', ''5100002115137'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''30-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 96.00, 0.00, 216.96, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5100002'', ''5100002115137'', ''ÎÎÎ "ÄÅËÀÉ"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''ÑÌÑ'', 4221.00, 0.00, 13211.73, ''3.13'', 0.20)';
+values (''5100002'', ''5100002115137'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''ï¿½ï¿½ï¿½'', 4221.00, 0.00, 13211.73, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5100002'', ''5100002115137'', ''ÎÎÎ "ÄÅËÀÉ"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''Çâîíêè'', 4221.00, 0.00, 9539.46, ''2.26'', 0.20)';
+values (''5100002'', ''5100002115137'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 4221.00, 0.00, 9539.46, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5100002'', ''5100002115137'', ''ÎÎÎ "ÄÅËÀÉ"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''ÑÌÑ'', 3570.00, 0.00, 11174.10, ''3.13'', 0.20)';
+values (''5100002'', ''5100002115137'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''ï¿½ï¿½ï¿½'', 3570.00, 0.00, 11174.10, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5100002'', ''5100002115137'', ''ÎÎÎ "ÄÅËÀÉ"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''Çâîíêè'', 3570.00, 0.00, 8068.20, ''2.26'', 0.20)';
+values (''5100002'', ''5100002115137'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 3570.00, 0.00, 8068.20, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5100002'', ''5100002115137'', ''ÎÎÎ "ÄÅËÀÉ"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''Çâîíêè'', 4907.00, 0.00, 11089.82, ''2.26'', 0.20)';
+values (''5100002'', ''5100002115137'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 4907.00, 0.00, 11089.82, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5100002'', ''5100002115137'', ''ÎÎÎ "ÄÅËÀÉ"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''ÑÌÑ'', 4907.00, 0.00, 15358.91, ''3.13'', 0.20)';
+values (''5100002'', ''5100002115137'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''ï¿½ï¿½ï¿½'', 4907.00, 0.00, 15358.91, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5100002'', ''5100002115137'', ''ÎÎÎ "ÄÅËÀÉ"'', ''15-SEP-20'', ''16-SEP-20'', ''01-SEP-20'', ''Çâîíêè'', 193.00, 0.00, 436.18, ''2.26'', 0.20)';
+values (''5100002'', ''5100002115137'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''15-SEP-20'', ''16-SEP-20'', ''01-SEP-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 193.00, 0.00, 436.18, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5100002'', ''5100002115137'', ''ÎÎÎ "ÄÅËÀÉ"'', ''15-SEP-20'', ''16-SEP-20'', ''01-SEP-20'', ''ÑÌÑ'', 193.00, 0.00, 604.09, ''3.13'', 0.20)';
+values (''5100002'', ''5100002115137'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''15-SEP-20'', ''16-SEP-20'', ''01-SEP-20'', ''ï¿½ï¿½ï¿½'', 193.00, 0.00, 604.09, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833417342'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''ÑÌÑ'', 14.00, 0.00, 41.98, ''2.99'', 0.20)';
+values (''5488833'', ''5488833417342'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''ï¿½ï¿½ï¿½'', 14.00, 0.00, 41.98, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833417342'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''ÑÌÑ'', 7.00, 0.00, 20.99, ''2.99'', 0.20)';
+values (''5488833'', ''5488833417342'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''ï¿½ï¿½ï¿½'', 7.00, 0.00, 20.99, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833417342'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''Çâîíêè'', 14.00, 0.00, 27.54, ''1.96'', 0.20)';
+values (''5488833'', ''5488833417342'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 14.00, 0.00, 27.54, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833417342'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''Çâîíêè'', 7.00, 0.00, 13.77, ''1.96'', 0.20)';
+values (''5488833'', ''5488833417342'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 7.00, 0.00, 13.77, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833417342'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''Çâîíêè'', 14.00, 0.00, 31.64, ''2.26'', 0.20)';
+values (''5488833'', ''5488833417342'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 14.00, 0.00, 31.64, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833417342'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''Çâîíêè'', 0.00, 0.00, 0.00, ''2.26'', 0.20)';
+values (''5488833'', ''5488833417342'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833417342'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-JAN-20'', ''01-FEB-20'', ''31-JAN-20'', ''Çâîíêè'', 7.00, 0.00, 13.77, ''1.96'', 0.20)';
+values (''5488833'', ''5488833417342'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JAN-20'', ''01-FEB-20'', ''31-JAN-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 7.00, 0.00, 13.77, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833417342'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-JAN-20'', ''01-FEB-20'', ''31-JAN-20'', ''ÑÌÑ'', 7.00, 0.00, 20.99, ''2.99'', 0.20)';
+values (''5488833'', ''5488833417342'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JAN-20'', ''01-FEB-20'', ''31-JAN-20'', ''ï¿½ï¿½ï¿½'', 7.00, 0.00, 20.99, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833417342'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''ÑÌÑ'', 14.00, 0.00, 41.98, ''2.99'', 0.20)';
+values (''5488833'', ''5488833417342'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''ï¿½ï¿½ï¿½'', 14.00, 0.00, 41.98, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833417342'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''2.99'', 0.20)';
+values (''5488833'', ''5488833417342'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833417342'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''Çâîíêè'', 14.00, 0.00, 27.54, ''1.96'', 0.20)';
+values (''5488833'', ''5488833417342'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 14.00, 0.00, 27.54, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833417342'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''Çâîíêè'', 0.00, 0.00, 0.00, ''1.96'', 0.20)';
+values (''5488833'', ''5488833417342'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833417342'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''ÑÌÑ'', 14.00, 0.00, 43.82, ''3.13'', 0.20)';
+values (''5488833'', ''5488833417342'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''ï¿½ï¿½ï¿½'', 14.00, 0.00, 43.82, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833417342'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''ÑÌÑ'', 7.00, 0.00, 21.91, ''3.13'', 0.20)';
+values (''5488833'', ''5488833417342'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''ï¿½ï¿½ï¿½'', 7.00, 0.00, 21.91, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833417342'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-APR-20'', ''01-MAY-20'', ''30-APR-20'', ''Çâîíêè'', 7.00, 0.00, 13.77, ''1.96'', 0.20)';
+values (''5488833'', ''5488833417342'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-APR-20'', ''01-MAY-20'', ''30-APR-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 7.00, 0.00, 13.77, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833417342'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-APR-20'', ''01-MAY-20'', ''30-APR-20'', ''ÑÌÑ'', 7.00, 0.00, 20.99, ''2.99'', 0.20)';
+values (''5488833'', ''5488833417342'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-APR-20'', ''01-MAY-20'', ''30-APR-20'', ''ï¿½ï¿½ï¿½'', 7.00, 0.00, 20.99, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833417342'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-APR-20'', ''01-MAY-20'', ''30-APR-20'', ''ÑÌÑ'', 7.00, 0.00, 20.99, ''2.99'', 0.20)';
+values (''5488833'', ''5488833417342'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-APR-20'', ''01-MAY-20'', ''30-APR-20'', ''ï¿½ï¿½ï¿½'', 7.00, 0.00, 20.99, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833417342'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-APR-20'', ''01-MAY-20'', ''30-APR-20'', ''Çâîíêè'', 7.00, 0.00, 13.77, ''1.96'', 0.20)';
+values (''5488833'', ''5488833417342'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-APR-20'', ''01-MAY-20'', ''30-APR-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 7.00, 0.00, 13.77, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833417342'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-MAR-20'', ''01-APR-20'', ''31-MAR-20'', ''Çâîíêè'', 14.00, 0.00, 27.54, ''1.96'', 0.20)';
+values (''5488833'', ''5488833417342'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-MAR-20'', ''01-APR-20'', ''31-MAR-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 14.00, 0.00, 27.54, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833417342'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-MAR-20'', ''01-APR-20'', ''31-MAR-20'', ''ÑÌÑ'', 14.00, 0.00, 41.98, ''2.99'', 0.20)';
+values (''5488833'', ''5488833417342'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-MAR-20'', ''01-APR-20'', ''31-MAR-20'', ''ï¿½ï¿½ï¿½'', 14.00, 0.00, 41.98, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833417342'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-FEB-20'', ''01-MAR-20'', ''29-FEB-20'', ''ÑÌÑ'', 7.00, 0.00, 20.99, ''2.99'', 0.20)';
+values (''5488833'', ''5488833417342'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-20'', ''01-MAR-20'', ''29-FEB-20'', ''ï¿½ï¿½ï¿½'', 7.00, 0.00, 20.99, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833417342'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-FEB-20'', ''01-MAR-20'', ''29-FEB-20'', ''ÑÌÑ'', 21.00, 0.00, 62.97, ''2.99'', 0.20)';
+values (''5488833'', ''5488833417342'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-20'', ''01-MAR-20'', ''29-FEB-20'', ''ï¿½ï¿½ï¿½'', 21.00, 0.00, 62.97, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833417342'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-FEB-20'', ''01-MAR-20'', ''29-FEB-20'', ''Çâîíêè'', 21.00, 0.00, 41.31, ''1.96'', 0.20)';
+values (''5488833'', ''5488833417342'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-20'', ''01-MAR-20'', ''29-FEB-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 21.00, 0.00, 41.31, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833417342'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-FEB-20'', ''01-MAR-20'', ''29-FEB-20'', ''Çâîíêè'', 7.00, 0.00, 13.77, ''1.96'', 0.20)';
+values (''5488833'', ''5488833417342'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-20'', ''01-MAR-20'', ''29-FEB-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 7.00, 0.00, 13.77, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833417342'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''Çâîíêè'', 14.00, 0.00, 31.64, ''2.26'', 0.20)';
+values (''5488833'', ''5488833417342'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 14.00, 0.00, 31.64, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833417342'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''Çâîíêè'', 7.00, 0.00, 15.82, ''2.26'', 0.20)';
+values (''5488833'', ''5488833417342'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 7.00, 0.00, 15.82, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833417342'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''ÑÌÑ'', 14.00, 0.00, 43.82, ''3.13'', 0.20)';
+values (''5488833'', ''5488833417342'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''ï¿½ï¿½ï¿½'', 14.00, 0.00, 43.82, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833417342'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''ÑÌÑ'', 63.00, 0.00, 197.19, ''3.13'', 0.20)';
+values (''5488833'', ''5488833417342'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''ï¿½ï¿½ï¿½'', 63.00, 0.00, 197.19, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833417342'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''Çâîíêè'', 14.00, 0.00, 31.64, ''2.26'', 0.20)';
+values (''5488833'', ''5488833417342'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 14.00, 0.00, 31.64, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833417342'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''Çâîíêè'', 63.00, 0.00, 142.38, ''2.26'', 0.20)';
+values (''5488833'', ''5488833417342'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 63.00, 0.00, 142.38, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833417342'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''ÑÌÑ'', 14.00, 0.00, 43.82, ''3.13'', 0.20)';
+values (''5488833'', ''5488833417342'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''ï¿½ï¿½ï¿½'', 14.00, 0.00, 43.82, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833417342'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''5488833'', ''5488833417342'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833417342'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''Çâîíêè'', 20.00, 0.00, 45.20, ''2.26'', 0.20)';
+values (''5488833'', ''5488833417342'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 20.00, 0.00, 45.20, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833417342'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''Çâîíêè'', 12.00, 0.00, 27.12, ''2.26'', 0.20)';
+values (''5488833'', ''5488833417342'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 12.00, 0.00, 27.12, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833417342'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''ÑÌÑ'', 20.00, 0.00, 62.60, ''3.13'', 0.20)';
+values (''5488833'', ''5488833417342'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''ï¿½ï¿½ï¿½'', 20.00, 0.00, 62.60, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833417342'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''ÑÌÑ'', 12.00, 0.00, 37.56, ''3.13'', 0.20)';
+values (''5488833'', ''5488833417342'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''ï¿½ï¿½ï¿½'', 12.00, 0.00, 37.56, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833417342'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''ÑÌÑ'', 21.00, 0.00, 65.73, ''3.13'', 0.20)';
+values (''5488833'', ''5488833417342'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''ï¿½ï¿½ï¿½'', 21.00, 0.00, 65.73, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833417342'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''5488833'', ''5488833417342'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833417342'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''Çâîíêè'', 21.00, 0.00, 47.46, ''2.26'', 0.20)';
+values (''5488833'', ''5488833417342'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 21.00, 0.00, 47.46, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833417342'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''Çâîíêè'', 0.00, 0.00, 0.00, ''2.26'', 0.20)';
+values (''5488833'', ''5488833417342'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833417342'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''ÑÌÑ'', 14.00, 0.00, 43.82, ''3.13'', 0.20)';
+values (''5488833'', ''5488833417342'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''ï¿½ï¿½ï¿½'', 14.00, 0.00, 43.82, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833417342'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''5488833'', ''5488833417342'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833417342'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''Çâîíêè'', 14.00, 0.00, 31.64, ''2.26'', 0.20)';
+values (''5488833'', ''5488833417342'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 14.00, 0.00, 31.64, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833417342'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''Çâîíêè'', 0.00, 0.00, 0.00, ''2.26'', 0.20)';
+values (''5488833'', ''5488833417342'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833417342'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''ÑÌÑ'', 14.00, 0.00, 43.82, ''3.13'', 0.20)';
+values (''5488833'', ''5488833417342'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''ï¿½ï¿½ï¿½'', 14.00, 0.00, 43.82, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833417342'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''5488833'', ''5488833417342'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833417342'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''Çâîíêè'', 14.00, 0.00, 31.64, ''2.26'', 0.20)';
+values (''5488833'', ''5488833417342'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 14.00, 0.00, 31.64, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833417342'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''Çâîíêè'', 0.00, 0.00, 0.00, ''2.26'', 0.20)';
+values (''5488833'', ''5488833417342'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833417342'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''2.99'', 0.20)';
+values (''5488833'', ''5488833417342'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833417342'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''5488833'', ''5488833417342'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833417342'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''2.99'', 0.20)';
+values (''5488833'', ''5488833417342'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833417342'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''5488833'', ''5488833417342'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833417342'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''5488833'', ''5488833417342'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833417342'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''5488833'', ''5488833417342'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833417342'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''5488833'', ''5488833417342'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833417342'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''5488833'', ''5488833417342'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833417342'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''5488833'', ''5488833417342'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833417342'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''5488833'', ''5488833417342'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833417342'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''ÑÌÑ'', 14.00, 0.00, 43.82, ''3.13'', 0.20)';
+values (''5488833'', ''5488833417342'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''ï¿½ï¿½ï¿½'', 14.00, 0.00, 43.82, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833417342'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''ÑÌÑ'', 8.00, 0.00, 25.04, ''3.13'', 0.20)';
+values (''5488833'', ''5488833417342'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''ï¿½ï¿½ï¿½'', 8.00, 0.00, 25.04, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833417342'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''Çâîíêè'', 14.00, 0.00, 31.64, ''2.26'', 0.20)';
+values (''5488833'', ''5488833417342'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 14.00, 0.00, 31.64, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833417342'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''Çâîíêè'', 8.00, 0.00, 18.08, ''2.26'', 0.20)';
+values (''5488833'', ''5488833417342'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 8.00, 0.00, 18.08, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833722900'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''Çâîíêè'', 35.00, 0.00, 68.85, ''1.96'', 0.20)';
+values (''5488833'', ''5488833722900'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 35.00, 0.00, 68.85, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833722900'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''Çâîíêè'', 56.00, 0.00, 126.56, ''2.26'', 0.20)';
+values (''5488833'', ''5488833722900'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 56.00, 0.00, 126.56, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833722900'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-JAN-20'', ''01-FEB-20'', ''31-JAN-20'', ''ÑÌÑ'', 84.00, 0.00, 251.88, ''2.99'', 0.20)';
+values (''5488833'', ''5488833722900'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JAN-20'', ''01-FEB-20'', ''31-JAN-20'', ''ï¿½ï¿½ï¿½'', 84.00, 0.00, 251.88, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833722900'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-JAN-20'', ''01-FEB-20'', ''31-JAN-20'', ''Çâîíêè'', 84.00, 0.00, 165.24, ''1.96'', 0.20)';
+values (''5488833'', ''5488833722900'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JAN-20'', ''01-FEB-20'', ''31-JAN-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 84.00, 0.00, 165.24, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833722900'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''ÑÌÑ'', 56.00, 0.00, 167.92, ''2.99'', 0.20)';
+values (''5488833'', ''5488833722900'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''ï¿½ï¿½ï¿½'', 56.00, 0.00, 167.92, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833722900'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''Çâîíêè'', 56.00, 0.00, 110.16, ''1.96'', 0.20)';
+values (''5488833'', ''5488833722900'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 56.00, 0.00, 110.16, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833722900'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''ÑÌÑ'', 63.00, 0.00, 197.19, ''3.13'', 0.20)';
+values (''5488833'', ''5488833722900'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''ï¿½ï¿½ï¿½'', 63.00, 0.00, 197.19, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833722900'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-APR-20'', ''01-MAY-20'', ''30-APR-20'', ''Çâîíêè'', 147.00, 0.00, 289.17, ''1.96'', 0.20)';
+values (''5488833'', ''5488833722900'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-APR-20'', ''01-MAY-20'', ''30-APR-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 147.00, 0.00, 289.17, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833722900'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-APR-20'', ''01-MAY-20'', ''30-APR-20'', ''ÑÌÑ'', 147.00, 0.00, 440.79, ''2.99'', 0.20)';
+values (''5488833'', ''5488833722900'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-APR-20'', ''01-MAY-20'', ''30-APR-20'', ''ï¿½ï¿½ï¿½'', 147.00, 0.00, 440.79, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833722900'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-MAR-20'', ''01-APR-20'', ''31-MAR-20'', ''ÑÌÑ'', 70.00, 0.00, 209.90, ''2.99'', 0.20)';
+values (''5488833'', ''5488833722900'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-MAR-20'', ''01-APR-20'', ''31-MAR-20'', ''ï¿½ï¿½ï¿½'', 70.00, 0.00, 209.90, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833722900'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-MAR-20'', ''01-APR-20'', ''31-MAR-20'', ''Çâîíêè'', 70.00, 0.00, 137.70, ''1.96'', 0.20)';
+values (''5488833'', ''5488833722900'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-MAR-20'', ''01-APR-20'', ''31-MAR-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 70.00, 0.00, 137.70, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833722900'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-FEB-20'', ''01-MAR-20'', ''29-FEB-20'', ''ÑÌÑ'', 91.00, 0.00, 272.87, ''2.99'', 0.20)';
+values (''5488833'', ''5488833722900'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-20'', ''01-MAR-20'', ''29-FEB-20'', ''ï¿½ï¿½ï¿½'', 91.00, 0.00, 272.87, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833722900'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-FEB-20'', ''01-MAR-20'', ''29-FEB-20'', ''Çâîíêè'', 91.00, 0.00, 179.01, ''1.96'', 0.20)';
+values (''5488833'', ''5488833722900'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-20'', ''01-MAR-20'', ''29-FEB-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 91.00, 0.00, 179.01, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833722900'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''ÑÌÑ'', 35.00, 0.00, 104.95, ''2.99'', 0.20)';
+values (''5488833'', ''5488833722900'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''ï¿½ï¿½ï¿½'', 35.00, 0.00, 104.95, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833722900'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''Çâîíêè'', 63.00, 0.00, 142.38, ''2.26'', 0.20)';
+values (''5488833'', ''5488833722900'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 63.00, 0.00, 142.38, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833722900'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''ÑÌÑ'', 154.00, 0.00, 482.02, ''3.13'', 0.20)';
+values (''5488833'', ''5488833722900'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''ï¿½ï¿½ï¿½'', 154.00, 0.00, 482.02, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833722900'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''Çâîíêè'', 154.00, 0.00, 348.04, ''2.26'', 0.20)';
+values (''5488833'', ''5488833722900'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 154.00, 0.00, 348.04, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833722900'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''ÑÌÑ'', 56.00, 0.00, 175.28, ''3.13'', 0.20)';
+values (''5488833'', ''5488833722900'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''ï¿½ï¿½ï¿½'', 56.00, 0.00, 175.28, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833722900'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''Çâîíêè'', 103.00, 0.00, 232.78, ''2.26'', 0.20)';
+values (''5488833'', ''5488833722900'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 103.00, 0.00, 232.78, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833722900'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''ÑÌÑ'', 103.00, 0.00, 322.39, ''3.13'', 0.20)';
+values (''5488833'', ''5488833722900'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''ï¿½ï¿½ï¿½'', 103.00, 0.00, 322.39, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833722900'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''ÑÌÑ'', 70.00, 0.00, 219.10, ''3.13'', 0.20)';
+values (''5488833'', ''5488833722900'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''ï¿½ï¿½ï¿½'', 70.00, 0.00, 219.10, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833722900'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''Çâîíêè'', 70.00, 0.00, 158.20, ''2.26'', 0.20)';
+values (''5488833'', ''5488833722900'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 70.00, 0.00, 158.20, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833722900'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''Çâîíêè'', 98.00, 0.00, 221.48, ''2.26'', 0.20)';
+values (''5488833'', ''5488833722900'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 98.00, 0.00, 221.48, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833722900'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''ÑÌÑ'', 98.00, 0.00, 306.74, ''3.13'', 0.20)';
+values (''5488833'', ''5488833722900'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''ï¿½ï¿½ï¿½'', 98.00, 0.00, 306.74, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833722900'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''5488833'', ''5488833722900'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833722900'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''Çâîíêè'', 0.00, 0.00, 0.00, ''2.26'', 0.20)';
+values (''5488833'', ''5488833722900'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833722900'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''5488833'', ''5488833722900'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833722900'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''2.99'', 0.20)';
+values (''5488833'', ''5488833722900'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833722900'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''5488833'', ''5488833722900'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833722900'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''2.99'', 0.20)';
+values (''5488833'', ''5488833722900'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833722900'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''5488833'', ''5488833722900'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833722900'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''5488833'', ''5488833722900'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833722900'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''5488833'', ''5488833722900'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833722900'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''5488833'', ''5488833722900'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833722900'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''5488833'', ''5488833722900'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833722900'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''5488833'', ''5488833722900'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833722900'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''Çâîíêè'', 99.00, 0.00, 223.74, ''2.26'', 0.20)';
+values (''5488833'', ''5488833722900'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 99.00, 0.00, 223.74, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833722900'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''ÑÌÑ'', 99.00, 0.00, 309.87, ''3.13'', 0.20)';
+values (''5488833'', ''5488833722900'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''ï¿½ï¿½ï¿½'', 99.00, 0.00, 309.87, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833823049'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''Çâîíêè'', 35.00, 0.00, 97.04, ''2.77'', 0.20)';
+values (''5488833'', ''5488833823049'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 35.00, 0.00, 97.04, ''2.77'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833823049'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''Äåíåæíûå ïåðåâîäû'', 0.00, 0.00, 0.00, ''2.77'', 0.20)';
+values (''5488833'', ''5488833823049'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''2.77'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833823049'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''Çâîíêè'', 28.00, 0.00, 83.47, ''2.98'', 0.20)';
+values (''5488833'', ''5488833823049'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 28.00, 0.00, 83.47, ''2.98'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833823049'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''Äåíåæíûå ïåðåâîäû'', 0.00, 0.00, 0.00, ''2.98'', 0.20)';
+values (''5488833'', ''5488833823049'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''2.98'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833823049'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''ÑÌÑ'', 35.00, 0.00, 104.95, ''2.99'', 0.20)';
+values (''5488833'', ''5488833823049'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''ï¿½ï¿½ï¿½'', 35.00, 0.00, 104.95, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833823049'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''Çâîíêè'', 35.00, 0.00, 97.04, ''2.77'', 0.20)';
+values (''5488833'', ''5488833823049'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 35.00, 0.00, 97.04, ''2.77'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833823049'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''Äåíåæíûå ïåðåâîäû'', 0.00, 0.00, 0.00, ''2.77'', 0.20)';
+values (''5488833'', ''5488833823049'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''2.77'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833823049'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''ÑÌÑ'', 14.00, 0.00, 43.82, ''3.13'', 0.20)';
+values (''5488833'', ''5488833823049'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''ï¿½ï¿½ï¿½'', 14.00, 0.00, 43.82, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833823049'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-APR-20'', ''01-MAY-20'', ''30-APR-20'', ''Çâîíêè'', 28.00, 0.00, 77.63, ''2.77'', 0.20)';
+values (''5488833'', ''5488833823049'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-APR-20'', ''01-MAY-20'', ''30-APR-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 28.00, 0.00, 77.63, ''2.77'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''5488833'', ''5488833823049'', ''ÎÎÎ "ÑÌÓÇÈ"'', ''01-APR-20'', ''01-MAY-20'', ''30-APR-20'', ''ÑÌÑ'', 28.00, 0.00, 83.96, ''2.99'', 0.20)';
+values (''5488833'', ''5488833823049'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-APR-20'', ''01-MAY-20'', ''30-APR-20'', ''ï¿½ï¿½ï¿½'', 28.00, 0.00, 83.96, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161953432'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-SEP-20'', ''02-SEP-20'', ''01-SEP-20'', ''Çâîíêè'', 9.00, 0.00, 20.34, ''2.26'', 0.20)';
+values (''4011161'', ''4011161953432'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-SEP-20'', ''02-SEP-20'', ''01-SEP-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 9.00, 0.00, 20.34, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161953432'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-SEP-20'', ''02-SEP-20'', ''01-SEP-20'', ''Äåíåæíûå ïåðåâîäû'', 9.00, 0.00, 20.34, ''2.26'', 0.20)';
+values (''4011161'', ''4011161953432'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-SEP-20'', ''02-SEP-20'', ''01-SEP-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 9.00, 0.00, 20.34, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161953432'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''02-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''Çâîíêè'', 284.00, 0.00, 641.84, ''2.26'', 0.20)';
+values (''4011161'', ''4011161953432'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''02-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 284.00, 0.00, 641.84, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161953432'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''02-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''Äåíåæíûå ïåðåâîäû'', 284.00, 0.00, 641.84, ''2.26'', 0.20)';
+values (''4011161'', ''4011161953432'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''02-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 284.00, 0.00, 641.84, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161953432'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''Çâîíêè'', 297.00, 0.00, 671.22, ''2.26'', 0.20)';
+values (''4011161'', ''4011161953432'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 297.00, 0.00, 671.22, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161953432'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''Äåíåæíûå ïåðåâîäû'', 297.00, 0.00, 671.22, ''2.26'', 0.20)';
+values (''4011161'', ''4011161953432'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 297.00, 0.00, 671.22, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161953432'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''Çâîíêè'', 297.00, 0.00, 671.22, ''2.26'', 0.20)';
+values (''4011161'', ''4011161953432'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 297.00, 0.00, 671.22, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161953432'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''Äåíåæíûå ïåðåâîäû'', 297.00, 0.00, 671.22, ''2.26'', 0.20)';
+values (''4011161'', ''4011161953432'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 297.00, 0.00, 671.22, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161953432'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''Çâîíêè'', 297.00, 0.00, 671.22, ''2.26'', 0.20)';
+values (''4011161'', ''4011161953432'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 297.00, 0.00, 671.22, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161953432'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''Äåíåæíûå ïåðåâîäû'', 297.00, 0.00, 671.22, ''2.26'', 0.20)';
+values (''4011161'', ''4011161953432'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 297.00, 0.00, 671.22, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161953432'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''4011161953432'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161953432'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''4011161953432'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161953432'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''4011161953432'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161953432'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''4011161953432'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161953432'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''2.99'', 0.20)';
+values (''4011161'', ''4011161953432'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161953432'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''2.99'', 0.20)';
+values (''4011161'', ''4011161953432'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161953432'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-SEP-20'', ''02-SEP-20'', ''01-SEP-20'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''4011161953432'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-SEP-20'', ''02-SEP-20'', ''01-SEP-20'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161953432'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''02-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''4011161953432'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''02-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161953432'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-SEP-20'', ''02-SEP-20'', ''01-SEP-20'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''4011161953432'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-SEP-20'', ''02-SEP-20'', ''01-SEP-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161953432'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''02-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''4011161953432'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''02-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161953432'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''4011161953432'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161953432'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''4011161953432'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161953432'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''4011161953432'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161953432'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''4011161953432'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161953432'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''4011161953432'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161953432'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''4011161953432'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161953432'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''4011161953432'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161953432'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''4011161953432'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161953432'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''4011161953432'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161953432'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''4011161953432'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111611053831'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''Çâîíêè'', 233.00, 0.00, 526.58, ''2.26'', 0.20)';
+values (''4011161'', ''40111611053831'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 233.00, 0.00, 526.58, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111611053831'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''Äåíåæíûå ïåðåâîäû'', 233.00, 0.00, 526.58, ''2.26'', 0.20)';
+values (''4011161'', ''40111611053831'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 233.00, 0.00, 526.58, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111611053831'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''Çâîíêè'', 233.00, 0.00, 526.58, ''2.26'', 0.20)';
+values (''4011161'', ''40111611053831'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 233.00, 0.00, 526.58, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111611053831'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''Äåíåæíûå ïåðåâîäû'', 233.00, 0.00, 526.58, ''2.26'', 0.20)';
+values (''4011161'', ''40111611053831'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 233.00, 0.00, 526.58, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111611053831'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-JUL-20'', ''02-JUL-20'', ''01-JUL-20'', ''Çâîíêè'', 9.00, 0.00, 20.34, ''2.26'', 0.20)';
+values (''4011161'', ''40111611053831'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUL-20'', ''02-JUL-20'', ''01-JUL-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 9.00, 0.00, 20.34, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161953432'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''Çâîíêè'', 1750.00, 0.00, 3955.00, ''2.26'', 0.20)';
+values (''4011161'', ''4011161953432'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 1750.00, 0.00, 3955.00, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161953432'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''Äåíåæíûå ïåðåâîäû'', 1750.00, 0.00, 3955.00, ''2.26'', 0.20)';
+values (''4011161'', ''4011161953432'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 1750.00, 0.00, 3955.00, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161953432'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''Çâîíêè'', 863.00, 0.00, 1697.64, ''1.96'', 0.20)';
+values (''4011161'', ''4011161953432'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 863.00, 0.00, 1697.64, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161953432'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''Äåíåæíûå ïåðåâîäû'', 863.00, 0.00, 1697.64, ''1.96'', 0.20)';
+values (''4011161'', ''4011161953432'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 863.00, 0.00, 1697.64, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161953432'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''Çâîíêè'', 303.00, 0.00, 684.78, ''2.26'', 0.20)';
+values (''4011161'', ''4011161953432'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 303.00, 0.00, 684.78, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161953432'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''Äåíåæíûå ïåðåâîäû'', 303.00, 0.00, 684.78, ''2.26'', 0.20)';
+values (''4011161'', ''4011161953432'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 303.00, 0.00, 684.78, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111611053831'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-JUL-20'', ''02-JUL-20'', ''01-JUL-20'', ''Äåíåæíûå ïåðåâîäû'', 9.00, 0.00, 20.34, ''2.26'', 0.20)';
+values (''4011161'', ''40111611053831'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUL-20'', ''02-JUL-20'', ''01-JUL-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 9.00, 0.00, 20.34, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111611053831'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''02-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''Çâîíêè'', 290.00, 0.00, 655.40, ''2.26'', 0.20)';
+values (''4011161'', ''40111611053831'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''02-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 290.00, 0.00, 655.40, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111611053831'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''02-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''Äåíåæíûå ïåðåâîäû'', 290.00, 0.00, 655.40, ''2.26'', 0.20)';
+values (''4011161'', ''40111611053831'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''02-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 290.00, 0.00, 655.40, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111611053831'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''Çâîíêè'', 405.00, 0.00, 796.69, ''1.96'', 0.20)';
+values (''4011161'', ''40111611053831'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 405.00, 0.00, 796.69, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111611053831'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''Äåíåæíûå ïåðåâîäû'', 405.00, 0.00, 796.69, ''1.96'', 0.20)';
+values (''4011161'', ''40111611053831'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 405.00, 0.00, 796.69, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111611053831'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''Çâîíêè'', 238.00, 0.00, 537.88, ''2.26'', 0.20)';
+values (''4011161'', ''40111611053831'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 238.00, 0.00, 537.88, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111611053831'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''Äåíåæíûå ïåðåâîäû'', 238.00, 0.00, 537.88, ''2.26'', 0.20)';
+values (''4011161'', ''40111611053831'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 238.00, 0.00, 537.88, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111611053831'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''Çâîíêè'', 230.00, 0.00, 519.80, ''2.26'', 0.20)';
+values (''4011161'', ''40111611053831'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 230.00, 0.00, 519.80, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111611053831'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''Äåíåæíûå ïåðåâîäû'', 230.00, 0.00, 519.80, ''2.26'', 0.20)';
+values (''4011161'', ''40111611053831'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 230.00, 0.00, 519.80, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111611053831'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''Çâîíêè'', 233.00, 0.00, 526.58, ''2.26'', 0.20)';
+values (''4011161'', ''40111611053831'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 233.00, 0.00, 526.58, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111611053831'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''Äåíåæíûå ïåðåâîäû'', 233.00, 0.00, 526.58, ''2.26'', 0.20)';
+values (''4011161'', ''40111611053831'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 233.00, 0.00, 526.58, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111611053831'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''Çâîíêè'', 233.00, 0.00, 526.58, ''2.26'', 0.20)';
+values (''4011161'', ''40111611053831'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 233.00, 0.00, 526.58, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111611053831'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''Äåíåæíûå ïåðåâîäû'', 233.00, 0.00, 526.58, ''2.26'', 0.20)';
+values (''4011161'', ''40111611053831'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 233.00, 0.00, 526.58, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111611053831'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''Çâîíêè'', 233.00, 0.00, 526.58, ''2.26'', 0.20)';
+values (''4011161'', ''40111611053831'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 233.00, 0.00, 526.58, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111611053831'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''Äåíåæíûå ïåðåâîäû'', 233.00, 0.00, 526.58, ''2.26'', 0.20)';
+values (''4011161'', ''40111611053831'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 233.00, 0.00, 526.58, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111611053831'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''Çâîíêè'', 0.00, 0.00, 0.00, ''1.96'', 0.20)';
+values (''4011161'', ''40111611053831'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111611053831'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''Äåíåæíûå ïåðåâîäû'', 3945.00, 0.00, 7760.37, ''1.96'', 0.20)';
+values (''4011161'', ''40111611053831'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 3945.00, 0.00, 7760.37, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111611053831'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''40111611053831'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111611053831'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''40111611053831'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111611053831'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''40111611053831'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111611053831'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''40111611053831'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111611053831'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-JUL-20'', ''02-JUL-20'', ''01-JUL-20'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''40111611053831'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUL-20'', ''02-JUL-20'', ''01-JUL-20'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111611053831'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''02-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''40111611053831'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''02-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111611053831'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-JUL-20'', ''02-JUL-20'', ''01-JUL-20'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''40111611053831'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUL-20'', ''02-JUL-20'', ''01-JUL-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111611053831'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''02-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''40111611053831'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''02-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111611053831'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''2.99'', 0.20)';
+values (''4011161'', ''40111611053831'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111611053831'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''Èíòåðíåò'', 3945.00, 0.00, 11829.36, ''2.99'', 0.20)';
+values (''4011161'', ''40111611053831'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 3945.00, 0.00, 11829.36, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111611053831'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''40111611053831'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111611053831'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''40111611053831'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111611053831'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''40111611053831'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111611053831'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''40111611053831'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111611053831'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''40111611053831'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111611053831'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''40111611053831'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111611053831'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''40111611053831'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111611053831'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''40111611053831'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111611053831'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''2.99'', 0.20)';
+values (''4011161'', ''40111611053831'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111611053831'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''2.99'', 0.20)';
+values (''4011161'', ''40111611053831'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111611053831'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''40111611053831'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111611053831'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''40111611053831'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111611153942'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''Çâîíêè'', 626.00, 0.00, 1414.76, ''2.26'', 0.20)';
+values (''4011161'', ''40111611153942'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 626.00, 0.00, 1414.76, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111611153942'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''Äåíåæíûå ïåðåâîäû'', 626.00, 0.00, 1414.76, ''2.26'', 0.20)';
+values (''4011161'', ''40111611153942'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 626.00, 0.00, 1414.76, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111611153942'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''Çâîíêè'', 626.00, 0.00, 1414.76, ''2.26'', 0.20)';
+values (''4011161'', ''40111611153942'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 626.00, 0.00, 1414.76, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111611153942'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''Äåíåæíûå ïåðåâîäû'', 626.00, 0.00, 1414.76, ''2.26'', 0.20)';
+values (''4011161'', ''40111611153942'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 626.00, 0.00, 1414.76, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111611153942'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-JUL-20'', ''31-JUL-20'', ''01-JUL-20'', ''Çâîíêè'', 4891.00, 0.00, 11053.66, ''2.26'', 0.20)';
+values (''4011161'', ''40111611153942'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUL-20'', ''31-JUL-20'', ''01-JUL-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 4891.00, 0.00, 11053.66, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111611153942'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-JUL-20'', ''31-JUL-20'', ''01-JUL-20'', ''Äåíåæíûå ïåðåâîäû'', 4891.00, 0.00, 11053.66, ''2.26'', 0.20)';
+values (''4011161'', ''40111611153942'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUL-20'', ''31-JUL-20'', ''01-JUL-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 4891.00, 0.00, 11053.66, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111611153942'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''31-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''Çâîíêè'', 163.00, 0.00, 368.38, ''2.26'', 0.20)';
+values (''4011161'', ''40111611153942'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''31-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 163.00, 0.00, 368.38, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111611153942'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''31-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''Äåíåæíûå ïåðåâîäû'', 163.00, 0.00, 368.38, ''2.26'', 0.20)';
+values (''4011161'', ''40111611153942'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''31-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 163.00, 0.00, 368.38, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111611153942'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-JUN-20'', ''15-JUN-20'', ''01-JUN-20'', ''Çâîíêè'', 2282.00, 0.00, 4489.02, ''1.96'', 0.20)';
+values (''4011161'', ''40111611153942'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUN-20'', ''15-JUN-20'', ''01-JUN-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 2282.00, 0.00, 4489.02, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111611153942'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-JUN-20'', ''15-JUN-20'', ''01-JUN-20'', ''Äåíåæíûå ïåðåâîäû'', 2282.00, 0.00, 4489.02, ''1.96'', 0.20)';
+values (''4011161'', ''40111611153942'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUN-20'', ''15-JUN-20'', ''01-JUN-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 2282.00, 0.00, 4489.02, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111611153942'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''15-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''Çâîíêè'', 2608.00, 0.00, 5130.30, ''1.96'', 0.20)';
+values (''4011161'', ''40111611153942'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''15-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 2608.00, 0.00, 5130.30, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111611153942'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''15-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''Äåíåæíûå ïåðåâîäû'', 2608.00, 0.00, 5130.30, ''1.96'', 0.20)';
+values (''4011161'', ''40111611153942'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''15-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 2608.00, 0.00, 5130.30, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111611153942'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''Çâîíêè'', 638.00, 0.00, 1441.88, ''2.26'', 0.20)';
+values (''4011161'', ''40111611153942'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 638.00, 0.00, 1441.88, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111611153942'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''Äåíåæíûå ïåðåâîäû'', 638.00, 0.00, 1441.88, ''2.26'', 0.20)';
+values (''4011161'', ''40111611153942'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 638.00, 0.00, 1441.88, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111611153942'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''Çâîíêè'', 618.00, 0.00, 1396.68, ''2.26'', 0.20)';
+values (''4011161'', ''40111611153942'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 618.00, 0.00, 1396.68, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111611153942'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''Äåíåæíûå ïåðåâîäû'', 618.00, 0.00, 1396.68, ''2.26'', 0.20)';
+values (''4011161'', ''40111611153942'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 618.00, 0.00, 1396.68, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111611153942'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''ÑÌÑ'', 417.00, 0.00, 1305.21, ''3.13'', 0.20)';
+values (''4011161'', ''40111611153942'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''ï¿½ï¿½ï¿½'', 417.00, 0.00, 1305.21, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111611153942'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''Èíòåðíåò'', 626.00, 0.00, 1959.38, ''3.13'', 0.20)';
+values (''4011161'', ''40111611153942'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 626.00, 0.00, 1959.38, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111611153942'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''Çâîíêè'', 626.00, 0.00, 1414.76, ''2.26'', 0.20)';
+values (''4011161'', ''40111611153942'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 626.00, 0.00, 1414.76, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111611153942'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''Äåíåæíûå ïåðåâîäû'', 626.00, 0.00, 1414.76, ''2.26'', 0.20)';
+values (''4011161'', ''40111611153942'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 626.00, 0.00, 1414.76, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111611153942'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''Çâîíêè'', 626.00, 0.00, 1414.76, ''2.26'', 0.20)';
+values (''4011161'', ''40111611153942'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 626.00, 0.00, 1414.76, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111611153942'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''Äåíåæíûå ïåðåâîäû'', 626.00, 0.00, 1414.76, ''2.26'', 0.20)';
+values (''4011161'', ''40111611153942'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 626.00, 0.00, 1414.76, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111611153942'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''Çâîíêè'', 626.00, 0.00, 1414.76, ''2.26'', 0.20)';
+values (''4011161'', ''40111611153942'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 626.00, 0.00, 1414.76, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111611153942'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''Äåíåæíûå ïåðåâîäû'', 626.00, 0.00, 1414.76, ''2.26'', 0.20)';
+values (''4011161'', ''40111611153942'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 626.00, 0.00, 1414.76, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111611153942'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''ÑÌÑ'', 417.00, 0.00, 1305.21, ''3.13'', 0.20)';
+values (''4011161'', ''40111611153942'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''ï¿½ï¿½ï¿½'', 417.00, 0.00, 1305.21, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111611153942'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''Èíòåðíåò'', 626.00, 0.00, 1959.38, ''3.13'', 0.20)';
+values (''4011161'', ''40111611153942'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 626.00, 0.00, 1959.38, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111611153942'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''40111611153942'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111611153942'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''40111611153942'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111611153942'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-JUN-20'', ''15-JUN-20'', ''01-JUN-20'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''2.99'', 0.20)';
+values (''4011161'', ''40111611153942'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUN-20'', ''15-JUN-20'', ''01-JUN-20'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111611153942'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''15-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''2.99'', 0.20)';
+values (''4011161'', ''40111611153942'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''15-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111611153942'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-JUN-20'', ''15-JUN-20'', ''01-JUN-20'', ''Èíòåðíåò'', 2062.00, 0.00, 6183.05, ''2.99'', 0.20)';
+values (''4011161'', ''40111611153942'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUN-20'', ''15-JUN-20'', ''01-JUN-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 2062.00, 0.00, 6183.05, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111611153942'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''15-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''Èíòåðíåò'', 2356.00, 0.00, 7064.63, ''2.99'', 0.20)';
+values (''4011161'', ''40111611153942'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''15-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 2356.00, 0.00, 7064.63, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111611153942'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''40111611153942'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111611153942'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''40111611153942'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111611153942'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''40111611153942'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111611153942'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''40111611153942'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111611153942'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-JUL-20'', ''31-JUL-20'', ''01-JUL-20'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''40111611153942'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUL-20'', ''31-JUL-20'', ''01-JUL-20'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111611153942'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''31-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''40111611153942'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''31-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111611153942'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-JUL-20'', ''31-JUL-20'', ''01-JUL-20'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''40111611153942'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUL-20'', ''31-JUL-20'', ''01-JUL-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111611153942'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''31-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''40111611153942'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''31-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111611153942'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''40111611153942'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111611153942'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''40111611153942'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''288777316293'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''ÑÌÑ'', 910.00, 0.00, 2728.70, ''2.99'', 0.20)';
+values (''288777'', ''288777316293'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''ï¿½ï¿½ï¿½'', 910.00, 0.00, 2728.70, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''288777316293'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''Çâîíêè'', 910.00, 0.00, 1790.10, ''1.96'', 0.20)';
+values (''288777'', ''288777316293'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 910.00, 0.00, 1790.10, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''288777316293'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-JAN-20'', ''01-FEB-20'', ''31-JAN-20'', ''ÑÌÑ'', 2464.00, 0.00, 7388.48, ''2.99'', 0.20)';
+values (''288777'', ''288777316293'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JAN-20'', ''01-FEB-20'', ''31-JAN-20'', ''ï¿½ï¿½ï¿½'', 2464.00, 0.00, 7388.48, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''288777316293'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-JAN-20'', ''01-FEB-20'', ''31-JAN-20'', ''Çâîíêè'', 2464.00, 0.00, 4847.04, ''1.96'', 0.20)';
+values (''288777'', ''288777316293'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JAN-20'', ''01-FEB-20'', ''31-JAN-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 2464.00, 0.00, 4847.04, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''288777316293'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''288777'', ''288777316293'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''288777316293'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-FEB-20'', ''01-MAR-20'', ''29-FEB-20'', ''ÑÌÑ'', 2149.00, 0.00, 6443.93, ''2.99'', 0.20)';
+values (''288777'', ''288777316293'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-20'', ''01-MAR-20'', ''29-FEB-20'', ''ï¿½ï¿½ï¿½'', 2149.00, 0.00, 6443.93, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''288777316293'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-FEB-20'', ''01-MAR-20'', ''29-FEB-20'', ''Çâîíêè'', 2149.00, 0.00, 4227.39, ''1.96'', 0.20)';
+values (''288777'', ''288777316293'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-20'', ''01-MAR-20'', ''29-FEB-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 2149.00, 0.00, 4227.39, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''288777316293'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-APR-20'', ''01-MAY-20'', ''30-APR-20'', ''ÑÌÑ'', 3017.00, 0.00, 9046.69, ''2.99'', 0.20)';
+values (''288777'', ''288777316293'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-APR-20'', ''01-MAY-20'', ''30-APR-20'', ''ï¿½ï¿½ï¿½'', 3017.00, 0.00, 9046.69, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''288777316293'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-APR-20'', ''01-MAY-20'', ''30-APR-20'', ''Çâîíêè'', 3017.00, 0.00, 5934.87, ''1.96'', 0.20)';
+values (''288777'', ''288777316293'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-APR-20'', ''01-MAY-20'', ''30-APR-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 3017.00, 0.00, 5934.87, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''288777316293'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''Çâîíêè'', 0.00, 0.00, 0.00, ''2.26'', 0.20)';
+values (''288777'', ''288777316293'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''288777316293'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''ÑÌÑ'', 1855.00, 0.00, 5806.15, ''3.13'', 0.20)';
+values (''288777'', ''288777316293'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''ï¿½ï¿½ï¿½'', 1855.00, 0.00, 5806.15, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''288777316293'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''Çâîíêè'', 1855.00, 0.00, 4192.30, ''2.26'', 0.20)';
+values (''288777'', ''288777316293'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 1855.00, 0.00, 4192.30, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''288777316293'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''17-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''288777'', ''288777316293'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''17-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''288777316293'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''17-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''Çâîíêè'', 0.00, 0.00, 0.00, ''2.26'', 0.20)';
+values (''288777'', ''288777316293'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''17-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''288777316293'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''ÑÌÑ'', 1435.00, 0.00, 4491.55, ''3.13'', 0.20)';
+values (''288777'', ''288777316293'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''ï¿½ï¿½ï¿½'', 1435.00, 0.00, 4491.55, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''288777316293'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''Çâîíêè'', 1435.00, 0.00, 3243.10, ''2.26'', 0.20)';
+values (''288777'', ''288777316293'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 1435.00, 0.00, 3243.10, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''288777316293'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-MAR-20'', ''01-APR-20'', ''31-MAR-20'', ''Çâîíêè'', 2730.00, 0.00, 5370.30, ''1.96'', 0.20)';
+values (''288777'', ''288777316293'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-MAR-20'', ''01-APR-20'', ''31-MAR-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 2730.00, 0.00, 5370.30, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''288777316293'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-MAR-20'', ''01-APR-20'', ''31-MAR-20'', ''ÑÌÑ'', 2730.00, 0.00, 8186.10, ''2.99'', 0.20)';
+values (''288777'', ''288777316293'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-MAR-20'', ''01-APR-20'', ''31-MAR-20'', ''ï¿½ï¿½ï¿½'', 2730.00, 0.00, 8186.10, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''288777316293'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-APR-20'', ''01-MAY-20'', ''30-APR-20'', ''ÑÌÑ'', -2730.00, 0.00, -8186.10, ''2.99'', 0.20)';
+values (''288777'', ''288777316293'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-APR-20'', ''01-MAY-20'', ''30-APR-20'', ''ï¿½ï¿½ï¿½'', -2730.00, 0.00, -8186.10, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''288777316293'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-APR-20'', ''01-MAY-20'', ''30-APR-20'', ''Çâîíêè'', -2730.00, 0.00, -5370.30, ''1.96'', 0.20)';
+values (''288777'', ''288777316293'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-APR-20'', ''01-MAY-20'', ''30-APR-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', -2730.00, 0.00, -5370.30, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''288777316293'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''Çâîíêè'', 1886.00, 0.00, 4262.36, ''2.26'', 0.20)';
+values (''288777'', ''288777316293'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 1886.00, 0.00, 4262.36, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''288777316293'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''ÑÌÑ'', 1949.00, 0.00, 6100.37, ''3.13'', 0.20)';
+values (''288777'', ''288777316293'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''ï¿½ï¿½ï¿½'', 1949.00, 0.00, 6100.37, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''288777316293'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''Çâîíêè'', 1949.00, 0.00, 4404.74, ''2.26'', 0.20)';
+values (''288777'', ''288777316293'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 1949.00, 0.00, 4404.74, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''288777316293'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''Çâîíêè'', 2240.00, 0.00, 4406.40, ''1.96'', 0.20)';
+values (''288777'', ''288777316293'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 2240.00, 0.00, 4406.40, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''288777316293'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''ÑÌÑ'', 2240.00, 0.00, 6716.80, ''2.99'', 0.20)';
+values (''288777'', ''288777316293'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''ï¿½ï¿½ï¿½'', 2240.00, 0.00, 6716.80, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''288777316293'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''ÑÌÑ'', 1949.00, 0.00, 6100.37, ''3.13'', 0.20)';
+values (''288777'', ''288777316293'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''ï¿½ï¿½ï¿½'', 1949.00, 0.00, 6100.37, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''288777316293'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''Çâîíêè'', 1949.00, 0.00, 4404.74, ''2.26'', 0.20)';
+values (''288777'', ''288777316293'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 1949.00, 0.00, 4404.74, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''288777316293'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''ÑÌÑ'', 1886.00, 0.00, 5903.18, ''3.13'', 0.20)';
+values (''288777'', ''288777316293'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''ï¿½ï¿½ï¿½'', 1886.00, 0.00, 5903.18, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''288777316293'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''ÑÌÑ'', 1886.00, 0.00, 5903.18, ''3.13'', 0.20)';
+values (''288777'', ''288777316293'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''ï¿½ï¿½ï¿½'', 1886.00, 0.00, 5903.18, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''288777316293'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''Çâîíêè'', 1886.00, 0.00, 4262.36, ''2.26'', 0.20)';
+values (''288777'', ''288777316293'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 1886.00, 0.00, 4262.36, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''288777316293'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-DEC-20'', ''17-DEC-20'', ''01-DEC-20'', ''ÑÌÑ'', 1006.00, 0.00, 3148.78, ''3.13'', 0.20)';
+values (''288777'', ''288777316293'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-DEC-20'', ''17-DEC-20'', ''01-DEC-20'', ''ï¿½ï¿½ï¿½'', 1006.00, 0.00, 3148.78, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''288777316293'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-DEC-20'', ''17-DEC-20'', ''01-DEC-20'', ''Çâîíêè'', 1006.00, 0.00, 2273.56, ''2.26'', 0.20)';
+values (''288777'', ''288777316293'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-DEC-20'', ''17-DEC-20'', ''01-DEC-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 1006.00, 0.00, 2273.56, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''28877719960'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''ÑÌÑ'', 476.00, 0.00, 1489.88, ''3.13'', 0.20)';
+values (''288777'', ''28877719960'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''ï¿½ï¿½ï¿½'', 476.00, 0.00, 1489.88, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''28877719960'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''Çâîíêè'', 476.00, 0.00, 1075.76, ''2.26'', 0.20)';
+values (''288777'', ''28877719960'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 476.00, 0.00, 1075.76, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''28877719960'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''288777'', ''28877719960'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''28877719960'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''Çâîíêè'', 0.00, 0.00, 0.00, ''2.26'', 0.20)';
+values (''288777'', ''28877719960'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''28877719960'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-JAN-20'', ''01-FEB-20'', ''31-JAN-20'', ''Çâîíêè'', 308.00, 0.00, 605.88, ''1.96'', 0.20)';
+values (''288777'', ''28877719960'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JAN-20'', ''01-FEB-20'', ''31-JAN-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 308.00, 0.00, 605.88, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''28877719960'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-JAN-20'', ''01-FEB-20'', ''31-JAN-20'', ''ÑÌÑ'', 308.00, 0.00, 923.56, ''2.99'', 0.20)';
+values (''288777'', ''28877719960'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JAN-20'', ''01-FEB-20'', ''31-JAN-20'', ''ï¿½ï¿½ï¿½'', 308.00, 0.00, 923.56, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''28877719960'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-FEB-20'', ''01-MAR-20'', ''29-FEB-20'', ''ÑÌÑ'', 35.00, 0.00, 104.95, ''2.99'', 0.20)';
+values (''288777'', ''28877719960'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-20'', ''01-MAR-20'', ''29-FEB-20'', ''ï¿½ï¿½ï¿½'', 35.00, 0.00, 104.95, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''28877719960'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-FEB-20'', ''01-MAR-20'', ''29-FEB-20'', ''Çâîíêè'', 35.00, 0.00, 68.85, ''1.96'', 0.20)';
+values (''288777'', ''28877719960'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-20'', ''01-MAR-20'', ''29-FEB-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 35.00, 0.00, 68.85, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''28877719960'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''288777'', ''28877719960'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''28877719960'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''Çâîíêè'', 0.00, 0.00, 0.00, ''2.26'', 0.20)';
+values (''288777'', ''28877719960'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''28877719960'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''288777'', ''28877719960'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''28877719960'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''Çâîíêè'', 0.00, 0.00, 0.00, ''2.26'', 0.20)';
+values (''288777'', ''28877719960'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''28877719960'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''288777'', ''28877719960'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''28877719960'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''Çâîíêè'', 0.00, 0.00, 0.00, ''2.26'', 0.20)';
+values (''288777'', ''28877719960'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''28877719960'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-MAR-20'', ''01-APR-20'', ''31-MAR-20'', ''ÑÌÑ'', 539.00, 0.00, 1616.23, ''2.99'', 0.20)';
+values (''288777'', ''28877719960'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-MAR-20'', ''01-APR-20'', ''31-MAR-20'', ''ï¿½ï¿½ï¿½'', 539.00, 0.00, 1616.23, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''28877719960'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-MAR-20'', ''01-APR-20'', ''31-MAR-20'', ''Çâîíêè'', 539.00, 0.00, 1060.29, ''1.96'', 0.20)';
+values (''288777'', ''28877719960'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-MAR-20'', ''01-APR-20'', ''31-MAR-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 539.00, 0.00, 1060.29, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''28877719960'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-APR-20'', ''01-MAY-20'', ''30-APR-20'', ''ÑÌÑ'', 518.00, 0.00, 1553.26, ''2.99'', 0.20)';
+values (''288777'', ''28877719960'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-APR-20'', ''01-MAY-20'', ''30-APR-20'', ''ï¿½ï¿½ï¿½'', 518.00, 0.00, 1553.26, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''28877719960'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-APR-20'', ''01-MAY-20'', ''30-APR-20'', ''Çâîíêè'', 518.00, 0.00, 1018.98, ''1.96'', 0.20)';
+values (''288777'', ''28877719960'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-APR-20'', ''01-MAY-20'', ''30-APR-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 518.00, 0.00, 1018.98, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''28877719960'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''30-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''Çâîíêè'', 0.00, 0.00, 0.00, ''1.96'', 0.20)';
+values (''288777'', ''28877719960'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''30-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''28877719960'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-JUN-20'', ''04-JUN-20'', ''01-JUN-20'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''2.99'', 0.20)';
+values (''288777'', ''28877719960'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUN-20'', ''04-JUN-20'', ''01-JUN-20'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''28877719960'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''04-JUN-20'', ''05-JUN-20'', ''01-JUN-20'', ''ÑÌÑ'', 4.00, 0.00, 11.99, ''2.99'', 0.20)';
+values (''288777'', ''28877719960'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''04-JUN-20'', ''05-JUN-20'', ''01-JUN-20'', ''ï¿½ï¿½ï¿½'', 4.00, 0.00, 11.99, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''28877719960'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''05-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''ÑÌÑ'', 3229.00, 0.00, 9682.38, ''2.99'', 0.20)';
+values (''288777'', ''28877719960'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''05-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''ï¿½ï¿½ï¿½'', 3229.00, 0.00, 9682.38, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''28877719960'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-SEP-20'', ''16-SEP-20'', ''01-SEP-20'', ''Çâîíêè'', 1464.00, 0.00, 3308.64, ''2.26'', 0.20)';
+values (''288777'', ''28877719960'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-SEP-20'', ''16-SEP-20'', ''01-SEP-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 1464.00, 0.00, 3308.64, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''28877719960'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-JUN-20'', ''04-JUN-20'', ''01-JUN-20'', ''Çâîíêè'', 0.00, 0.00, 0.00, ''1.96'', 0.20)';
+values (''288777'', ''28877719960'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUN-20'', ''04-JUN-20'', ''01-JUN-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''28877719960'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''04-JUN-20'', ''05-JUN-20'', ''01-JUN-20'', ''Çâîíêè'', 4.00, 0.00, 7.86, ''1.96'', 0.20)';
+values (''288777'', ''28877719960'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''04-JUN-20'', ''05-JUN-20'', ''01-JUN-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 4.00, 0.00, 7.86, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''28877719960'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''05-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''Çâîíêè'', 3229.00, 0.00, 6351.90, ''1.96'', 0.20)';
+values (''288777'', ''28877719960'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''05-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 3229.00, 0.00, 6351.90, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''28877719960'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''ÑÌÑ'', 3889.00, 0.00, 12172.57, ''3.13'', 0.20)';
+values (''288777'', ''28877719960'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''ï¿½ï¿½ï¿½'', 3889.00, 0.00, 12172.57, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''28877719960'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''30-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''2.99'', 0.20)';
+values (''288777'', ''28877719960'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''30-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''28877719960'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''Çâîíêè'', 3889.00, 0.00, 8789.14, ''2.26'', 0.20)';
+values (''288777'', ''28877719960'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 3889.00, 0.00, 8789.14, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''28877719960'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''ÑÌÑ'', 3798.00, 0.00, 11887.74, ''3.13'', 0.20)';
+values (''288777'', ''28877719960'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''ï¿½ï¿½ï¿½'', 3798.00, 0.00, 11887.74, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''28877719960'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''Çâîíêè'', 3798.00, 0.00, 8583.48, ''2.26'', 0.20)';
+values (''288777'', ''28877719960'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 3798.00, 0.00, 8583.48, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''28877719960'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-SEP-20'', ''16-SEP-20'', ''01-SEP-20'', ''ÑÌÑ'', 1464.00, 0.00, 4582.32, ''3.13'', 0.20)';
+values (''288777'', ''28877719960'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-SEP-20'', ''16-SEP-20'', ''01-SEP-20'', ''ï¿½ï¿½ï¿½'', 1464.00, 0.00, 4582.32, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''28877719960'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-MAY-20'', ''30-MAY-20'', ''01-MAY-20'', ''Çâîíêè'', 500.00, 0.00, 983.57, ''1.96'', 0.20)';
+values (''288777'', ''28877719960'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-MAY-20'', ''30-MAY-20'', ''01-MAY-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 500.00, 0.00, 983.57, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''28877719960'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-MAY-20'', ''30-MAY-20'', ''01-MAY-20'', ''ÑÌÑ'', 500.00, 0.00, 1499.28, ''2.99'', 0.20)';
+values (''288777'', ''28877719960'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-MAY-20'', ''30-MAY-20'', ''01-MAY-20'', ''ï¿½ï¿½ï¿½'', 500.00, 0.00, 1499.28, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''28877729959'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''Çâîíêè'', 42.00, 0.00, 82.62, ''1.96'', 0.20)';
+values (''288777'', ''28877729959'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 42.00, 0.00, 82.62, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''28877729959'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''Çâîíêè'', 84.00, 0.00, 165.24, ''1.96'', 0.20)';
+values (''288777'', ''28877729959'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 84.00, 0.00, 165.24, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''28877729959'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''Äåíåæíûå ïåðåâîäû'', 0.00, 0.00, 0.00, ''1.96'', 0.20)';
+values (''288777'', ''28877729959'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''28877729959'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''Äåíåæíûå ïåðåâîäû'', 0.00, 0.00, 0.00, ''1.96'', 0.20)';
+values (''288777'', ''28877729959'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''28877729959'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-JAN-20'', ''01-FEB-20'', ''31-JAN-20'', ''ÑÌÑ'', 126.00, 0.00, 377.82, ''2.99'', 0.20)';
+values (''288777'', ''28877729959'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JAN-20'', ''01-FEB-20'', ''31-JAN-20'', ''ï¿½ï¿½ï¿½'', 126.00, 0.00, 377.82, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''28877729959'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-JAN-20'', ''01-FEB-20'', ''31-JAN-20'', ''ÑÌÑ'', 42.00, 0.00, 125.94, ''2.99'', 0.20)';
+values (''288777'', ''28877729959'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JAN-20'', ''01-FEB-20'', ''31-JAN-20'', ''ï¿½ï¿½ï¿½'', 42.00, 0.00, 125.94, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''28877729959'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-JAN-20'', ''01-FEB-20'', ''31-JAN-20'', ''Çâîíêè'', 126.00, 0.00, 247.86, ''1.96'', 0.20)';
+values (''288777'', ''28877729959'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JAN-20'', ''01-FEB-20'', ''31-JAN-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 126.00, 0.00, 247.86, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''28877729959'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-JAN-20'', ''01-FEB-20'', ''31-JAN-20'', ''Çâîíêè'', 42.00, 0.00, 82.62, ''1.96'', 0.20)';
+values (''288777'', ''28877729959'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JAN-20'', ''01-FEB-20'', ''31-JAN-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 42.00, 0.00, 82.62, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''28877729959'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''Çâîíêè'', 9.00, 0.00, 20.34, ''2.26'', 0.20)';
+values (''288777'', ''28877729959'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 9.00, 0.00, 20.34, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''28877729959'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''Çâîíêè'', 114.00, 0.00, 257.64, ''2.26'', 0.20)';
+values (''288777'', ''28877729959'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 114.00, 0.00, 257.64, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''28877729959'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''Äåíåæíûå ïåðåâîäû'', 0.00, 0.00, 0.00, ''2.26'', 0.20)';
+values (''288777'', ''28877729959'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''28877729959'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''Äåíåæíûå ïåðåâîäû'', 0.00, 0.00, 0.00, ''2.26'', 0.20)';
+values (''288777'', ''28877729959'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''28877729959'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''ÑÌÑ'', 9.00, 0.00, 28.17, ''3.13'', 0.20)';
+values (''288777'', ''28877729959'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''ï¿½ï¿½ï¿½'', 9.00, 0.00, 28.17, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''28877729959'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''ÑÌÑ'', 114.00, 0.00, 356.82, ''3.13'', 0.20)';
+values (''288777'', ''28877729959'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''ï¿½ï¿½ï¿½'', 114.00, 0.00, 356.82, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''28877729959'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-FEB-20'', ''01-MAR-20'', ''29-FEB-20'', ''ÑÌÑ'', 84.00, 0.00, 251.88, ''2.99'', 0.20)';
+values (''288777'', ''28877729959'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-20'', ''01-MAR-20'', ''29-FEB-20'', ''ï¿½ï¿½ï¿½'', 84.00, 0.00, 251.88, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''28877729959'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-FEB-20'', ''01-MAR-20'', ''29-FEB-20'', ''Çâîíêè'', 42.00, 0.00, 82.62, ''1.96'', 0.20)';
+values (''288777'', ''28877729959'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-20'', ''01-MAR-20'', ''29-FEB-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 42.00, 0.00, 82.62, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''28877729959'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-FEB-20'', ''01-MAR-20'', ''29-FEB-20'', ''Çâîíêè'', 84.00, 0.00, 165.24, ''1.96'', 0.20)';
+values (''288777'', ''28877729959'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-20'', ''01-MAR-20'', ''29-FEB-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 84.00, 0.00, 165.24, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''28877729959'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-FEB-20'', ''01-MAR-20'', ''29-FEB-20'', ''ÑÌÑ'', 42.00, 0.00, 125.94, ''2.99'', 0.20)';
+values (''288777'', ''28877729959'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-20'', ''01-MAR-20'', ''29-FEB-20'', ''ï¿½ï¿½ï¿½'', 42.00, 0.00, 125.94, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''28877729959'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-APR-20'', ''01-MAY-20'', ''30-APR-20'', ''Çâîíêè'', 168.00, 0.00, 330.48, ''1.96'', 0.20)';
+values (''288777'', ''28877729959'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-APR-20'', ''01-MAY-20'', ''30-APR-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 168.00, 0.00, 330.48, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''28877729959'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-APR-20'', ''01-MAY-20'', ''30-APR-20'', ''ÑÌÑ'', 84.00, 0.00, 251.88, ''2.99'', 0.20)';
+values (''288777'', ''28877729959'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-APR-20'', ''01-MAY-20'', ''30-APR-20'', ''ï¿½ï¿½ï¿½'', 84.00, 0.00, 251.88, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''28877729959'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-APR-20'', ''01-MAY-20'', ''30-APR-20'', ''ÑÌÑ'', 168.00, 0.00, 503.76, ''2.99'', 0.20)';
+values (''288777'', ''28877729959'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-APR-20'', ''01-MAY-20'', ''30-APR-20'', ''ï¿½ï¿½ï¿½'', 168.00, 0.00, 503.76, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''28877729959'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-APR-20'', ''01-MAY-20'', ''30-APR-20'', ''Çâîíêè'', 84.00, 0.00, 165.24, ''1.96'', 0.20)';
+values (''288777'', ''28877729959'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-APR-20'', ''01-MAY-20'', ''30-APR-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 84.00, 0.00, 165.24, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''28877729959'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''ÑÌÑ'', 42.00, 0.00, 125.94, ''2.99'', 0.20)';
+values (''288777'', ''28877729959'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''ï¿½ï¿½ï¿½'', 42.00, 0.00, 125.94, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''28877729959'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''ÑÌÑ'', 84.00, 0.00, 251.88, ''2.99'', 0.20)';
+values (''288777'', ''28877729959'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''ï¿½ï¿½ï¿½'', 84.00, 0.00, 251.88, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''28877729959'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''Çâîíêè'', 35.00, 0.00, 79.10, ''2.26'', 0.20)';
+values (''288777'', ''28877729959'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 35.00, 0.00, 79.10, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''28877729959'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''Çâîíêè'', 211.00, 0.00, 476.86, ''2.26'', 0.20)';
+values (''288777'', ''28877729959'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 211.00, 0.00, 476.86, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''28877729959'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''Äåíåæíûå ïåðåâîäû'', 0.00, 0.00, 0.00, ''2.26'', 0.20)';
+values (''288777'', ''28877729959'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''28877729959'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''Äåíåæíûå ïåðåâîäû'', 0.00, 0.00, 0.00, ''2.26'', 0.20)';
+values (''288777'', ''28877729959'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''28877729959'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''ÑÌÑ'', 35.00, 0.00, 109.55, ''3.13'', 0.20)';
+values (''288777'', ''28877729959'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''ï¿½ï¿½ï¿½'', 35.00, 0.00, 109.55, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''28877729959'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''ÑÌÑ'', 211.00, 0.00, 660.43, ''3.13'', 0.20)';
+values (''288777'', ''28877729959'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''ï¿½ï¿½ï¿½'', 211.00, 0.00, 660.43, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''28877729959'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''ÑÌÑ'', 11.00, 0.00, 34.43, ''3.13'', 0.20)';
+values (''288777'', ''28877729959'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''ï¿½ï¿½ï¿½'', 11.00, 0.00, 34.43, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''28877729959'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''288777'', ''28877729959'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''28877729959'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''Çâîíêè'', 11.00, 0.00, 24.86, ''2.26'', 0.20)';
+values (''288777'', ''28877729959'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 11.00, 0.00, 24.86, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''28877729959'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''Çâîíêè'', 0.00, 0.00, 0.00, ''2.26'', 0.20)';
+values (''288777'', ''28877729959'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''28877729959'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''Äåíåæíûå ïåðåâîäû'', 0.00, 0.00, 0.00, ''2.26'', 0.20)';
+values (''288777'', ''28877729959'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''28877729959'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''Äåíåæíûå ïåðåâîäû'', 0.00, 0.00, 0.00, ''2.26'', 0.20)';
+values (''288777'', ''28877729959'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''28877729959'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''ÑÌÑ'', 35.00, 0.00, 109.55, ''3.13'', 0.20)';
+values (''288777'', ''28877729959'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''ï¿½ï¿½ï¿½'', 35.00, 0.00, 109.55, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''28877729959'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''ÑÌÑ'', 119.00, 0.00, 372.47, ''3.13'', 0.20)';
+values (''288777'', ''28877729959'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''ï¿½ï¿½ï¿½'', 119.00, 0.00, 372.47, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''28877729959'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''Çâîíêè'', 35.00, 0.00, 79.10, ''2.26'', 0.20)';
+values (''288777'', ''28877729959'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 35.00, 0.00, 79.10, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''28877729959'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''Çâîíêè'', 119.00, 0.00, 268.94, ''2.26'', 0.20)';
+values (''288777'', ''28877729959'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 119.00, 0.00, 268.94, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''28877729959'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''Äåíåæíûå ïåðåâîäû'', 0.00, 0.00, 0.00, ''2.26'', 0.20)';
+values (''288777'', ''28877729959'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''28877729959'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''Äåíåæíûå ïåðåâîäû'', 0.00, 0.00, 0.00, ''2.26'', 0.20)';
+values (''288777'', ''28877729959'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''28877729959'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-MAR-20'', ''01-APR-20'', ''31-MAR-20'', ''Çâîíêè'', 28.00, 0.00, 55.08, ''1.96'', 0.20)';
+values (''288777'', ''28877729959'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-MAR-20'', ''01-APR-20'', ''31-MAR-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 28.00, 0.00, 55.08, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''28877729959'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-MAR-20'', ''01-APR-20'', ''31-MAR-20'', ''ÑÌÑ'', 98.00, 0.00, 293.86, ''2.99'', 0.20)';
+values (''288777'', ''28877729959'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-MAR-20'', ''01-APR-20'', ''31-MAR-20'', ''ï¿½ï¿½ï¿½'', 98.00, 0.00, 293.86, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''28877729959'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-MAR-20'', ''01-APR-20'', ''31-MAR-20'', ''ÑÌÑ'', 28.00, 0.00, 83.96, ''2.99'', 0.20)';
+values (''288777'', ''28877729959'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-MAR-20'', ''01-APR-20'', ''31-MAR-20'', ''ï¿½ï¿½ï¿½'', 28.00, 0.00, 83.96, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''28877729959'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-MAR-20'', ''01-APR-20'', ''31-MAR-20'', ''Çâîíêè'', 98.00, 0.00, 192.78, ''1.96'', 0.20)';
+values (''288777'', ''28877729959'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-MAR-20'', ''01-APR-20'', ''31-MAR-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 98.00, 0.00, 192.78, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''28877729959'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-APR-20'', ''01-MAY-20'', ''30-APR-20'', ''ÑÌÑ'', -28.00, 0.00, -83.96, ''2.99'', 0.20)';
+values (''288777'', ''28877729959'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-APR-20'', ''01-MAY-20'', ''30-APR-20'', ''ï¿½ï¿½ï¿½'', -28.00, 0.00, -83.96, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''28877729959'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-APR-20'', ''01-MAY-20'', ''30-APR-20'', ''Çâîíêè'', -28.00, 0.00, -55.08, ''1.96'', 0.20)';
+values (''288777'', ''28877729959'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-APR-20'', ''01-MAY-20'', ''30-APR-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', -28.00, 0.00, -55.08, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''28877729959'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-APR-20'', ''01-MAY-20'', ''30-APR-20'', ''Çâîíêè'', -98.00, 0.00, -192.78, ''1.96'', 0.20)';
+values (''288777'', ''28877729959'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-APR-20'', ''01-MAY-20'', ''30-APR-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', -98.00, 0.00, -192.78, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''28877729959'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-APR-20'', ''01-MAY-20'', ''30-APR-20'', ''ÑÌÑ'', -98.00, 0.00, -293.86, ''2.99'', 0.20)';
+values (''288777'', ''28877729959'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-APR-20'', ''01-MAY-20'', ''30-APR-20'', ''ï¿½ï¿½ï¿½'', -98.00, 0.00, -293.86, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''28877729959'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''ÑÌÑ'', 32.00, 0.00, 95.95, ''2.99'', 0.20)';
+values (''288777'', ''28877729959'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''ï¿½ï¿½ï¿½'', 32.00, 0.00, 95.95, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''28877729959'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''ÑÌÑ'', 88.00, 0.00, 263.87, ''2.99'', 0.20)';
+values (''288777'', ''28877729959'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''ï¿½ï¿½ï¿½'', 88.00, 0.00, 263.87, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''28877729959'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''Çâîíêè'', 36.00, 0.00, 81.36, ''2.26'', 0.20)';
+values (''288777'', ''28877729959'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 36.00, 0.00, 81.36, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''28877729959'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''Çâîíêè'', 93.00, 0.00, 210.18, ''2.26'', 0.20)';
+values (''288777'', ''28877729959'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 93.00, 0.00, 210.18, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''28877729959'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''Äåíåæíûå ïåðåâîäû'', 0.00, 0.00, 0.00, ''2.26'', 0.20)';
+values (''288777'', ''28877729959'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''28877729959'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''Äåíåæíûå ïåðåâîäû'', 0.00, 0.00, 0.00, ''2.26'', 0.20)';
+values (''288777'', ''28877729959'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''28877729959'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''ÑÌÑ'', 36.00, 0.00, 112.68, ''3.13'', 0.20)';
+values (''288777'', ''28877729959'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''ï¿½ï¿½ï¿½'', 36.00, 0.00, 112.68, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''28877729959'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''ÑÌÑ'', 93.00, 0.00, 291.09, ''3.13'', 0.20)';
+values (''288777'', ''28877729959'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''ï¿½ï¿½ï¿½'', 93.00, 0.00, 291.09, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''28877729959'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''Çâîíêè'', 32.00, 0.00, 62.94, ''1.96'', 0.20)';
+values (''288777'', ''28877729959'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 32.00, 0.00, 62.94, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''28877729959'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''Çâîíêè'', 88.00, 0.00, 173.10, ''1.96'', 0.20)';
+values (''288777'', ''28877729959'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 88.00, 0.00, 173.10, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''28877729959'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''Äåíåæíûå ïåðåâîäû'', 44.00, 0.00, 86.55, ''1.96'', 0.20)';
+values (''288777'', ''28877729959'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 44.00, 0.00, 86.55, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''28877729959'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''Äåíåæíûå ïåðåâîäû'', 72.00, 0.00, 141.63, ''1.96'', 0.20)';
+values (''288777'', ''28877729959'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 72.00, 0.00, 141.63, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''28877729959'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''ÑÌÑ'', 35.00, 0.00, 109.55, ''3.13'', 0.20)';
+values (''288777'', ''28877729959'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''ï¿½ï¿½ï¿½'', 35.00, 0.00, 109.55, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''28877729959'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''ÑÌÑ'', 90.00, 0.00, 281.70, ''3.13'', 0.20)';
+values (''288777'', ''28877729959'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''ï¿½ï¿½ï¿½'', 90.00, 0.00, 281.70, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''28877729959'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''Çâîíêè'', 35.00, 0.00, 79.10, ''2.26'', 0.20)';
+values (''288777'', ''28877729959'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 35.00, 0.00, 79.10, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''28877729959'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''Çâîíêè'', 90.00, 0.00, 203.40, ''2.26'', 0.20)';
+values (''288777'', ''28877729959'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 90.00, 0.00, 203.40, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''28877729959'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''Äåíåæíûå ïåðåâîäû'', 0.00, 0.00, 0.00, ''2.26'', 0.20)';
+values (''288777'', ''28877729959'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''28877729959'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''Äåíåæíûå ïåðåâîäû'', 0.00, 0.00, 0.00, ''2.26'', 0.20)';
+values (''288777'', ''28877729959'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''28877729959'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''Çâîíêè'', 36.00, 0.00, 81.36, ''2.26'', 0.20)';
+values (''288777'', ''28877729959'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 36.00, 0.00, 81.36, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''28877729959'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''ÑÌÑ'', 36.00, 0.00, 112.68, ''3.13'', 0.20)';
+values (''288777'', ''28877729959'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''ï¿½ï¿½ï¿½'', 36.00, 0.00, 112.68, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''28877729959'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''ÑÌÑ'', 93.00, 0.00, 291.09, ''3.13'', 0.20)';
+values (''288777'', ''28877729959'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''ï¿½ï¿½ï¿½'', 93.00, 0.00, 291.09, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''28877729959'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''Çâîíêè'', 93.00, 0.00, 210.18, ''2.26'', 0.20)';
+values (''288777'', ''28877729959'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 93.00, 0.00, 210.18, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''28877729959'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''Äåíåæíûå ïåðåâîäû'', 0.00, 0.00, 0.00, ''2.26'', 0.20)';
+values (''288777'', ''28877729959'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''28877729959'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''Äåíåæíûå ïåðåâîäû'', 0.00, 0.00, 0.00, ''2.26'', 0.20)';
+values (''288777'', ''28877729959'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''28877729959'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''Çâîíêè'', 35.00, 0.00, 79.10, ''2.26'', 0.20)';
+values (''288777'', ''28877729959'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 35.00, 0.00, 79.10, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''28877729959'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''Çâîíêè'', 90.00, 0.00, 203.40, ''2.26'', 0.20)';
+values (''288777'', ''28877729959'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 90.00, 0.00, 203.40, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''28877729959'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''Äåíåæíûå ïåðåâîäû'', 0.00, 0.00, 0.00, ''2.26'', 0.20)';
+values (''288777'', ''28877729959'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''28877729959'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''Äåíåæíûå ïåðåâîäû'', 0.00, 0.00, 0.00, ''2.26'', 0.20)';
+values (''288777'', ''28877729959'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''28877729959'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''ÑÌÑ'', 35.00, 0.00, 109.55, ''3.13'', 0.20)';
+values (''288777'', ''28877729959'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''ï¿½ï¿½ï¿½'', 35.00, 0.00, 109.55, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''28877729959'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''ÑÌÑ'', 90.00, 0.00, 281.70, ''3.13'', 0.20)';
+values (''288777'', ''28877729959'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''ï¿½ï¿½ï¿½'', 90.00, 0.00, 281.70, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''288777444687'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''02-OCT-20'', ''01-NOV-20'', ''01-NOV-20'', ''Çâîíêè'', 7621.00, 0.00, 17223.46, ''2.26'', 0.20)';
+values (''288777'', ''288777444687'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''02-OCT-20'', ''01-NOV-20'', ''01-NOV-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 7621.00, 0.00, 17223.46, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''288777444687'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''Çâîíêè'', 7875.00, 0.00, 17797.50, ''2.26'', 0.20)';
+values (''288777'', ''288777444687'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 7875.00, 0.00, 17797.50, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''288777444687'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''02-OCT-20'', ''01-NOV-20'', ''01-NOV-20'', ''ÑÌÑ'', 7621.00, 0.00, 23853.73, ''3.13'', 0.20)';
+values (''288777'', ''288777444687'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''02-OCT-20'', ''01-NOV-20'', ''01-NOV-20'', ''ï¿½ï¿½ï¿½'', 7621.00, 0.00, 23853.73, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''288777444687'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''ÑÌÑ'', 7875.00, 0.00, 24648.75, ''3.13'', 0.20)';
+values (''288777'', ''288777444687'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''ï¿½ï¿½ï¿½'', 7875.00, 0.00, 24648.75, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''288777444687'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''Çâîíêè'', 1736.00, 0.00, 3414.96, ''1.96'', 0.20)';
+values (''288777'', ''288777444687'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 1736.00, 0.00, 3414.96, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''288777444687'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-JAN-20'', ''01-FEB-20'', ''31-JAN-20'', ''ÑÌÑ'', 4613.00, 0.00, 13832.41, ''2.99'', 0.20)';
+values (''288777'', ''288777444687'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JAN-20'', ''01-FEB-20'', ''31-JAN-20'', ''ï¿½ï¿½ï¿½'', 4613.00, 0.00, 13832.41, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''288777444687'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-JAN-20'', ''01-FEB-20'', ''31-JAN-20'', ''Çâîíêè'', 4613.00, 0.00, 9074.43, ''1.96'', 0.20)';
+values (''288777'', ''288777444687'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JAN-20'', ''01-FEB-20'', ''31-JAN-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 4613.00, 0.00, 9074.43, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''288777444687'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-FEB-20'', ''01-MAR-20'', ''29-FEB-20'', ''ÑÌÑ'', 4774.00, 0.00, 14315.18, ''2.99'', 0.20)';
+values (''288777'', ''288777444687'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-20'', ''01-MAR-20'', ''29-FEB-20'', ''ï¿½ï¿½ï¿½'', 4774.00, 0.00, 14315.18, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''288777444687'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-FEB-20'', ''01-MAR-20'', ''29-FEB-20'', ''Çâîíêè'', 4774.00, 0.00, 9391.14, ''1.96'', 0.20)';
+values (''288777'', ''288777444687'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-20'', ''01-MAR-20'', ''29-FEB-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 4774.00, 0.00, 9391.14, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''288777444687'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-APR-20'', ''01-MAY-20'', ''30-APR-20'', ''ÑÌÑ'', 5740.00, 0.00, 17211.80, ''2.99'', 0.20)';
+values (''288777'', ''288777444687'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-APR-20'', ''01-MAY-20'', ''30-APR-20'', ''ï¿½ï¿½ï¿½'', 5740.00, 0.00, 17211.80, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''288777444687'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-APR-20'', ''01-MAY-20'', ''30-APR-20'', ''Çâîíêè'', 5740.00, 0.00, 11291.40, ''1.96'', 0.20)';
+values (''288777'', ''288777444687'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-APR-20'', ''01-MAY-20'', ''30-APR-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 5740.00, 0.00, 11291.40, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''288777444687'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''ÑÌÑ'', 1736.00, 0.00, 5205.52, ''2.99'', 0.20)';
+values (''288777'', ''288777444687'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''ï¿½ï¿½ï¿½'', 1736.00, 0.00, 5205.52, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''288777444687'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''Çâîíêè'', 1609.00, 0.00, 3636.34, ''2.26'', 0.20)';
+values (''288777'', ''288777444687'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 1609.00, 0.00, 3636.34, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''288777444687'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''ÑÌÑ'', 1609.00, 0.00, 5036.17, ''3.13'', 0.20)';
+values (''288777'', ''288777444687'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''ï¿½ï¿½ï¿½'', 1609.00, 0.00, 5036.17, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''288777444687'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-DEC-20'', ''31-DEC-20'', ''01-DEC-20'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''288777'', ''288777444687'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-DEC-20'', ''31-DEC-20'', ''01-DEC-20'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''288777444687'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''31-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''288777'', ''288777444687'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''31-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''288777444687'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-DEC-20'', ''31-DEC-20'', ''01-DEC-20'', ''Çâîíêè'', 0.00, 0.00, 0.00, ''2.26'', 0.20)';
+values (''288777'', ''288777444687'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-DEC-20'', ''31-DEC-20'', ''01-DEC-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''288777444687'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''31-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''Çâîíêè'', 0.00, 0.00, 0.00, ''2.26'', 0.20)';
+values (''288777'', ''288777444687'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''31-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''288777444687'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''ÑÌÑ'', 5187.00, 0.00, 16235.31, ''3.13'', 0.20)';
+values (''288777'', ''288777444687'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''ï¿½ï¿½ï¿½'', 5187.00, 0.00, 16235.31, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''288777444687'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''Çâîíêè'', 5187.00, 0.00, 11722.62, ''2.26'', 0.20)';
+values (''288777'', ''288777444687'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 5187.00, 0.00, 11722.62, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''288777444687'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-MAR-20'', ''01-APR-20'', ''31-MAR-20'', ''Çâîíêè'', 5607.00, 0.00, 11029.77, ''1.96'', 0.20)';
+values (''288777'', ''288777444687'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-MAR-20'', ''01-APR-20'', ''31-MAR-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 5607.00, 0.00, 11029.77, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''288777444687'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-MAR-20'', ''01-APR-20'', ''31-MAR-20'', ''ÑÌÑ'', 5607.00, 0.00, 16812.99, ''2.99'', 0.20)';
+values (''288777'', ''288777444687'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-MAR-20'', ''01-APR-20'', ''31-MAR-20'', ''ï¿½ï¿½ï¿½'', 5607.00, 0.00, 16812.99, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''288777444687'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-APR-20'', ''01-MAY-20'', ''30-APR-20'', ''ÑÌÑ'', -5607.00, 0.00, -16812.99, ''2.99'', 0.20)';
+values (''288777'', ''288777444687'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-APR-20'', ''01-MAY-20'', ''30-APR-20'', ''ï¿½ï¿½ï¿½'', -5607.00, 0.00, -16812.99, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''288777444687'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-APR-20'', ''01-MAY-20'', ''30-APR-20'', ''Çâîíêè'', -5607.00, 0.00, -11029.77, ''1.96'', 0.20)';
+values (''288777'', ''288777444687'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-APR-20'', ''01-MAY-20'', ''30-APR-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', -5607.00, 0.00, -11029.77, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''288777444687'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-SEP-20'', ''16-SEP-20'', ''01-SEP-20'', ''Çâîíêè'', 36106.00, 0.00, 81599.56, ''2.26'', 0.20)';
+values (''288777'', ''288777444687'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-SEP-20'', ''16-SEP-20'', ''01-SEP-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 36106.00, 0.00, 81599.56, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''288777444687'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''30-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''ÑÌÑ'', 4814.00, 0.00, 15067.82, ''3.13'', 0.20)';
+values (''288777'', ''288777444687'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''30-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''ï¿½ï¿½ï¿½'', 4814.00, 0.00, 15067.82, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''288777444687'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''30-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''Çâîíêè'', 4814.00, 0.00, 10879.64, ''2.26'', 0.20)';
+values (''288777'', ''288777444687'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''30-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 4814.00, 0.00, 10879.64, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''288777444687'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-SEP-20'', ''16-SEP-20'', ''01-SEP-20'', ''ÑÌÑ'', 36106.00, 0.00, 113011.78, ''3.13'', 0.20)';
+values (''288777'', ''288777444687'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-SEP-20'', ''16-SEP-20'', ''01-SEP-20'', ''ï¿½ï¿½ï¿½'', 36106.00, 0.00, 113011.78, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''288777444687'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''2.99'', 0.20)';
+values (''288777'', ''288777444687'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''288777444687'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-OCT-20'', ''02-OCT-20'', ''01-OCT-20'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''288777'', ''288777444687'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-OCT-20'', ''02-OCT-20'', ''01-OCT-20'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''288777444687'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''288777'', ''288777444687'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''288777444687'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''02-OCT-20'', ''01-NOV-20'', ''01-NOV-20'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''288777'', ''288777444687'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''02-OCT-20'', ''01-NOV-20'', ''01-NOV-20'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''288777444687'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''288777'', ''288777444687'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''288777444687'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''2.99'', 0.20)';
+values (''288777'', ''288777444687'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''288777444687'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-AUG-20'', ''30-AUG-20'', ''01-AUG-20'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''288777'', ''288777444687'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-AUG-20'', ''30-AUG-20'', ''01-AUG-20'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''288777444687'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''30-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''288777'', ''288777444687'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''30-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''288777444687'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-SEP-20'', ''16-SEP-20'', ''01-SEP-20'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''288777'', ''288777444687'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-SEP-20'', ''16-SEP-20'', ''01-SEP-20'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''288777444687'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''16-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''288777'', ''288777444687'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''16-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''288777444687'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''288777'', ''288777444687'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''288777444687'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''288777'', ''288777444687'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''288777444687'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''288777'', ''288777444687'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''288777444687'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''ÑÌÑ'', 4672.00, 0.00, 14009.32, ''2.99'', 0.20)';
+values (''288777'', ''288777444687'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''ï¿½ï¿½ï¿½'', 4672.00, 0.00, 14009.32, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''288777444687'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''Çâîíêè'', 4672.00, 0.00, 9190.49, ''1.96'', 0.20)';
+values (''288777'', ''288777444687'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 4672.00, 0.00, 9190.49, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''288777444687'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''16-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''Çâîíêè'', 2336.00, 0.00, 5279.36, ''2.26'', 0.20)';
+values (''288777'', ''288777444687'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''16-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 2336.00, 0.00, 5279.36, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''288777444687'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''ÑÌÑ'', 4828.00, 0.00, 15111.64, ''3.13'', 0.20)';
+values (''288777'', ''288777444687'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''ï¿½ï¿½ï¿½'', 4828.00, 0.00, 15111.64, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''288777444687'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''Çâîíêè'', 4828.00, 0.00, 10911.28, ''2.26'', 0.20)';
+values (''288777'', ''288777444687'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 4828.00, 0.00, 10911.28, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''288777444687'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-AUG-20'', ''30-AUG-20'', ''01-AUG-20'', ''ÑÌÑ'', 4517.00, 0.00, 14138.21, ''3.13'', 0.20)';
+values (''288777'', ''288777444687'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-AUG-20'', ''30-AUG-20'', ''01-AUG-20'', ''ï¿½ï¿½ï¿½'', 4517.00, 0.00, 14138.21, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''288777444687'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''01-AUG-20'', ''30-AUG-20'', ''01-AUG-20'', ''Çâîíêè'', 4517.00, 0.00, 10208.42, ''2.26'', 0.20)';
+values (''288777'', ''288777444687'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-AUG-20'', ''30-AUG-20'', ''01-AUG-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 4517.00, 0.00, 10208.42, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''288777'', ''288777444687'', ''ÎÎÎ "ÑÒÐÎÉÀÉÒÈÑÅÐÂÈÑ"'', ''16-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''ÑÌÑ'', 2336.00, 0.00, 7311.68, ''3.13'', 0.20)';
+values (''288777'', ''288777444687'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''16-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''ï¿½ï¿½ï¿½'', 2336.00, 0.00, 7311.68, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111619004505'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''Çâîíêè'', 601.00, 0.00, 1358.26, ''2.26'', 0.20)';
+values (''4011161'', ''40111619004505'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 601.00, 0.00, 1358.26, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111619004505'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''Äåíåæíûå ïåðåâîäû'', 601.00, 0.00, 1358.26, ''2.26'', 0.20)';
+values (''4011161'', ''40111619004505'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 601.00, 0.00, 1358.26, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111619004505'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''Çâîíêè'', 608.00, 0.00, 1374.08, ''2.26'', 0.20)';
+values (''4011161'', ''40111619004505'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 608.00, 0.00, 1374.08, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111619004505'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''Äåíåæíûå ïåðåâîäû'', 608.00, 0.00, 1374.08, ''2.26'', 0.20)';
+values (''4011161'', ''40111619004505'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 608.00, 0.00, 1374.08, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111619004505'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''Çâîíêè'', 1525.00, 0.00, 2999.89, ''1.96'', 0.20)';
+values (''4011161'', ''40111619004505'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 1525.00, 0.00, 2999.89, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111619004505'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''Äåíåæíûå ïåðåâîäû'', 1525.00, 0.00, 2999.89, ''1.96'', 0.20)';
+values (''4011161'', ''40111619004505'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 1525.00, 0.00, 2999.89, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111619004505'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''Çâîíêè'', 1465.00, 0.00, 3310.90, ''2.26'', 0.20)';
+values (''4011161'', ''40111619004505'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 1465.00, 0.00, 3310.90, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111619004505'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''Äåíåæíûå ïåðåâîäû'', 1465.00, 0.00, 3310.90, ''2.26'', 0.20)';
+values (''4011161'', ''40111619004505'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 1465.00, 0.00, 3310.90, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111619004505'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''Çâîíêè'', 621.00, 0.00, 1403.46, ''2.26'', 0.20)';
+values (''4011161'', ''40111619004505'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 621.00, 0.00, 1403.46, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111619004505'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''Äåíåæíûå ïåðåâîäû'', 621.00, 0.00, 1403.46, ''2.26'', 0.20)';
+values (''4011161'', ''40111619004505'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 621.00, 0.00, 1403.46, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111619004505'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''Çâîíêè'', 609.00, 0.00, 1376.34, ''2.26'', 0.20)';
+values (''4011161'', ''40111619004505'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 609.00, 0.00, 1376.34, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111619004505'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''Äåíåæíûå ïåðåâîäû'', 609.00, 0.00, 1376.34, ''2.26'', 0.20)';
+values (''4011161'', ''40111619004505'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 609.00, 0.00, 1376.34, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111619004505'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''Çâîíêè'', 608.00, 0.00, 1374.08, ''2.26'', 0.20)';
+values (''4011161'', ''40111619004505'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 608.00, 0.00, 1374.08, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111619004505'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''Äåíåæíûå ïåðåâîäû'', 608.00, 0.00, 1374.08, ''2.26'', 0.20)';
+values (''4011161'', ''40111619004505'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 608.00, 0.00, 1374.08, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111619004505'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''Çâîíêè'', 608.00, 0.00, 1374.08, ''2.26'', 0.20)';
+values (''4011161'', ''40111619004505'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 608.00, 0.00, 1374.08, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111619004505'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''Äåíåæíûå ïåðåâîäû'', 608.00, 0.00, 1374.08, ''2.26'', 0.20)';
+values (''4011161'', ''40111619004505'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 608.00, 0.00, 1374.08, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111619004505'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''Çâîíêè'', 608.00, 0.00, 1374.08, ''2.26'', 0.20)';
+values (''4011161'', ''40111619004505'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 608.00, 0.00, 1374.08, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111619004505'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''Äåíåæíûå ïåðåâîäû'', 608.00, 0.00, 1374.08, ''2.26'', 0.20)';
+values (''4011161'', ''40111619004505'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 608.00, 0.00, 1374.08, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111619004505'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''2.99'', 0.20)';
+values (''4011161'', ''40111619004505'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111619004505'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''2.99'', 0.20)';
+values (''4011161'', ''40111619004505'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111619004505'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''Çâîíêè'', 0.00, 0.00, 0.00, ''1.96'', 0.20)';
+values (''4011161'', ''40111619004505'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111619004505'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''Äåíåæíûå ïåðåâîäû'', 0.00, 0.00, 0.00, ''1.96'', 0.20)';
+values (''4011161'', ''40111619004505'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111619004505'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''40111619004505'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111619004505'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''40111619004505'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111619004505'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''40111619004505'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111619004505'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''40111619004505'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111619004505'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''40111619004505'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111619004505'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''40111619004505'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111619004505'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''40111619004505'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111619004505'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''40111619004505'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111619004505'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''40111619004505'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111619004505'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''40111619004505'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111619004505'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''40111619004505'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111619004505'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''40111619004505'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111619004505'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''40111619004505'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111619004505'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''40111619004505'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111619004505'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''2.99'', 0.20)';
+values (''4011161'', ''40111619004505'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111619004505'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''2.99'', 0.20)';
+values (''4011161'', ''40111619004505'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111619004505'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''40111619004505'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111619004505'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''40111619004505'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111619004690'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-SEP-20'', ''02-SEP-20'', ''01-SEP-20'', ''Äåíåæíûå ïåðåâîäû'', 5.00, 0.00, 11.30, ''2.26'', 0.20)';
+values (''4011161'', ''40111619004690'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-SEP-20'', ''02-SEP-20'', ''01-SEP-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 5.00, 0.00, 11.30, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111619004690'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''02-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''Çâîíêè'', 170.00, 0.00, 384.20, ''2.26'', 0.20)';
+values (''4011161'', ''40111619004690'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''02-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 170.00, 0.00, 384.20, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111619004690'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''02-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''Äåíåæíûå ïåðåâîäû'', 170.00, 0.00, 384.20, ''2.26'', 0.20)';
+values (''4011161'', ''40111619004690'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''02-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 170.00, 0.00, 384.20, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111619004690'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-SEP-20'', ''02-SEP-20'', ''01-SEP-20'', ''Çâîíêè'', 5.00, 0.00, 11.30, ''2.26'', 0.20)';
+values (''4011161'', ''40111619004690'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-SEP-20'', ''02-SEP-20'', ''01-SEP-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 5.00, 0.00, 11.30, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111619004690'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''Çâîíêè'', 178.00, 0.00, 402.28, ''2.26'', 0.20)';
+values (''4011161'', ''40111619004690'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 178.00, 0.00, 402.28, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111619004690'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''Äåíåæíûå ïåðåâîäû'', 178.00, 0.00, 402.28, ''2.26'', 0.20)';
+values (''4011161'', ''40111619004690'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 178.00, 0.00, 402.28, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111619004690'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''Çâîíêè'', 848.00, 0.00, 1668.13, ''1.96'', 0.20)';
+values (''4011161'', ''40111619004690'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 848.00, 0.00, 1668.13, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111619004690'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''Äåíåæíûå ïåðåâîäû'', 848.00, 0.00, 1668.13, ''1.96'', 0.20)';
+values (''4011161'', ''40111619004690'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 848.00, 0.00, 1668.13, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111619004690'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-JUL-20'', ''02-JUL-20'', ''01-JUL-20'', ''Çâîíêè'', 27.00, 0.00, 61.02, ''2.26'', 0.20)';
+values (''4011161'', ''40111619004690'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUL-20'', ''02-JUL-20'', ''01-JUL-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 27.00, 0.00, 61.02, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111619004690'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-JUL-20'', ''02-JUL-20'', ''01-JUL-20'', ''Äåíåæíûå ïåðåâîäû'', 27.00, 0.00, 61.02, ''2.26'', 0.20)';
+values (''4011161'', ''40111619004690'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUL-20'', ''02-JUL-20'', ''01-JUL-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 27.00, 0.00, 61.02, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111619004690'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''02-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''Çâîíêè'', 832.00, 0.00, 1880.32, ''2.26'', 0.20)';
+values (''4011161'', ''40111619004690'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''02-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 832.00, 0.00, 1880.32, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111619004690'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''02-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''Äåíåæíûå ïåðåâîäû'', 832.00, 0.00, 1880.32, ''2.26'', 0.20)';
+values (''4011161'', ''40111619004690'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''02-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 832.00, 0.00, 1880.32, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111619004690'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''Çâîíêè'', 181.00, 0.00, 409.06, ''2.26'', 0.20)';
+values (''4011161'', ''40111619004690'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 181.00, 0.00, 409.06, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111619004690'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''Äåíåæíûå ïåðåâîäû'', 181.00, 0.00, 409.06, ''2.26'', 0.20)';
+values (''4011161'', ''40111619004690'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 181.00, 0.00, 409.06, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111619004690'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''Çâîíêè'', 178.00, 0.00, 402.28, ''2.26'', 0.20)';
+values (''4011161'', ''40111619004690'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 178.00, 0.00, 402.28, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111619004690'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''Äåíåæíûå ïåðåâîäû'', 178.00, 0.00, 402.28, ''2.26'', 0.20)';
+values (''4011161'', ''40111619004690'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 178.00, 0.00, 402.28, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111619004690'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''Çâîíêè'', 178.00, 0.00, 402.28, ''2.26'', 0.20)';
+values (''4011161'', ''40111619004690'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 178.00, 0.00, 402.28, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111619004690'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''Äåíåæíûå ïåðåâîäû'', 178.00, 0.00, 402.28, ''2.26'', 0.20)';
+values (''4011161'', ''40111619004690'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 178.00, 0.00, 402.28, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111619004690'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''Çâîíêè'', 178.00, 0.00, 402.28, ''2.26'', 0.20)';
+values (''4011161'', ''40111619004690'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 178.00, 0.00, 402.28, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111619004690'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''Äåíåæíûå ïåðåâîäû'', 178.00, 0.00, 402.28, ''2.26'', 0.20)';
+values (''4011161'', ''40111619004690'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 178.00, 0.00, 402.28, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111619004690'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''Çâîíêè'', 178.00, 0.00, 402.28, ''2.26'', 0.20)';
+values (''4011161'', ''40111619004690'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 178.00, 0.00, 402.28, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111619004690'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''Äåíåæíûå ïåðåâîäû'', 178.00, 0.00, 402.28, ''2.26'', 0.20)';
+values (''4011161'', ''40111619004690'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 178.00, 0.00, 402.28, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111619004690'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''2.99'', 0.20)';
+values (''4011161'', ''40111619004690'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111619004690'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''2.99'', 0.20)';
+values (''4011161'', ''40111619004690'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111619004690'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-JAN-20'', ''01-FEB-20'', ''01-MAY-20'', ''Çâîíêè'', 9702.00, 0.00, 19085.22, ''1.96'', 0.20)';
+values (''4011161'', ''40111619004690'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JAN-20'', ''01-FEB-20'', ''01-MAY-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 9702.00, 0.00, 19085.22, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111619004690'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-JAN-20'', ''01-FEB-20'', ''01-MAY-20'', ''Äåíåæíûå ïåðåâîäû'', 4864.00, 0.00, 9568.18, ''1.96'', 0.20)';
+values (''4011161'', ''40111619004690'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JAN-20'', ''01-FEB-20'', ''01-MAY-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 4864.00, 0.00, 9568.18, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111619004690'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-FEB-20'', ''01-MAR-20'', ''01-MAY-20'', ''Çâîíêè'', 8550.00, 0.00, 16819.07, ''1.96'', 0.20)';
+values (''4011161'', ''40111619004690'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-20'', ''01-MAR-20'', ''01-MAY-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 8550.00, 0.00, 16819.07, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111619004690'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-FEB-20'', ''01-MAR-20'', ''01-MAY-20'', ''Äåíåæíûå ïåðåâîäû'', 4287.00, 0.00, 8433.14, ''1.96'', 0.20)';
+values (''4011161'', ''40111619004690'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-20'', ''01-MAR-20'', ''01-MAY-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 4287.00, 0.00, 8433.14, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111619004690'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-MAR-20'', ''01-APR-20'', ''01-MAY-20'', ''Çâîíêè'', 8676.00, 0.00, 17066.93, ''1.96'', 0.20)';
+values (''4011161'', ''40111619004690'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-MAR-20'', ''01-APR-20'', ''01-MAY-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 8676.00, 0.00, 17066.93, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111619004690'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-MAR-20'', ''01-APR-20'', ''01-MAY-20'', ''Äåíåæíûå ïåðåâîäû'', 4350.00, 0.00, 8557.07, ''1.96'', 0.20)';
+values (''4011161'', ''40111619004690'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-MAR-20'', ''01-APR-20'', ''01-MAY-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 4350.00, 0.00, 8557.07, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111619004690'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-APR-20'', ''01-MAY-20'', ''01-MAY-20'', ''Çâîíêè'', 0.00, 0.00, 0.00, ''1.96'', 0.20)';
+values (''4011161'', ''40111619004690'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-APR-20'', ''01-MAY-20'', ''01-MAY-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111619004690'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-APR-20'', ''01-MAY-20'', ''01-MAY-20'', ''Äåíåæíûå ïåðåâîäû'', 4592.00, 0.00, 9033.12, ''1.96'', 0.20)';
+values (''4011161'', ''40111619004690'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-APR-20'', ''01-MAY-20'', ''01-MAY-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 4592.00, 0.00, 9033.12, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111619004690'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''Çâîíêè'', 0.00, 0.00, 0.00, ''1.96'', 0.20)';
+values (''4011161'', ''40111619004690'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111619004690'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''Äåíåæíûå ïåðåâîäû'', 0.00, 0.00, 0.00, ''1.96'', 0.20)';
+values (''4011161'', ''40111619004690'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111619004690'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-SEP-20'', ''02-SEP-20'', ''01-SEP-20'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''40111619004690'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-SEP-20'', ''02-SEP-20'', ''01-SEP-20'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111619004690'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''02-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''40111619004690'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''02-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111619004690'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-SEP-20'', ''02-SEP-20'', ''01-SEP-20'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''40111619004690'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-SEP-20'', ''02-SEP-20'', ''01-SEP-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111619004690'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''02-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''40111619004690'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''02-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111619004690'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''40111619004690'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111619004690'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''40111619004690'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111619004690'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-APR-20'', ''01-MAY-20'', ''01-MAY-20'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''2.99'', 0.20)';
+values (''4011161'', ''40111619004690'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-APR-20'', ''01-MAY-20'', ''01-MAY-20'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111619004690'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-JAN-20'', ''01-FEB-20'', ''01-MAY-20'', ''ÑÌÑ'', 9702.00, 0.00, 29092.14, ''2.99'', 0.20)';
+values (''4011161'', ''40111619004690'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JAN-20'', ''01-FEB-20'', ''01-MAY-20'', ''ï¿½ï¿½ï¿½'', 9702.00, 0.00, 29092.14, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111619004690'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-FEB-20'', ''01-MAR-20'', ''01-MAY-20'', ''ÑÌÑ'', 8550.00, 0.00, 25637.78, ''2.99'', 0.20)';
+values (''4011161'', ''40111619004690'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-20'', ''01-MAR-20'', ''01-MAY-20'', ''ï¿½ï¿½ï¿½'', 8550.00, 0.00, 25637.78, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111619004690'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-MAR-20'', ''01-APR-20'', ''01-MAY-20'', ''ÑÌÑ'', 8676.00, 0.00, 26015.60, ''2.99'', 0.20)';
+values (''4011161'', ''40111619004690'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-MAR-20'', ''01-APR-20'', ''01-MAY-20'', ''ï¿½ï¿½ï¿½'', 8676.00, 0.00, 26015.60, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111619004690'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-JAN-20'', ''01-FEB-20'', ''01-MAY-20'', ''Èíòåðíåò'', 4864.00, 0.00, 14585.05, ''2.99'', 0.20)';
+values (''4011161'', ''40111619004690'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JAN-20'', ''01-FEB-20'', ''01-MAY-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 4864.00, 0.00, 14585.05, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111619004690'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-FEB-20'', ''01-MAR-20'', ''01-MAY-20'', ''Èíòåðíåò'', 4287.00, 0.00, 12854.87, ''2.99'', 0.20)';
+values (''4011161'', ''40111619004690'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-20'', ''01-MAR-20'', ''01-MAY-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 4287.00, 0.00, 12854.87, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111619004690'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-MAR-20'', ''01-APR-20'', ''01-MAY-20'', ''Èíòåðíåò'', 4350.00, 0.00, 13043.78, ''2.99'', 0.20)';
+values (''4011161'', ''40111619004690'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-MAR-20'', ''01-APR-20'', ''01-MAY-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 4350.00, 0.00, 13043.78, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111619004690'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-APR-20'', ''01-MAY-20'', ''01-MAY-20'', ''Èíòåðíåò'', 4592.00, 0.00, 13769.44, ''2.99'', 0.20)';
+values (''4011161'', ''40111619004690'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-APR-20'', ''01-MAY-20'', ''01-MAY-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 4592.00, 0.00, 13769.44, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111619004690'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-JUL-20'', ''02-JUL-20'', ''01-JUL-20'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''40111619004690'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUL-20'', ''02-JUL-20'', ''01-JUL-20'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111619004690'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''02-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''40111619004690'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''02-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111619004690'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-JUL-20'', ''02-JUL-20'', ''01-JUL-20'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''40111619004690'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUL-20'', ''02-JUL-20'', ''01-JUL-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111619004690'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''02-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''40111619004690'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''02-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111619004690'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''40111619004690'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111619004690'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''40111619004690'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111619004690'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''40111619004690'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111619004690'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''40111619004690'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111619004690'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''40111619004690'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111619004690'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''40111619004690'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111619004690'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''40111619004690'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111619004690'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''40111619004690'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111619004690'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''2.99'', 0.20)';
+values (''4011161'', ''40111619004690'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111619004690'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''2.99'', 0.20)';
+values (''4011161'', ''40111619004690'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111619004690'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''40111619004690'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111619004690'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''40111619004690'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111619008542'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''Çâîíêè'', 1194.00, 0.00, 2348.76, ''1.96'', 0.20)';
+values (''4011161'', ''40111619008542'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 1194.00, 0.00, 2348.76, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111619008542'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''Äåíåæíûå ïåðåâîäû'', 1194.00, 0.00, 2348.76, ''1.96'', 0.20)';
+values (''4011161'', ''40111619008542'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 1194.00, 0.00, 2348.76, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111619008542'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''ÑÌÑ'', 1178.00, 0.00, 3532.31, ''2.99'', 0.20)';
+values (''4011161'', ''40111619008542'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''ï¿½ï¿½ï¿½'', 1178.00, 0.00, 3532.31, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111619008542'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''Èíòåðíåò'', 1178.00, 0.00, 3532.31, ''2.99'', 0.20)';
+values (''4011161'', ''40111619008542'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 1178.00, 0.00, 3532.31, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111619008542'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''Çâîíêè'', 1178.00, 0.00, 2317.29, ''1.96'', 0.20)';
+values (''4011161'', ''40111619008542'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 1178.00, 0.00, 2317.29, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111619008542'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''Äåíåæíûå ïåðåâîäû'', 1178.00, 0.00, 2317.29, ''1.96'', 0.20)';
+values (''4011161'', ''40111619008542'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 1178.00, 0.00, 2317.29, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111619008542'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''ÑÌÑ'', 1194.00, 0.00, 3580.29, ''2.99'', 0.20)';
+values (''4011161'', ''40111619008542'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''ï¿½ï¿½ï¿½'', 1194.00, 0.00, 3580.29, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''40111619008542'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''Èíòåðíåò'', 1194.00, 0.00, 3580.29, ''2.99'', 0.20)';
+values (''4011161'', ''40111619008542'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 1194.00, 0.00, 3580.29, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161441791'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''Çâîíêè'', 128.00, 0.00, 289.28, ''2.26'', 0.20)';
+values (''4011161'', ''4011161441791'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 128.00, 0.00, 289.28, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161441791'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''Äåíåæíûå ïåðåâîäû'', 128.00, 0.00, 289.28, ''2.26'', 0.20)';
+values (''4011161'', ''4011161441791'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 128.00, 0.00, 289.28, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161441791'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''Çâîíêè'', 541.00, 0.00, 1064.22, ''1.96'', 0.20)';
+values (''4011161'', ''4011161441791'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 541.00, 0.00, 1064.22, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161441791'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''Äåíåæíûå ïåðåâîäû'', 541.00, 0.00, 1064.22, ''1.96'', 0.20)';
+values (''4011161'', ''4011161441791'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 541.00, 0.00, 1064.22, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161441791'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''Çâîíêè'', 128.00, 0.00, 289.28, ''2.26'', 0.20)';
+values (''4011161'', ''4011161441791'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 128.00, 0.00, 289.28, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161441791'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''Äåíåæíûå ïåðåâîäû'', 128.00, 0.00, 289.28, ''2.26'', 0.20)';
+values (''4011161'', ''4011161441791'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 128.00, 0.00, 289.28, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161441791'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-JUL-20'', ''02-JUL-20'', ''01-JUL-20'', ''Çâîíêè'', 17.00, 0.00, 38.42, ''2.26'', 0.20)';
+values (''4011161'', ''4011161441791'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUL-20'', ''02-JUL-20'', ''01-JUL-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 17.00, 0.00, 38.42, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161441791'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-JUL-20'', ''02-JUL-20'', ''01-JUL-20'', ''Äåíåæíûå ïåðåâîäû'', 17.00, 0.00, 38.42, ''2.26'', 0.20)';
+values (''4011161'', ''4011161441791'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUL-20'', ''02-JUL-20'', ''01-JUL-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 17.00, 0.00, 38.42, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161441791'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''02-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''Çâîíêè'', 531.00, 0.00, 1200.06, ''2.26'', 0.20)';
+values (''4011161'', ''4011161441791'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''02-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 531.00, 0.00, 1200.06, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161441791'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''02-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''Äåíåæíûå ïåðåâîäû'', 531.00, 0.00, 1200.06, ''2.26'', 0.20)';
+values (''4011161'', ''4011161441791'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''02-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 531.00, 0.00, 1200.06, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161441791'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''Çâîíêè'', 131.00, 0.00, 296.06, ''2.26'', 0.20)';
+values (''4011161'', ''4011161441791'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 131.00, 0.00, 296.06, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161441791'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''Äåíåæíûå ïåðåâîäû'', 131.00, 0.00, 296.06, ''2.26'', 0.20)';
+values (''4011161'', ''4011161441791'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 131.00, 0.00, 296.06, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161441791'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-SEP-20'', ''03-SEP-20'', ''01-SEP-20'', ''Çâîíêè'', 8.00, 0.00, 18.08, ''2.26'', 0.20)';
+values (''4011161'', ''4011161441791'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-SEP-20'', ''03-SEP-20'', ''01-SEP-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 8.00, 0.00, 18.08, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161441791'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-SEP-20'', ''03-SEP-20'', ''01-SEP-20'', ''Äåíåæíûå ïåðåâîäû'', 8.00, 0.00, 18.08, ''2.26'', 0.20)';
+values (''4011161'', ''4011161441791'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-SEP-20'', ''03-SEP-20'', ''01-SEP-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 8.00, 0.00, 18.08, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161441791'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''03-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''Çâîíêè'', 118.00, 0.00, 266.68, ''2.26'', 0.20)';
+values (''4011161'', ''4011161441791'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''03-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 118.00, 0.00, 266.68, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161441791'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''03-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''Äåíåæíûå ïåðåâîäû'', 118.00, 0.00, 266.68, ''2.26'', 0.20)';
+values (''4011161'', ''4011161441791'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''03-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 118.00, 0.00, 266.68, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161441791'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''Çâîíêè'', 128.00, 0.00, 289.28, ''2.26'', 0.20)';
+values (''4011161'', ''4011161441791'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 128.00, 0.00, 289.28, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161441791'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''Äåíåæíûå ïåðåâîäû'', 128.00, 0.00, 289.28, ''2.26'', 0.20)';
+values (''4011161'', ''4011161441791'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 128.00, 0.00, 289.28, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161441791'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''Çâîíêè'', 128.00, 0.00, 289.28, ''2.26'', 0.20)';
+values (''4011161'', ''4011161441791'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 128.00, 0.00, 289.28, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161441791'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''Äåíåæíûå ïåðåâîäû'', 128.00, 0.00, 289.28, ''2.26'', 0.20)';
+values (''4011161'', ''4011161441791'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 128.00, 0.00, 289.28, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161441791'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''Çâîíêè'', 128.00, 0.00, 289.28, ''2.26'', 0.20)';
+values (''4011161'', ''4011161441791'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 128.00, 0.00, 289.28, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161441791'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''Äåíåæíûå ïåðåâîäû'', 128.00, 0.00, 289.28, ''2.26'', 0.20)';
+values (''4011161'', ''4011161441791'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 128.00, 0.00, 289.28, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161441791'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''Çâîíêè'', 0.00, 0.00, 0.00, ''1.96'', 0.20)';
+values (''4011161'', ''4011161441791'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161441791'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''Äåíåæíûå ïåðåâîäû'', 0.00, 0.00, 0.00, ''1.96'', 0.20)';
+values (''4011161'', ''4011161441791'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161441791'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''4011161441791'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161441791'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''4011161441791'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161441791'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''4011161441791'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161441791'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''4011161441791'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161441791'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''2.99'', 0.20)';
+values (''4011161'', ''4011161441791'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161441791'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''2.99'', 0.20)';
+values (''4011161'', ''4011161441791'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161441791'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-JUL-20'', ''02-JUL-20'', ''01-JUL-20'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''4011161441791'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUL-20'', ''02-JUL-20'', ''01-JUL-20'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161441791'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''02-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''4011161441791'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''02-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161441791'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-JUL-20'', ''02-JUL-20'', ''01-JUL-20'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''4011161441791'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUL-20'', ''02-JUL-20'', ''01-JUL-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161441791'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''02-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''Èíòåðíåò'', 1081.00, 0.00, 3383.53, ''3.13'', 0.20)';
+values (''4011161'', ''4011161441791'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''02-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 1081.00, 0.00, 3383.53, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161441791'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-SEP-20'', ''03-SEP-20'', ''01-SEP-20'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''4011161441791'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-SEP-20'', ''03-SEP-20'', ''01-SEP-20'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161441791'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''03-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''4011161441791'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''03-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161441791'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-SEP-20'', ''03-SEP-20'', ''01-SEP-20'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''4011161441791'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-SEP-20'', ''03-SEP-20'', ''01-SEP-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161441791'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''03-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''4011161441791'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''03-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161441791'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''4011161441791'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161441791'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''4011161441791'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161441791'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''4011161441791'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161441791'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''4011161441791'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161441791'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''4011161441791'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161441791'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''4011161441791'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161441791'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''2.99'', 0.20)';
+values (''4011161'', ''4011161441791'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161441791'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''2.99'', 0.20)';
+values (''4011161'', ''4011161441791'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161441791'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''4011161441791'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161441791'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''4011161441791'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161545976'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''Çâîíêè'', 90.00, 0.00, 203.40, ''2.26'', 0.20)';
+values (''4011161'', ''4011161545976'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 90.00, 0.00, 203.40, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161545976'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''Äåíåæíûå ïåðåâîäû'', 90.00, 0.00, 203.40, ''2.26'', 0.20)';
+values (''4011161'', ''4011161545976'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 90.00, 0.00, 203.40, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161545976'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''Çâîíêè'', 91.00, 0.00, 205.66, ''2.26'', 0.20)';
+values (''4011161'', ''4011161545976'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 91.00, 0.00, 205.66, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161545976'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''Äåíåæíûå ïåðåâîäû'', 91.00, 0.00, 205.66, ''2.26'', 0.20)';
+values (''4011161'', ''4011161545976'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 91.00, 0.00, 205.66, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161545976'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''Çâîíêè'', 1063.00, 0.00, 2091.07, ''1.96'', 0.20)';
+values (''4011161'', ''4011161545976'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 1063.00, 0.00, 2091.07, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161545976'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''Äåíåæíûå ïåðåâîäû'', 1063.00, 0.00, 2091.07, ''1.96'', 0.20)';
+values (''4011161'', ''4011161545976'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 1063.00, 0.00, 2091.07, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161545976'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''Çâîíêè'', 91.00, 0.00, 205.66, ''2.26'', 0.20)';
+values (''4011161'', ''4011161545976'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 91.00, 0.00, 205.66, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161545976'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''Äåíåæíûå ïåðåâîäû'', 91.00, 0.00, 205.66, ''2.26'', 0.20)';
+values (''4011161'', ''4011161545976'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 91.00, 0.00, 205.66, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161545976'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''Çâîíêè'', 1098.00, 0.00, 2481.48, ''2.26'', 0.20)';
+values (''4011161'', ''4011161545976'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 1098.00, 0.00, 2481.48, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161545976'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''Äåíåæíûå ïåðåâîäû'', 1098.00, 0.00, 2481.48, ''2.26'', 0.20)';
+values (''4011161'', ''4011161545976'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 1098.00, 0.00, 2481.48, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161545976'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''Çâîíêè'', 93.00, 0.00, 210.18, ''2.26'', 0.20)';
+values (''4011161'', ''4011161545976'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 93.00, 0.00, 210.18, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161545976'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''Äåíåæíûå ïåðåâîäû'', 93.00, 0.00, 210.18, ''2.26'', 0.20)';
+values (''4011161'', ''4011161545976'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 93.00, 0.00, 210.18, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161545976'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''Çâîíêè'', 91.00, 0.00, 205.66, ''2.26'', 0.20)';
+values (''4011161'', ''4011161545976'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 91.00, 0.00, 205.66, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161545976'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''Äåíåæíûå ïåðåâîäû'', 91.00, 0.00, 205.66, ''2.26'', 0.20)';
+values (''4011161'', ''4011161545976'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 91.00, 0.00, 205.66, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161545976'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''Çâîíêè'', 91.00, 0.00, 205.66, ''2.26'', 0.20)';
+values (''4011161'', ''4011161545976'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 91.00, 0.00, 205.66, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161545976'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''Äåíåæíûå ïåðåâîäû'', 91.00, 0.00, 205.66, ''2.26'', 0.20)';
+values (''4011161'', ''4011161545976'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 91.00, 0.00, 205.66, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161545976'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''Çâîíêè'', 91.00, 0.00, 205.66, ''2.26'', 0.20)';
+values (''4011161'', ''4011161545976'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 91.00, 0.00, 205.66, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161545976'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''Äåíåæíûå ïåðåâîäû'', 91.00, 0.00, 205.66, ''2.26'', 0.20)';
+values (''4011161'', ''4011161545976'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 91.00, 0.00, 205.66, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161545976'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''4011161545976'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161545976'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''4011161545976'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161545976'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''4011161545976'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161545976'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''4011161545976'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161545976'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''4011161545976'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161545976'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''Èíòåðíåò'', 136.00, 0.00, 425.68, ''3.13'', 0.20)';
+values (''4011161'', ''4011161545976'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 136.00, 0.00, 425.68, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161545976'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''4011161545976'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161545976'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''4011161545976'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161545976'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''4011161545976'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161545976'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''4011161545976'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161545976'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''4011161545976'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161545976'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''4011161545976'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161545976'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''4011161545976'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161545976'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''4011161545976'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161141792'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-SEP-20'', ''02-SEP-20'', ''01-SEP-20'', ''Çâîíêè'', 4.00, 0.00, 9.04, ''2.26'', 0.20)';
+values (''4011161'', ''4011161141792'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-SEP-20'', ''02-SEP-20'', ''01-SEP-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 4.00, 0.00, 9.04, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161141792'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-SEP-20'', ''02-SEP-20'', ''01-SEP-20'', ''Äåíåæíûå ïåðåâîäû'', 4.00, 0.00, 9.04, ''2.26'', 0.20)';
+values (''4011161'', ''4011161141792'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-SEP-20'', ''02-SEP-20'', ''01-SEP-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 4.00, 0.00, 9.04, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161141792'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''02-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''Çâîíêè'', 122.00, 0.00, 275.72, ''2.26'', 0.20)';
+values (''4011161'', ''4011161141792'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''02-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 122.00, 0.00, 275.72, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161141792'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''02-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''Äåíåæíûå ïåðåâîäû'', 122.00, 0.00, 275.72, ''2.26'', 0.20)';
+values (''4011161'', ''4011161141792'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''02-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 122.00, 0.00, 275.72, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161141792'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-OCT-20'', ''29-OCT-20'', ''01-OCT-20'', ''Çâîíêè'', 116.00, 0.00, 262.16, ''2.26'', 0.20)';
+values (''4011161'', ''4011161141792'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-OCT-20'', ''29-OCT-20'', ''01-OCT-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 116.00, 0.00, 262.16, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161141792'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-OCT-20'', ''29-OCT-20'', ''01-OCT-20'', ''Äåíåæíûå ïåðåâîäû'', 116.00, 0.00, 262.16, ''2.26'', 0.20)';
+values (''4011161'', ''4011161141792'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-OCT-20'', ''29-OCT-20'', ''01-OCT-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 116.00, 0.00, 262.16, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161141792'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''29-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''Çâîíêè'', 12.00, 0.00, 27.12, ''2.26'', 0.20)';
+values (''4011161'', ''4011161141792'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''29-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 12.00, 0.00, 27.12, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161141792'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''29-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''Äåíåæíûå ïåðåâîäû'', 12.00, 0.00, 27.12, ''2.26'', 0.20)';
+values (''4011161'', ''4011161141792'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''29-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 12.00, 0.00, 27.12, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161141792'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''Çâîíêè'', 497.00, 0.00, 977.67, ''1.96'', 0.20)';
+values (''4011161'', ''4011161141792'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 497.00, 0.00, 977.67, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161141792'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''Äåíåæíûå ïåðåâîäû'', 497.00, 0.00, 977.67, ''1.96'', 0.20)';
+values (''4011161'', ''4011161141792'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 497.00, 0.00, 977.67, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161141792'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''Çâîíêè'', 128.00, 0.00, 289.28, ''2.26'', 0.20)';
+values (''4011161'', ''4011161141792'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 128.00, 0.00, 289.28, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161141792'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''Äåíåæíûå ïåðåâîäû'', 128.00, 0.00, 289.28, ''2.26'', 0.20)';
+values (''4011161'', ''4011161141792'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 128.00, 0.00, 289.28, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161141792'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-JUL-20'', ''02-JUL-20'', ''01-JUL-20'', ''Çâîíêè'', 16.00, 0.00, 36.16, ''2.26'', 0.20)';
+values (''4011161'', ''4011161141792'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUL-20'', ''02-JUL-20'', ''01-JUL-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 16.00, 0.00, 36.16, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161141792'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-JUL-20'', ''02-JUL-20'', ''01-JUL-20'', ''Äåíåæíûå ïåðåâîäû'', 16.00, 0.00, 36.16, ''2.26'', 0.20)';
+values (''4011161'', ''4011161141792'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUL-20'', ''02-JUL-20'', ''01-JUL-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 16.00, 0.00, 36.16, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161141792'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''02-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''Çâîíêè'', 487.00, 0.00, 1100.62, ''2.26'', 0.20)';
+values (''4011161'', ''4011161141792'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''02-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 487.00, 0.00, 1100.62, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161141792'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''02-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''Äåíåæíûå ïåðåâîäû'', 487.00, 0.00, 1100.62, ''2.26'', 0.20)';
+values (''4011161'', ''4011161141792'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''02-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 487.00, 0.00, 1100.62, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161141792'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''Çâîíêè'', 131.00, 0.00, 296.06, ''2.26'', 0.20)';
+values (''4011161'', ''4011161141792'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 131.00, 0.00, 296.06, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161141792'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''Äåíåæíûå ïåðåâîäû'', 131.00, 0.00, 296.06, ''2.26'', 0.20)';
+values (''4011161'', ''4011161141792'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 131.00, 0.00, 296.06, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161141792'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''Çâîíêè'', 128.00, 0.00, 289.28, ''2.26'', 0.20)';
+values (''4011161'', ''4011161141792'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 128.00, 0.00, 289.28, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161141792'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''Äåíåæíûå ïåðåâîäû'', 128.00, 0.00, 289.28, ''2.26'', 0.20)';
+values (''4011161'', ''4011161141792'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 128.00, 0.00, 289.28, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161141792'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''Çâîíêè'', 128.00, 0.00, 289.28, ''2.26'', 0.20)';
+values (''4011161'', ''4011161141792'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 128.00, 0.00, 289.28, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161141792'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''Äåíåæíûå ïåðåâîäû'', 128.00, 0.00, 289.28, ''2.26'', 0.20)';
+values (''4011161'', ''4011161141792'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 128.00, 0.00, 289.28, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161141792'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''Çâîíêè'', 128.00, 0.00, 289.28, ''2.26'', 0.20)';
+values (''4011161'', ''4011161141792'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 128.00, 0.00, 289.28, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161141792'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''Äåíåæíûå ïåðåâîäû'', 128.00, 0.00, 289.28, ''2.26'', 0.20)';
+values (''4011161'', ''4011161141792'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 128.00, 0.00, 289.28, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161141792'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''Çâîíêè'', 0.00, 0.00, 0.00, ''1.96'', 0.20)';
+values (''4011161'', ''4011161141792'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161141792'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''Äåíåæíûå ïåðåâîäû'', 0.00, 0.00, 0.00, ''1.96'', 0.20)';
+values (''4011161'', ''4011161141792'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161141792'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-OCT-20'', ''29-OCT-20'', ''01-OCT-20'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''4011161141792'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-OCT-20'', ''29-OCT-20'', ''01-OCT-20'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161141792'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''29-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''4011161141792'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''29-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161141792'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-OCT-20'', ''29-OCT-20'', ''01-OCT-20'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''4011161141792'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-OCT-20'', ''29-OCT-20'', ''01-OCT-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161141792'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''29-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''4011161141792'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''29-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161141792'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''4011161141792'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161141792'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''4011161141792'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161141792'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''2.99'', 0.20)';
+values (''4011161'', ''4011161141792'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161141792'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''2.99'', 0.20)';
+values (''4011161'', ''4011161141792'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-MAY-20'', ''01-JUN-20'', ''01-MAY-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161141792'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-JUL-20'', ''02-JUL-20'', ''01-JUL-20'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''4011161141792'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUL-20'', ''02-JUL-20'', ''01-JUL-20'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161141792'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''02-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''4011161141792'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''02-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161141792'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-JUL-20'', ''02-JUL-20'', ''01-JUL-20'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''4011161141792'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUL-20'', ''02-JUL-20'', ''01-JUL-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161141792'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''02-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''Èíòåðíåò'', 1904.00, 0.00, 5959.52, ''3.13'', 0.20)';
+values (''4011161'', ''4011161141792'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''02-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 1904.00, 0.00, 5959.52, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161141792'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-SEP-20'', ''02-SEP-20'', ''01-SEP-20'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''4011161141792'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-SEP-20'', ''02-SEP-20'', ''01-SEP-20'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161141792'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''02-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''4011161141792'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''02-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161141792'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-SEP-20'', ''02-SEP-20'', ''01-SEP-20'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''4011161141792'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-SEP-20'', ''02-SEP-20'', ''01-SEP-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161141792'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''02-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''4011161141792'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''02-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161141792'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''4011161141792'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161141792'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''4011161141792'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161141792'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''4011161141792'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161141792'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''4011161141792'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161141792'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''4011161141792'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161141792'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''4011161141792'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161141792'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''2.99'', 0.20)';
+values (''4011161'', ''4011161141792'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161141792'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''2.99'', 0.20)';
+values (''4011161'', ''4011161141792'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161141792'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''4011161141792'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161141792'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''4011161141792'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161753167'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''Çâîíêè'', 78.00, 0.00, 176.28, ''2.26'', 0.20)';
+values (''4011161'', ''4011161753167'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 78.00, 0.00, 176.28, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161753167'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''Äåíåæíûå ïåðåâîäû'', 78.00, 0.00, 176.28, ''2.26'', 0.20)';
+values (''4011161'', ''4011161753167'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 78.00, 0.00, 176.28, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161753167'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''Çâîíêè'', 78.00, 0.00, 176.28, ''2.26'', 0.20)';
+values (''4011161'', ''4011161753167'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 78.00, 0.00, 176.28, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161753167'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''Äåíåæíûå ïåðåâîäû'', 78.00, 0.00, 176.28, ''2.26'', 0.20)';
+values (''4011161'', ''4011161753167'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 78.00, 0.00, 176.28, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161753167'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''Çâîíêè'', 211.00, 0.00, 476.86, ''2.26'', 0.20)';
+values (''4011161'', ''4011161753167'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 211.00, 0.00, 476.86, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161753167'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''Äåíåæíûå ïåðåâîäû'', 211.00, 0.00, 476.86, ''2.26'', 0.20)';
+values (''4011161'', ''4011161753167'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 211.00, 0.00, 476.86, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161753167'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''Çâîíêè'', 208.00, 0.00, 409.16, ''1.96'', 0.20)';
+values (''4011161'', ''4011161753167'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 208.00, 0.00, 409.16, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161753167'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''Äåíåæíûå ïåðåâîäû'', 208.00, 0.00, 409.16, ''1.96'', 0.20)';
+values (''4011161'', ''4011161753167'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 208.00, 0.00, 409.16, ''1.96'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161753167'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''Çâîíêè'', 79.00, 0.00, 178.54, ''2.26'', 0.20)';
+values (''4011161'', ''4011161753167'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 79.00, 0.00, 178.54, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161753167'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''Äåíåæíûå ïåðåâîäû'', 79.00, 0.00, 178.54, ''2.26'', 0.20)';
+values (''4011161'', ''4011161753167'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 79.00, 0.00, 178.54, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161753167'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-SEP-20'', ''02-SEP-20'', ''01-SEP-20'', ''Çâîíêè'', 2.00, 0.00, 4.52, ''2.26'', 0.20)';
+values (''4011161'', ''4011161753167'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-SEP-20'', ''02-SEP-20'', ''01-SEP-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 2.00, 0.00, 4.52, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161753167'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-SEP-20'', ''02-SEP-20'', ''01-SEP-20'', ''Äåíåæíûå ïåðåâîäû'', 2.00, 0.00, 4.52, ''2.26'', 0.20)';
+values (''4011161'', ''4011161753167'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-SEP-20'', ''02-SEP-20'', ''01-SEP-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 2.00, 0.00, 4.52, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161753167'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''02-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''Çâîíêè'', 74.00, 0.00, 167.24, ''2.26'', 0.20)';
+values (''4011161'', ''4011161753167'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''02-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 74.00, 0.00, 167.24, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161753167'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''02-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''Äåíåæíûå ïåðåâîäû'', 74.00, 0.00, 167.24, ''2.26'', 0.20)';
+values (''4011161'', ''4011161753167'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''02-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 74.00, 0.00, 167.24, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161753167'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-DEC-20'', ''23-DEC-20'', ''01-DEC-20'', ''Çâîíêè'', 55.00, 0.00, 124.30, ''2.26'', 0.20)';
+values (''4011161'', ''4011161753167'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-DEC-20'', ''23-DEC-20'', ''01-DEC-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 55.00, 0.00, 124.30, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161753167'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-DEC-20'', ''23-DEC-20'', ''01-DEC-20'', ''Äåíåæíûå ïåðåâîäû'', 55.00, 0.00, 124.30, ''2.26'', 0.20)';
+values (''4011161'', ''4011161753167'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-DEC-20'', ''23-DEC-20'', ''01-DEC-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 55.00, 0.00, 124.30, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161753167'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''23-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''Çâîíêè'', 22.00, 0.00, 49.72, ''2.26'', 0.20)';
+values (''4011161'', ''4011161753167'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''23-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 22.00, 0.00, 49.72, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161753167'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''23-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''Äåíåæíûå ïåðåâîäû'', 22.00, 0.00, 49.72, ''2.26'', 0.20)';
+values (''4011161'', ''4011161753167'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''23-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 22.00, 0.00, 49.72, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161753167'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''Çâîíêè'', 78.00, 0.00, 176.28, ''2.26'', 0.20)';
+values (''4011161'', ''4011161753167'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 78.00, 0.00, 176.28, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161753167'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''Äåíåæíûå ïåðåâîäû'', 78.00, 0.00, 176.28, ''2.26'', 0.20)';
+values (''4011161'', ''4011161753167'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 78.00, 0.00, 176.28, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161753167'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''Çâîíêè'', 78.00, 0.00, 176.28, ''2.26'', 0.20)';
+values (''4011161'', ''4011161753167'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 78.00, 0.00, 176.28, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161753167'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''Äåíåæíûå ïåðåâîäû'', 78.00, 0.00, 176.28, ''2.26'', 0.20)';
+values (''4011161'', ''4011161753167'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 78.00, 0.00, 176.28, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161753167'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''4011161753167'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161753167'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''4011161753167'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161753167'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''4011161753167'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161753167'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''4011161753167'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161753167'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-SEP-20'', ''02-SEP-20'', ''01-SEP-20'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''4011161753167'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-SEP-20'', ''02-SEP-20'', ''01-SEP-20'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161753167'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''02-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''4011161753167'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''02-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161753167'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-SEP-20'', ''02-SEP-20'', ''01-SEP-20'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''4011161753167'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-SEP-20'', ''02-SEP-20'', ''01-SEP-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161753167'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''02-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''4011161753167'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''02-SEP-20'', ''01-OCT-20'', ''01-SEP-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161753167'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''4011161753167'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161753167'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-DEC-20'', ''23-DEC-20'', ''01-DEC-20'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''4011161753167'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-DEC-20'', ''23-DEC-20'', ''01-DEC-20'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161753167'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''23-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''4011161753167'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''23-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161753167'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-DEC-20'', ''23-DEC-20'', ''01-DEC-20'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''4011161753167'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-DEC-20'', ''23-DEC-20'', ''01-DEC-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161753167'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''23-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''4011161753167'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''23-DEC-20'', ''01-JAN-21'', ''01-DEC-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161753167'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''4011161753167'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JAN-21'', ''01-FEB-21'', ''01-JAN-21'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161753167'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''4011161753167'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161753167'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''4011161753167'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-FEB-21'', ''01-MAR-21'', ''01-FEB-21'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161753167'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''4011161753167'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161753167'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''4011161753167'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUL-20'', ''01-AUG-20'', ''01-JUL-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161753167'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''2.99'', 0.20)';
+values (''4011161'', ''4011161753167'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161753167'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''Èíòåðíåò'', 1679.00, 0.00, 5034.60, ''2.99'', 0.20)';
+values (''4011161'', ''4011161753167'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-JUN-20'', ''01-JUL-20'', ''01-JUN-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 1679.00, 0.00, 5034.60, ''2.99'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161753167'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''ÑÌÑ'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''4011161753167'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161753167'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''Èíòåðíåò'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
+values (''4011161'', ''4011161753167'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-AUG-20'', ''01-SEP-20'', ''01-AUG-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 0.00, 0.00, 0.00, ''3.13'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161953432'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''Çâîíêè'', 297.00, 0.00, 671.22, ''2.26'', 0.20)';
+values (''4011161'', ''4011161953432'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 297.00, 0.00, 671.22, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161953432'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''Äåíåæíûå ïåðåâîäû'', 297.00, 0.00, 671.22, ''2.26'', 0.20)';
+values (''4011161'', ''4011161953432'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-OCT-20'', ''01-NOV-20'', ''01-OCT-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 297.00, 0.00, 671.22, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161953432'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''Çâîíêè'', 297.00, 0.00, 671.22, ''2.26'', 0.20)';
+values (''4011161'', ''4011161953432'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 297.00, 0.00, 671.22, ''2.26'', 0.20)';
 
 EXECUTE IMMEDIATE 'insert into REP_CALC_OLAP (CONTRACT_REFID, JUR_LS_REFID, PAYER_SNAME, ACCDATE, ENDACCDATE, INVOICE_DATE, SERVICE, CALC_VOLUME, CALC_COST, CALC_NET, TARIFF, VAT_RATE)
-values (''4011161'', ''4011161953432'', ''ÎÎÎ "ÃÒÀ ÑÅÐÂÈÑ"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''Äåíåæíûå ïåðåâîäû'', 297.00, 0.00, 671.22, ''2.26'', 0.20)';
+values (''4011161'', ''4011161953432'', ''ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"'', ''01-NOV-20'', ''01-DEC-20'', ''01-NOV-20'', ''ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'', 297.00, 0.00, 671.22, ''2.26'', 0.20)';
 COMMIT;
 END;
