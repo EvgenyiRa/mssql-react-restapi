@@ -1,4 +1,4 @@
-/*!!!Обязательно установка опции lower_case_table_names = 1 test
+/*!!!Обязательно установка опции lower_case_table_names = 1
 https://askubuntu.com/questions/1261422/how-to-install-mysql-8-0-with-lower-case-table-names-1-on-ubuntu-server-20-04-lt*/
 CREATE TABLE `rep_users` (
   `USER_ID` INT(17) NOT NULL AUTO_INCREMENT,
