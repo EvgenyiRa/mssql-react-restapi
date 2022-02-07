@@ -14,6 +14,7 @@ const fs = require('fs');
 const path = require('path');
 const routerAuth = require('./routerAuth.js');
 const routerOLAP = require('./routerOLAP.js');
+const routerFClient = require('./routerFClient.js');
 const redis=require('./redis.js');
 
 let routerDB;
@@ -65,12 +66,21 @@ function initialize() {
               res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
               next();
           }
+          else {
+            //console.log(req);
+            if ((req.originalUrl.indexOf('/f-client')>-1) & (req.method==='POST')) {
+              /*console.log('f-control client');
+              console.log(req);*/
+              next();
+            }
+          }
     });
 
     app.use(bodyParser.json({limit: '100mb', extended: true}));
     app.use('/'+dbConfig.dbtype, routerDB);
     app.use('/auth', routerAuth);
     app.use('/olap', routerOLAP);
+    app.use('/f-client', routerFClient);
 
     httpsServer.listen(webServerConfig.port,webServerConfig.host)
       .on('listening', () => {
