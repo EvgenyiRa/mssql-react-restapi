@@ -1,4 +1,5 @@
 /*01*/const query = require('../db_apis/query.js'),
+            execquery = require('../db_apis/execquery.js'),
             configs=require('../config/configs.js'),
             jwt = configs.jwt,
             database = require('../services/database.js'),
@@ -6,84 +7,62 @@
 /*02*/
 /*03*/async function post(req, res, next) {
         console.log('req.body',req.body);
-        //if ((!!req.body.login) && (!!req.body.password)) {
+        if ((!!req.body.repUserId)
+              && (!!req.body.currentUser)
+              && (!!req.body.data)
+              && (!!req.body.date)
+            ) {
           try {
-            const context = {};
-            if (['mysql','pg'].indexOf(dbConfig.dbtype)>-1) {
-               context.params=[req.body.login];
+            let context = {};
+            context.params=[req.body.repUserId,req.body.currentUser];
+            const data=req.body.date;
+            //получаем ограничения пользователя
+            context.sql=`SELECT L.TIME_ALL
+                           FROM REP_USR_CNTRL_SYS_LIM L
+                           JOIN REP_USERS_CONTROL U
+                             ON U.ID=L.REP_USERS_CONTROL_ID
+                          WHERE U.REP_USERS_ID=?
+                            AND U.LOGIN=?`;
+            /*context.sql=`INSERT INTO t1 (a,b,c) VALUES (1,2,3),(4,5,6)
+                          ON DUPLICATE KEY UPDATE c=VALUES(a)+VALUES(b);`;*/
+            const contextE={execsql:[]};
+            contextE.execsql.push(context);
+            context={...context};
+            context.sql=`SELECT L.PRC_NAME,
+                                L.LIM
+                          FROM REP_USR_CNTRL_PRC_LIM L
+                          JOIN REP_USERS_CONTROL U
+                            ON U.ID=L.REP_USR_CNTRL_ID
+                         WHERE U.REP_USERS_ID=?
+                           AND U.LOGIN=?`;
+            contextE.execsql.push(context);
+            const resquery = await execquery.find(contextE);
+            //проверяем ограничения
+            let rows=resquery[0][0][0];
+            const timeAllClient=data.timeAll/1000;
+            if (rows['TIME_ALL']<timeAllClient) {
+              data.access=false;
             }
-            else {
-              context.params={login:req.body.login};
+            rows=resquery[1][0];
+            for (var i = 0; i < rows.length; i++) {
+              const rowOne=rows[i];
+              if (!!data.winsActiveSum[rowOne['PRC_NAME']]) {
+                const timeAllDeltaClient=data.winsActiveSum[rowOne['PRC_NAME']].timeAllDelta/1000;
+                if (rows['LIM']<timeAllDeltaClient) {
+                    data.winsActiveSum[rowOne['PRC_NAME']].access=false;
+                }
+              }
             }
-            /*if (dbConfig.dbtype!=='pg') {
-              context.sql=`SELECT USER_ID,
-                                  PASSWORD,
-                                  COALESCE(FIO,'null') FIO,
-                                  COALESCE(EMAIL,'null') EMAIL,
-                                  COALESCE(PHONE,'null') PHONE,
-                                  SOL`;
-            }
-            else {
-              //для PostgreSQL принудительно устанавливаем верхний регистр наименования полей
-              //для унификации авторизации
-              context.sql=`SELECT USER_ID "USER_ID",
-                                  PASSWORD "PASSWORD",
-                                  COALESCE(FIO,'null') "FIO",
-                                  COALESCE(EMAIL,'null') "EMAIL",
-                                  COALESCE(PHONE,'null') "PHONE",
-                                  SOL "SOL"`;
-            }
-            context.sql+=`   FROM REP_USERS
-                            WHERE LOGIN=`;
-            if (dbConfig.dbtype==='mssql') {
-              context.sql+=`@login`;
-            }
-            else if (dbConfig.dbtype==='ora') {
-               context.sql+=`:login`;
-            }
-            else if (dbConfig.dbtype==='mysql') {
-               context.sql+=`?`;
-            }
-            else if (dbConfig.dbtype==='pg') {
-               context.sql+=`$1`;
-            }
-            const resquery = await query.find(context);
-            //console.log(resquery);
-            let rows;
-            if (dbConfig.dbtype==='mssql') {
-              rows=resquery.recordsets[0];
-            }
-            else if (dbConfig.dbtype==='mysql') {
-               rows=resquery[0];
-            }
-            else if (dbConfig.dbtype==='ora') {
-               rows=resquery;
-            }
-            else if (dbConfig.dbtype==='pg') {
-               rows=resquery.rows;
-            }
-            if (rows.length>0) {
-              const bcrypt = require('bcrypt');
-              bcrypt.hash(req.body.password, jwt.salts[rows[0]['SOL']],async function(err, hash) {
-                  if (rows[0]['PASSWORD']==hash) {
-                    const resAuthUser=await database.authUser(req,rows,context);
-                    return res.status(200).json(resAuthUser);
-                  }
-                  else {
-                      return res.status(200).json({ message: 'PWD error' });
-                  }
-              });
-            }
-            else {
-                return res.status(200).json({ message: 'User not found' })
-            }*/
+            //console.log(resquery[0][0],resquery[1][0]);
+            return res.status(200).json({ data: data })
+            //let rows=resquery.recordsets[0];
           } catch (err) {
             next(err);
           }
-        /*}
+        }
         else {
             return res.status(200).json({ message: 'Data error' });
-        }*/
+        }
 
 }
 

@@ -57,21 +57,46 @@ CREATE TABLE `rep_users_control` (
   PRIMARY KEY (`id`),
   UNIQUE INDEX `rep_users_control_uid_l` (`rep_users_id` ASC, `login` ASC) VISIBLE);
 
-  CREATE TABLE `rep_usr_cntrl_sys_lim` (
-    `id` int(21) NOT NULL,
-    `rep_users_control_id` int(21) NOT NULL,
-    `time_all` int(5) NOT NULL DEFAULT '0',
-    PRIMARY KEY (`id`),
-    UNIQUE KEY `rep_users_control_id_UNIQUE` (`rep_users_control_id`)
-  );
+CREATE TABLE `rep_usr_cntrl_sys_lim` (
+  `id` int(21) NOT NULL,
+  `rep_users_control_id` int(21) NOT NULL,
+  `time_all` int(5) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `rep_users_control_id_UNIQUE` (`rep_users_control_id`)
+);
 
-  CREATE TABLE `rep_usr_cntrl_prc_lim` (
+CREATE TABLE `rep_usr_cntrl_prc_lim` (
+`id` INT(21) NOT NULL AUTO_INCREMENT,
+`rep_usr_cntrl_id` INT(21) NOT NULL,
+`PRC_NAME` VARCHAR(250) NOT NULL,
+`lim` INT(5) NOT NULL,
+PRIMARY KEY (`id`),
+UNIQUE INDEX `rep_usr_cntrl_prc_lim_idname` (`rep_usr_cntrl_id` ASC, `PRC_NAME` ASC) VISIBLE);
+
+CREATE TABLE `rep_usr_cntrl_sys_state` (
   `id` INT(21) NOT NULL AUTO_INCREMENT,
   `rep_usr_cntrl_id` INT(21) NOT NULL,
-  `PRC_NAME` VARCHAR(250) NOT NULL,
-  `lim` INT(5) NOT NULL,
+  `time_all` INT(5) NOT NULL,
+  `date` DATE NOT NULL,
+  `access` TINYINT NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE INDEX `rep_usr_cntrl_prc_lim_idname` (`rep_usr_cntrl_id` ASC, `PRC_NAME` ASC) VISIBLE);
+  UNIQUE INDEX `rep_usr_cntrl_sys_state_iddate` (`rep_usr_cntrl_id` ASC, `date` ASC) VISIBLE);
+
+CREATE TABLE `react`.`rep_usr_cntrl_prc_state` (
+  `id` INT(21) NOT NULL AUTO_INCREMENT,
+  `rep_usr_cntrl_id` INT(21) NOT NULL,
+  `date` DATE NULL,
+  `prc_name` VARCHAR(250) NULL,
+  `pid` INT NULL,
+  `access` TINYINT(1) NULL,
+  `last_Time` INT(19) NULL,
+  `time_All` INT(19) NULL,
+  `time_All_Delta` INT(5) NULL,
+  `time_All_usr` INT(19) NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `rep_usr_cntrl_prc_state_iddp` (`rep_usr_cntrl_id` ASC, `date` ASC, `prc_name` ASC) VISIBLE);
+
+
 
 INSERT INTO `rep_users_control`
 (`rep_users_id`,
