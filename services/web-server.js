@@ -68,7 +68,7 @@ function initialize() {
           }
           else {
             //console.log(req);
-            if ((req.originalUrl.indexOf('/f-client')>-1) & (req.method==='POST')) {
+            if ((req.originalUrl.split('/')[1]==='f-client') & (req.method==='POST')) {
               /*console.log('f-control client');
               console.log(req);*/
               next();

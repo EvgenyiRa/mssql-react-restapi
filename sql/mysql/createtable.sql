@@ -47,6 +47,55 @@ DEFAULT CHARACTER SET = utf8;
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;*/
 
+CREATE TABLE `rep_users_control` (
+  `id` INT(21) NOT NULL AUTO_INCREMENT,
+  `rep_users_id` INT(19) NOT NULL,
+  `login` VARCHAR(64) NOT NULL,
+  `fio` VARCHAR(150) NULL,
+  `email` VARCHAR(320) NULL,
+  `phone` VARCHAR(16) NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `rep_users_control_uid_l` (`rep_users_id` ASC, `login` ASC) VISIBLE);
+
+  CREATE TABLE `rep_usr_cntrl_sys_lim` (
+    `id` int(21) NOT NULL,
+    `rep_users_control_id` int(21) NOT NULL,
+    `time_all` int(5) NOT NULL DEFAULT '0',
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `rep_users_control_id_UNIQUE` (`rep_users_control_id`)
+  );
+
+  CREATE TABLE `rep_usr_cntrl_prc_lim` (
+  `id` INT(21) NOT NULL AUTO_INCREMENT,
+  `rep_usr_cntrl_id` INT(21) NOT NULL,
+  `PRC_NAME` VARCHAR(250) NOT NULL,
+  `lim` INT(5) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `rep_usr_cntrl_prc_lim_idname` (`rep_usr_cntrl_id` ASC, `PRC_NAME` ASC) VISIBLE);
+
+INSERT INTO `rep_users_control`
+(`rep_users_id`,
+`login`)
+VALUES (
+1,
+'dasha');
+
+INSERT INTO `rep_usr_cntrl_sys_lim`
+(`rep_users_control_id`,
+`time_all`)
+VALUES
+(1,
+10);
+
+INSERT INTO `react`.`rep_usr_cntrl_prc_lim`
+(`rep_usr_cntrl_id`,
+`PRC_NAME`,
+`lim`)
+VALUES
+(1,
+'chrome',
+10);
+
 INSERT INTO REP_RIGHTS (RIGHTS_ID, NAME, SYSNAME)
    VALUES (1, 'Редактирование формы', 'Edite'),
 		  (2, 'Просмотр формы', 'View'),
