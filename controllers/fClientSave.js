@@ -39,32 +39,15 @@
             //проверяем ограничения
             let rows=resquery[0][0];
             if (rows.length>0) {
-              rows=rows[0];
-              const timeAllClient=data.timeAll/1000;
-              data.access=true;
-              if (rows['TIME_ALL']>0) {
-                if (rows['TIME_ALL']<timeAllClient) {
-                  data.access=false;
-                }
-              }
-              const userCntlID=rows['REP_USERS_CONTROL_ID'];
+              const lims={};
+              lims.sys=rows[0];
               rows=resquery[1][0];
               if (rows.length>0) {
-                //console.log(data.winsActiveSum);
-                for (var i = 0; i < rows.length; i++) {
-                  const rowOne=rows[i];
-                  if (!!data.winsActiveSum[rowOne['PRC_NAME']]) {
-                    const timeAllDeltaClient=data.winsActiveSum[rowOne['PRC_NAME']].timeAllDelta/1000;
-                    data.winsActiveSum[rowOne['PRC_NAME']].access=true;
-                    if (rowOne['LIM']<timeAllDeltaClient) {
-                        data.winsActiveSum[rowOne['PRC_NAME']].access=false;
-                    }
-                  }
-                }
+                  lims.proc=rows;
               }
               contextE.execsql=[];
               context={};
-              context.params=[timeAllClient,req.body.date,(data.access)?1:0];
+              context.params=[parseInt(data.timeAll/1000),req.body.date,(data.access)?1:0];
               context.sql=`INSERT INTO REP_USR_CNTRL_SYS_STATE
                                       (REP_USR_CNTRL_ID,TIME_ALL,DATE,ACCESS)
                                 VALUES (`+userCntlID+`,?,STR_TO_DATE(?, '%d-%m-%Y'),?) AS new
@@ -82,10 +65,11 @@
               }
               //не дожидаемся завершения
               execquery.find(contextE);
-
+              return res.status(200).json({ lims: lims });
             }
-            //console.log(resquery[0][0],resquery[1][0]);
-            return res.status(200).json({ data: data })
+            else {
+              return res.status(200).json({ message: 'No limits system' });
+            }
             //let rows=resquery.recordsets[0];
           } catch (err) {
             next(err);
