@@ -58,7 +58,7 @@ CREATE TABLE `rep_users_control` (
   UNIQUE INDEX `rep_users_control_uid_l` (`rep_users_id` ASC, `login` ASC) VISIBLE);
 
 CREATE TABLE `rep_usr_cntrl_sys_lim` (
-  `id` int(21) NOT NULL,
+  `id` int(21) NOT NULL AUTO_INCREMENT,
   `rep_users_control_id` int(21) NOT NULL,
   `time_all` int(5) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
