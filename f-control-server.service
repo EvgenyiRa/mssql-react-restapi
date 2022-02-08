@@ -1,0 +1,18 @@
+#https://isqua.ru/blog/2020/05/25/nodejs-systemd/
+#https://qastack.ru/programming/4681067/how-do-i-run-a-node-js-application-as-its-own-process
+[Unit]
+Description=F-control-server
+
+[Service]
+#which node
+ExecStart=/usr/bin/node /var/www/nodejs/react-restapi/index.js
+Restart=always
+User=ra
+# Note Debian/Ubuntu uses 'nogroup', RHEL/Fedora uses 'nobody'
+Group=ra
+#Environment=PATH=/usr/bin:/usr/local/bin
+#Environment=NODE_ENV=production
+#WorkingDirectory=/var/www/nodejs/react-restapi
+
+[Install]
+WantedBy=multi-user.target
