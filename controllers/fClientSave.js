@@ -39,7 +39,7 @@
             //проверяем ограничения
             let rows=resquery[0][0];
             if (rows.length>0) {
-              const userCntlID=rows['REP_USERS_CONTROL_ID'];        
+              const userCntlID=rows[0]['REP_USERS_CONTROL_ID'];        
               const lims={};
               lims.sys=rows[0];
               rows=resquery[1][0];
