@@ -1,12 +1,16 @@
 const configs=require('../config/configs.js'),
+      wss=require('./webSocket.js'),
+      //WebSocket = require('ws'),
       webServerConfig = configs.webServer,
       dbConfig = configs.database;
-let https;
+let https,
+    httpWs;
 if (webServerConfig.https) {
     https = require('https');
 }
 else {
     https = require('http');
+    httpWs = require('http');
 }
 const express = require('express');
 const morgan = require('morgan');
@@ -34,7 +38,8 @@ else if (dbConfig.dbtype==='pg') {
 const bodyParser = require('body-parser'),
       jwt=configs.jwt;
 
-let httpsServer;
+let httpsServer,
+    httpWsServer;
 
 redis.client.on('connect', function() {
     console.log('redis connected');
@@ -43,7 +48,8 @@ redis.client.on('connect', function() {
 
 function initialize() {
   return new Promise((resolve, reject) => {
-    const app = express();
+    const app = express()/*,
+          appWs = express()*/;
 
     if (webServerConfig.https) {
       const serverKey=path.resolve('cert', 'server.key');
@@ -56,6 +62,7 @@ function initialize() {
     }
     else {
         httpsServer = https.createServer(app);
+        //httpWsServer = httpWs.createServer(appWs);
     }
 
     app.all('*', function(req, res, next) {
@@ -69,6 +76,11 @@ function initialize() {
           else {
             //console.log(req);
             if ((req.originalUrl.split('/')[1]==='f-client') & (req.method==='POST')) {
+              /*console.log('f-control client');
+              console.log(req);*/
+              next();
+            }
+            else if (req.originalUrl==='/ws') {
               /*console.log('f-control client');
               console.log(req);*/
               next();
@@ -92,6 +104,20 @@ function initialize() {
         reject(err);
       })
       .setTimeout(700000);
+
+    //const wss= new WebSocket.Server({ noServer: true });
+
+    httpsServer.on('upgrade', function upgrade(request, socket, head) {
+      const { pathname } = parse(request.url);
+      if (pathname === '/ws') {
+        wss.handleUpgrade(request, socket, head, function done(ws) {
+          wss.emit('connection', ws, request, client);
+        });
+      } else {
+        socket.destroy();
+      }
+    });
+
   });
 }
 

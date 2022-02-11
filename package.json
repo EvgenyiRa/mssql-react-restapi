@@ -29,8 +29,11 @@
     "pg": "^8.7.3",
     "redis": "^3.1.2",
     "request": "^2.88.2",
-    "request-promise": "^4.2.6"
+    "request-promise": "^4.2.6",
+    "ws": "^8.5.0"
   },
-  "devDependencies": {},
-  "description": ""
+  "description": "",
+  "optionalDependencies": {
+    "utf-8-validate": "^5.0.8"
+  }
 }
