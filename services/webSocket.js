@@ -1,5 +1,6 @@
 const WebSocket = require('ws'),
       wss= new WebSocket.Server({ noServer: true }),
+      execquery = require('../db_apis/execquery.js'),
       database = require('./database.js');
 
 wss.on('connection', async (wsf, request, client)=> {
