@@ -26,7 +26,7 @@ else if (dbConfig.dbtype==='mysql') {
             console.log('Connected to MYSQL');
             conn.release();
         }
-      });      
+      });
       module.exports.poolPromise=poolPromise;
     } catch (err) {
       console.log('MYSQL Connection Failed! Bad Config: ', err)
@@ -521,3 +521,56 @@ async function authUser(req,rows,context) {
 }
 
 module.exports.authUser = authUser;
+
+const authWSC=async (dataP)=>{
+  const result={auth:false};
+  try {
+    let context = {};
+    context.params=[dataP.repUserId,dataP.login,dataP.key];
+    //получаем ограничения пользователя
+    context.sql=`SELECT L.TIME_ALL,
+                        L.REP_USERS_CONTROL_ID
+                   FROM REP_USR_CNTRL_SYS_LIM L
+                   JOIN REP_USERS_CONTROL U
+                     ON U.ID=L.REP_USERS_CONTROL_ID
+                   JOIN REP_USERS RU
+                     ON RU.USER_ID=U.REP_USERS_ID
+                  WHERE U.REP_USERS_ID=?
+                    AND U.LOGIN=?
+                    AND RU.KEY_V=?`;
+    const contextE={execsql:[]};
+    contextE.execsql.push(context);
+    context={...context};
+    context.sql=`SELECT L.PRC_NAME,
+                        L.LIM
+                  FROM REP_USR_CNTRL_PRC_LIM L
+                  JOIN REP_USERS_CONTROL U
+                    ON U.ID=L.REP_USR_CNTRL_ID
+                  JOIN REP_USERS RU
+                    ON RU.USER_ID=U.REP_USERS_ID
+                 WHERE U.REP_USERS_ID=?
+                   AND U.LOGIN=?
+                   AND RU.KEY_V=?`;
+    contextE.execsql.push(context);
+    const resquery = await doubleExecute(contextE);
+    //проверяем ограничения
+    let rows=resquery[0][0];
+    if (rows.length>0) {
+      result.auth=true;
+      result.lims={sys:rows[0]};
+      rows=resquery[1][0];
+      if (rows.length>0) {
+          result.lims.proc=rows;
+      }
+      return result;
+    }
+    else {
+      result.message='No limits system';
+    }
+    //let rows=resquery.recordsets[0];
+  } catch (err) {
+    console.log('Err auth',err);
+  }
+  return result;
+}
+module.exports.authWSC=authWSC;

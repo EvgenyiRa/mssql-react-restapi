@@ -1,18 +1,19 @@
 /*!!!Обязательно установка опции lower_case_table_names = 1
 https://askubuntu.com/questions/1261422/how-to-install-mysql-8-0-with-lower-case-table-names-1-on-ubuntu-server-20-04-lt*/
 CREATE TABLE `rep_users` (
-  `USER_ID` INT(17) NOT NULL AUTO_INCREMENT,
-  `FIO` VARCHAR(500) NOT NULL,
-  `LOGIN` VARCHAR(200) NOT NULL,
-  `PASSWORD` VARCHAR(200) NOT NULL,
-  `EMAIL` VARCHAR(500) NULL,
-  `PHONE` VARCHAR(100) NULL,
-  `SOL` TINYINT(2) NULL,
+  `USER_ID` int NOT NULL AUTO_INCREMENT,
+  `FIO` varchar(500) NOT NULL,
+  `LOGIN` varchar(200) NOT NULL,
+  `PASSWORD` varchar(200) NOT NULL,
+  `EMAIL` varchar(500) DEFAULT NULL,
+  `PHONE` varchar(100) DEFAULT NULL,
+  `SOL` tinyint DEFAULT NULL,
+  `KEY_V` varchar(64) DEFAULT NULL,
   PRIMARY KEY (`USER_ID`),
-  UNIQUE INDEX `LOGIN_UNIQUE` (`LOGIN` ASC) VISIBLE,
-  UNIQUE INDEX `LOGIN_PWD` (`LOGIN` ASC, `PASSWORD` ASC) VISIBLE)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
+  UNIQUE KEY `LOGIN_UNIQUE` (`LOGIN`),
+  UNIQUE KEY `LOGIN_PWD` (`LOGIN`,`PASSWORD`),
+  KEY `KEY_V` (`KEY_V`)
+);
 
 CREATE TABLE `rep_rights` (
   `RIGHTS_ID` INT(10) NOT NULL AUTO_INCREMENT,
@@ -54,10 +55,8 @@ CREATE TABLE `rep_users_control` (
   `fio` varchar(150) DEFAULT NULL,
   `email` varchar(320) DEFAULT NULL,
   `phone` varchar(16) DEFAULT NULL,
-  `key_v` varchar(64) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `rep_users_control_uid_l` (`rep_users_id`,`login`),
-  KEY `rep_users_control_key` (`key_v`)
+  UNIQUE KEY `rep_users_control_uid_l` (`rep_users_id`,`login`)
 );
 
 CREATE TABLE `rep_usr_cntrl_sys_lim` (
