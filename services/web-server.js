@@ -98,9 +98,9 @@ function initialize() {
         console.log(`Web server listening on ${webServerConfig.host}:${webServerConfig.port}`);
 
         //test
-        const crypto = require('crypto'),
+        /*const crypto = require('crypto'),
               key=crypto.randomBytes(32).toString('hex');
-        console.log('Key ',key,' length='+key.length);
+        console.log('Key ',key,' length='+key.length);*/
 
         resolve();
       })
