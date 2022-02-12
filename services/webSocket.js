@@ -9,7 +9,7 @@ wss.on('connection', async (wsf, request, client)=> {
   const messDefault=JSON.stringify({type:'auth',data:"who is?"});
   wsf.send(messDefault);
   wsf.on('message', async (data)=> {
-    console.log(`Received message ${data} from user ${client}`);
+    //console.log(`Received message ${data} from user ${client}`);
     try {
       const dataP=JSON.parse(data);
       if (!auth) {
@@ -24,27 +24,26 @@ wss.on('connection', async (wsf, request, client)=> {
       }
       else {
         if (dataP.type==='dataUpdate') {
+          console.log('dataP.type enter');
           const resObj={type:'dataUpdateRes'};
-          if ((!!dataP.data.repUserId)
-                && (!!dataP.data.login)
-                && (!!dataP.data.data)
-                && (!!dataP.data.date)
+          if ((!!dataP.data)
+                && (!!dataP.date)
                 && (!!dataP.data.lims)
               ) {
             try {
               let context = {};
               const userCntlID=dataP.data.lims.sys['REP_USERS_CONTROL_ID'];
               const contextE={execsql:[]};
-              context.params=[parseInt(dataP.data.datatimeAll/1000),dataP.data.date,(dataP.data.dataaccess)?1:0];
+              context.params=[parseInt(dataP.data.data.timeAll/1000),dataP.date,(dataP.data.data.access)?1:0];
               context.sql=`INSERT INTO REP_USR_CNTRL_SYS_STATE
                                       (REP_USR_CNTRL_ID,TIME_ALL,DATE,ACCESS)
                                 VALUES (`+userCntlID+`,?,STR_TO_DATE(?, '%d-%m-%Y'),?) AS new
                           ON DUPLICATE KEY UPDATE TIME_ALL=new.TIME_ALL,ACCESS=new.ACCESS;`;
               contextE.execsql.push(context);
-              for (var key in dataP.data.datawinsActiveSum) {
-                const prcClient=dataP.data.datawinsActiveSum[key];
+              for (var key in dataP.data.data.winsActiveSum) {
+                const prcClient=dataP.data.data.winsActiveSum[key];
                 context={};
-                context.params=[dataP.data.date,key,prcClient.pid,(prcClient.access)?1:0,prcClient.lastTimeProcess,prcClient.timeAll,parseInt(prcClient.timeAllDelta/1000),prcClient.timeAllUser];
+                context.params=[dataP.date,key,prcClient.pid,(prcClient.access)?1:0,prcClient.lastTimeProcess,prcClient.timeAll,parseInt(prcClient.timeAllDelta/1000),prcClient.timeAllUser];
                 context.sql=`INSERT INTO REP_USR_CNTRL_PRC_STATE
                                         (REP_USR_CNTRL_ID,DATE,PRC_NAME,PID,ACCESS,LAST_TIME,TIME_ALL,TIME_ALL_DELTA,TIME_ALL_USR)
                                   VALUES (`+userCntlID+`, STR_TO_DATE(?, '%d-%m-%Y'),?,?,?,?,?,?,?) AS new
