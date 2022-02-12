@@ -48,14 +48,17 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;*/
 
 CREATE TABLE `rep_users_control` (
-  `id` INT(21) NOT NULL AUTO_INCREMENT,
-  `rep_users_id` INT(19) NOT NULL,
-  `login` VARCHAR(64) NOT NULL,
-  `fio` VARCHAR(150) NULL,
-  `email` VARCHAR(320) NULL,
-  `phone` VARCHAR(16) NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
+  `rep_users_id` int NOT NULL,
+  `login` varchar(64) NOT NULL,
+  `fio` varchar(150) DEFAULT NULL,
+  `email` varchar(320) DEFAULT NULL,
+  `phone` varchar(16) DEFAULT NULL,
+  `key_v` varchar(64) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE INDEX `rep_users_control_uid_l` (`rep_users_id` ASC, `login` ASC) VISIBLE);
+  UNIQUE KEY `rep_users_control_uid_l` (`rep_users_id`,`login`),
+  KEY `rep_users_control_key` (`key_v`)
+);
 
 CREATE TABLE `rep_usr_cntrl_sys_lim` (
   `id` int(21) NOT NULL AUTO_INCREMENT,

@@ -3,7 +3,7 @@ const WebSocket = require('ws'),
 
 wss.on('connection', function connection(wsf, request, client) {
   console.log('Новый пользователь');
-  //wsf.send('Привет');
+  wsf.send('Привет');
   wsf.on('message', function message(data) {
     console.log(`Received message ${data} from user ${client}`);
   });

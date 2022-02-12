@@ -1,5 +1,6 @@
 const configs=require('../config/configs.js'),
       wss=require('./webSocket.js'),
+      lurl=require('url');
       //WebSocket = require('ws'),
       webServerConfig = configs.webServer,
       dbConfig = configs.database;
@@ -10,7 +11,6 @@ if (webServerConfig.https) {
 }
 else {
     https = require('http');
-    httpWs = require('http');
 }
 const express = require('express');
 const morgan = require('morgan');
@@ -38,8 +38,7 @@ else if (dbConfig.dbtype==='pg') {
 const bodyParser = require('body-parser'),
       jwt=configs.jwt;
 
-let httpsServer,
-    httpWsServer;
+let httpsServer;
 
 redis.client.on('connect', function() {
     console.log('redis connected');
@@ -98,6 +97,11 @@ function initialize() {
       .on('listening', () => {
         console.log(`Web server listening on ${webServerConfig.host}:${webServerConfig.port}`);
 
+        //test
+        const crypto = require('crypto'),
+              key=crypto.randomBytes(32).toString('hex');
+        console.log('Key ',key,' length='+key.length);
+
         resolve();
       })
       .on('error', err => {
@@ -108,10 +112,10 @@ function initialize() {
     //const wss= new WebSocket.Server({ noServer: true });
 
     httpsServer.on('upgrade', function upgrade(request, socket, head) {
-      const { pathname } = parse(request.url);
+      const { pathname } = lurl.parse(request.url);
       if (pathname === '/ws') {
         wss.handleUpgrade(request, socket, head, function done(ws) {
-          wss.emit('connection', ws, request, client);
+          wss.emit('connection', ws, request);
         });
       } else {
         socket.destroy();
