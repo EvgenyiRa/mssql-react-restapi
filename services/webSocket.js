@@ -24,7 +24,7 @@ wss.on('connection', async (wsf, request, client)=> {
       }
       else {
         if (dataP.type==='dataUpdate') {
-          console.log('dataP.type enter');
+          //console.log('dataP.type enter');
           const resObj={type:'dataUpdateRes'};
           if ((!!dataP.data)
                 && (!!dataP.date)
