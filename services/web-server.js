@@ -75,13 +75,6 @@ function initialize() {
           else {
             //console.log(req);
             if ((req.originalUrl.split('/')[1]==='f-client') & (req.method==='POST')) {
-              /*console.log('f-control client');
-              console.log(req);*/
-              next();
-            }
-            else if (req.originalUrl==='/ws') {
-              /*console.log('f-control client');
-              console.log(req);*/
               next();
             }
           }
