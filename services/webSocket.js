@@ -75,18 +75,19 @@ wss.on('connection', async (wsf, request, client)=> {
                     contextE.execsql.push(context);
                     context={};
                     /*получаем AI чтобы использовать его далее, т.к. поведение LAST_INSERT_ID не подходит*/
-                    context.sql=`SELECT @brwr_max_id=MAX(COALESCE(B.ID,-1)) BRWR_MAX_ID
+                    context.sql=`SELECT MAX(COALESCE(B.ID,-1)) AI
                                    FROM REP_USR_CNTRL_BROWSER B
                                   WHERE B.REP_USR_CNTRL_ID=@usr_ctrl_id_v
                                     AND B.DATE=@date_v
-                                    AND B.HOST=@host_v;`;
+                                    AND B.HOST=@host_v
+                                   INTO @brwr_max_id;`;
                     contextE.execsql.push(context);
                     for (var i = 0; i < brwrOneHost.urls.length; i++) {
                       context={};
                       context.params=[brwrOneHost.urls[i]];
                       context.sql=`INSERT INTO REP_USR_CNTRL_BRWR_URLS
                                                (REP_USR_CNTRL_BRWR_ID,URL)
-                                        VALUES (@brwr_max_id,?)
+                                        VALUES (@brwr_max_id,?) AS new
                                             ON DUPLICATE KEY UPDATE URL=new.URL;`;
                       contextE.execsql.push(context);
                     }
