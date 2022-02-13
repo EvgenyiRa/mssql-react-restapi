@@ -84,7 +84,7 @@ CREATE TABLE `rep_usr_cntrl_sys_state` (
   PRIMARY KEY (`id`),
   UNIQUE INDEX `rep_usr_cntrl_sys_state_iddate` (`rep_usr_cntrl_id` ASC, `date` ASC) VISIBLE);
 
-CREATE TABLE `react`.`rep_usr_cntrl_prc_state` (
+CREATE TABLE `rep_usr_cntrl_prc_state` (
   `id` INT(21) NOT NULL AUTO_INCREMENT,
   `rep_usr_cntrl_id` INT(21) NOT NULL,
   `date` DATE NULL,
@@ -98,7 +98,22 @@ CREATE TABLE `react`.`rep_usr_cntrl_prc_state` (
   PRIMARY KEY (`id`),
   UNIQUE INDEX `rep_usr_cntrl_prc_state_iddp` (`rep_usr_cntrl_id` ASC, `date` ASC, `prc_name` ASC) VISIBLE);
 
+CREATE TABLE `rep_usr_cntrl_browser` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `rep_usr_cntrl_id` INT NOT NULL,
+  `date` DATE NOT NULL,
+  `host` VARCHAR(45) NOT NULL,
+  `time_all` INT NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `ruci_d_h` (`rep_usr_cntrl_id` ASC, `date` ASC, `host` ASC) VISIBLE);
 
+  CREATE TABLE `rep_usr_cntrl_brwr_urls` (
+    `id` int NOT NULL AUTO_INCREMENT,
+    `rep_usr_cntrl_brwr_id` int NOT NULL,
+    `url` varchar(2083) NOT NULL,
+    PRIMARY KEY (`id`),
+    KEY `rep_usr_cntrl_brwr_id` (`rep_usr_cntrl_brwr_id`)
+  );  
 
 INSERT INTO `rep_users_control`
 (`rep_users_id`,
