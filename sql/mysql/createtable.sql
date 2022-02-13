@@ -102,7 +102,7 @@ CREATE TABLE `rep_usr_cntrl_browser` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `rep_usr_cntrl_id` INT NOT NULL,
   `date` DATE NOT NULL,
-  `host` VARCHAR(45) NOT NULL,
+  `host` VARCHAR(256) NOT NULL,
   `time_all` INT NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `ruci_d_h` (`rep_usr_cntrl_id` ASC, `date` ASC, `host` ASC) VISIBLE);
@@ -113,7 +113,7 @@ CREATE TABLE `rep_usr_cntrl_browser` (
     `url` varchar(2083) NOT NULL,
     PRIMARY KEY (`id`),
     KEY `rep_usr_cntrl_brwr_id` (`rep_usr_cntrl_brwr_id`)
-  );  
+  );
 
 INSERT INTO `rep_users_control`
 (`rep_users_id`,
