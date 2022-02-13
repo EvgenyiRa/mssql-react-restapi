@@ -93,8 +93,7 @@ wss.on('connection', async (wsf, request, client)=> {
                     }
                   }
               }
-              //не дожидаемся завершения
-              execquery.find(contextE);
+              await execquery.find(contextE);
               resObj.message='ok';
             } catch (err) {
               console.log(err);
