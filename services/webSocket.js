@@ -34,10 +34,17 @@ wss.on('connection', async (wsf, request, client)=> {
               let context = {};
               const userCntlID=dataP.data.lims.sys['REP_USERS_CONTROL_ID'];
               const contextE={execsql:[]};
-              context.params=[userCntlID,dataP.date,parseInt(dataP.data.data.timeAll/1000),(dataP.data.data.access)?1:0];
-              context.sql=`SET @usr_ctrl_id_v=?;
-                           SET @date_v=STR_TO_DATE(?, '%d-%m-%Y');
-                           INSERT INTO REP_USR_CNTRL_SYS_STATE
+              //можно выполнить только одну операцию за раз, разбиваем на много запросов
+              context.params=[userCntlID];
+              context.sql=`SET @usr_ctrl_id_v=?;`;
+              contextE.execsql.push(context);
+              context={};
+              context.params=[dataP.date];
+              context.sql=`SET @date_v=STR_TO_DATE(?, '%d-%m-%Y');`;
+              contextE.execsql.push(context);
+              context={};
+              context.params=[parseInt(dataP.data.data.timeAll/1000),(dataP.data.data.access)?1:0];
+              context.sql=`INSERT INTO REP_USR_CNTRL_SYS_STATE
                                       (REP_USR_CNTRL_ID,TIME_ALL,DATE,ACCESS)
                                 VALUES (@usr_ctrl_id_v,?,@date_v,?) AS new
                           ON DUPLICATE KEY UPDATE TIME_ALL=new.TIME_ALL,ACCESS=new.ACCESS;`;
@@ -56,33 +63,42 @@ wss.on('connection', async (wsf, request, client)=> {
                   for (var key in dataP.data.data.browser) {
                     const brwrOneHost=dataP.data.data.browser[key];
                     context={};
-                    context.params=[key,parseInt(brwrOneHost.timeAll/1000)];
-                    context.sql=`SET @host_v=?;
-                                 SET @time_all_v=?;
-                                 SELECT @brwr_max_id=CASE WHEN B.BRWR_MAX_ID=-1 THEN (
-                                            							SELECT AUTO_INCREMENT
-                                            							  FROM  INFORMATION_SCHEMA.TABLES
-                                            							 WHERE TABLE_SCHEMA = DATABASE()
-                                            							   AND   TABLE_NAME   = 'rep_usr_cntrl_browser'
-                                            						   )
-                                            						 ELSE B.BRWR_MAX_ID
-                                            					END
-                                  FROM (SELECT COALESCE(B.ID,-1) BRWR_MAX_ID
-                                          FROM REP_USR_CNTRL_BROWSER B
-                                         WHERE B.REP_USR_CNTRL_ID=@usr_ctrl_id_v
-                                           AND B.DATE=@date_v
-                                           AND B.HOST=@host_v
-                                       ) B;
-                                  INSERT INTO REP_USR_CNTRL_BROWSER
-                                              (ID,REP_USR_CNTRL_ID,DATE,HOST,TIME_ALL)
-                                       VALUES (@brwr_max_id,@usr_ctrl_id_v, @date_v,@host_v,@time_all_v) AS new
-                                 ON DUPLICATE KEY UPDATE TIME_ALL=new.TIME_ALL;`;
+                    context.params=[key];
+                    context.sql=`SET @host_v=?;`;
+                    contextE.execsql.push(context);
+                    context={};
+                    context.params=[parseInt(brwrOneHost.timeAll/1000)];
+                    context.sql=`SET @time_all_v=?;`;
+                    contextE.execsql.push(context);
+                    context={};
+                    context.sql=`SELECT @brwr_max_id=CASE WHEN B.BRWR_MAX_ID=-1 THEN (
+                                                           SELECT AUTO_INCREMENT
+                                                             FROM  INFORMATION_SCHEMA.TABLES
+                                                            WHERE TABLE_SCHEMA = DATABASE()
+                                                              AND   TABLE_NAME   = 'rep_usr_cntrl_browser'
+                                                          )
+                                                          ELSE B.BRWR_MAX_ID
+                                                     END
+                                   FROM (SELECT COALESCE(B.ID,-1) BRWR_MAX_ID
+                                           FROM REP_USR_CNTRL_BROWSER B
+                                          WHERE B.REP_USR_CNTRL_ID=@usr_ctrl_id_v
+                                            AND B.DATE=@date_v
+                                            AND B.HOST=@host_v
+                                        ) B;`;
+                    contextE.execsql.push(context);
+                    context={};
+                    context.sql=`INSERT INTO REP_USR_CNTRL_BROWSER
+                                        (ID,REP_USR_CNTRL_ID,DATE,HOST,TIME_ALL)
+                                 VALUES (@brwr_max_id,@usr_ctrl_id_v, @date_v,@host_v,@time_all_v) AS new
+                           ON DUPLICATE KEY UPDATE TIME_ALL=new.TIME_ALL;`;
                     contextE.execsql.push(context);
                     for (var i = 0; i < brwrOneHost.urls.length; i++) {
                       context={};
                       context.params=[brwrOneHost.urls[i]];
+                      context.sql=`SET @url_v=?;`;
+                      contextE.execsql.push(context);
+                      context={};
                       context.sql=`/*Уникальный индекс невозможно создать, из-за длины поля URL*/
-                                  SET @url_v=?;
                                   INSERT INTO REP_USR_CNTRL_BRWR_URLS
                                               (REP_USR_CNTRL_BRWR_ID,URL)
                                    SELECT @brwr_max_id, @url_v
