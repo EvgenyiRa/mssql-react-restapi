@@ -107,13 +107,13 @@ CREATE TABLE `rep_usr_cntrl_browser` (
   PRIMARY KEY (`id`),
   UNIQUE INDEX `ruci_d_h` (`rep_usr_cntrl_id` ASC, `date` ASC, `host` ASC) VISIBLE);
 
-  CREATE TABLE `rep_usr_cntrl_brwr_urls` (
-    `id` int NOT NULL AUTO_INCREMENT,
-    `rep_usr_cntrl_brwr_id` int NOT NULL,
-    `url` varchar(2083) NOT NULL,
-    PRIMARY KEY (`id`),
-    KEY `rep_usr_cntrl_brwr_id` (`rep_usr_cntrl_brwr_id`)
-  );
+CREATE TABLE `rep_usr_cntrl_brwr_urls` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `rep_usr_cntrl_brwr_id` int NOT NULL,
+  `url` varchar(2083) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `rep_usr_cntrl_brwr_urls_idhost` (`rep_usr_cntrl_brwr_id`,`url`(1000))
+);
 
 INSERT INTO `rep_users_control`
 (`rep_users_id`,
