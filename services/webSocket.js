@@ -2,9 +2,10 @@ const WebSocket = require('ws'),
       wss= new WebSocket.Server({ noServer: true }),
       configs=require('../config/configs.js'),
       execquery = require('../db_apis/execquery.js'),
+      common=require('./common.js'),
       database = require('./database.js');
 
-wss.on('connection', async (wsf, request, client)=> {  
+wss.on('connection', async (wsf, request, socket)=> {
   let auth=false;
   const messDefault=JSON.stringify({type:'auth',data:"who is?"});
   wsf.send(messDefault);
@@ -17,9 +18,14 @@ wss.on('connection', async (wsf, request, client)=> {
             const result=await database.authWSC(dataP);
             auth=result.auth;
             wsf.send(JSON.stringify({type:'authRes',data:result}));
+            if (!auth) {
+              const text='Auth user error: ip-'+request.ip+'; login-'+dataP.login+'; key-'+dataP.key;
+              await common.checkErr(request.ip,result.message,text);
+              socket.destroy();
+            }
         }
         else {
-            wsf.send(messDefault);
+            socket.destroy();
         }
       }
       else {
@@ -111,6 +117,7 @@ wss.on('connection', async (wsf, request, client)=> {
       }
     } catch (err) {
       console.log('wsCliient err msg: ', err);
+      socket.destroy();
       auth=false;
     }
   });

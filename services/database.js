@@ -570,6 +570,7 @@ const authWSC=async (dataP)=>{
     //let rows=resquery.recordsets[0];
   } catch (err) {
     console.log('Err auth',err);
+    result.message='Err auth try';
   }
   return result;
 }

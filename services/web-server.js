@@ -112,24 +112,30 @@ function initialize() {
     httpsServer.on('upgrade', async function upgrade(request, socket, head) {
       const { pathname } = lurl.parse(request.url);
       if (pathname === '/ws') {
-        let ip;
-        if (!!configs.trust_proxy) {
-          ip=request.headers['x-forwarded-for'].split(/\s*,\s*/)[0];
-        }
-        else {
-          ip = request.connection.remoteAddress;
-        }
-        const resErrblock=await common.getAsync('errblock_'+ip);
-        //проверяем ip на нахождение в блокировке
-        if (resErrblock!==null) {
-            socket.destroy();
-            console.log('Заблокированный пользователь '+ip+' пытается войти');
-        }
-        else {
-          console.log('Новый пользователь '+ip);
-          wss.handleUpgrade(request, socket, head, function done(ws) {
-            wss.emit('connection', ws, request, socket);
-          });
+        try {
+          let ip;
+          if (!!configs.trust_proxy) {
+            ip=request.headers['x-forwarded-for'].split(/\s*,\s*/)[0];
+          }
+          else {
+            ip = request.connection.remoteAddress;
+          }
+          const resErrblock=await common.getAsync('errblock_'+ip);
+          //проверяем ip на нахождение в блокировке
+          if (resErrblock!==null) {
+              socket.destroy();
+              console.log('Заблокированный пользователь '+ip+' пытается войти');
+          }
+          else {
+            console.log('Новый пользователь '+ip);
+            request.ip=ip;
+            wss.handleUpgrade(request, socket, head, function done(ws) {
+              wss.emit('connection', ws, request, socket);
+            });
+          }
+        } catch (err) {
+          console.error(err);
+          socket.destroy();
         }
       } else {
         socket.destroy();
