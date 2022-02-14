@@ -3,7 +3,7 @@ module.exports = {
     port: process.env.WEBOLAP_RESTAPI_HTTP_PORT || 3777,
     host: process.env.WEBOLAP_RESTAPI_IP || '192.168.1.57',
     https:false,
-    proxy:false
+    /*trust_proxy:'ip'*/
  },
  database:{
    pool: {

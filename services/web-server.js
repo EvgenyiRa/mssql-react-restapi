@@ -1,4 +1,5 @@
 const configs=require('../config/configs.js'),
+      common=require('./common.js'),
       wss=require('./webSocket.js'),
       lurl=require('url');
       //WebSocket = require('ws'),
@@ -80,6 +81,10 @@ function initialize() {
           }
     });
 
+    if (!!webServerConfig.trust_proxy) {
+      app.set('trust proxy', webServerConfig.trust_proxy);
+    }
+
     app.use(bodyParser.json({limit: '100mb', extended: true}));
     app.use('/'+dbConfig.dbtype, routerDB);
     app.use('/auth', routerAuth);
@@ -104,20 +109,21 @@ function initialize() {
 
     //const wss= new WebSocket.Server({ noServer: true });
 
-    httpsServer.on('upgrade', function upgrade(request, socket, head) {
+    httpsServer.on('upgrade', async function upgrade(request, socket, head) {
       const { pathname } = lurl.parse(request.url);
       if (pathname === '/ws') {
         let ip;
-        if (configs.proxy) {
+        if (!!configs.trust_proxy) {
           ip=request.headers['x-forwarded-for'].split(/\s*,\s*/)[0];
         }
         else {
           ip = request.connection.remoteAddress;
         }
+        const resErrblock=await common.getAsync('errblock_'+ip);
         //проверяем ip на нахождение в блокировке
-        let isBlock=false;
-        if (isBlock) {
+        if (resErrblock!==null) {
             socket.destroy();
+            console.log('Заблокированный пользователь '+ip+' пытается войти');
         }
         else {
           console.log('Новый пользователь '+ip);

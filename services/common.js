@@ -1,7 +1,10 @@
-const configs=require('../configs/configs.js'),
+const configs=require('../config/configs.js'),
       redis=require('./redis.js'),
       { promisify } = require("util"),
       getAsync = promisify(redis.client.get).bind(redis.client);
+
+module.exports.getAsync=getAsync;      
+
 const checkErr=async (ipMac,getMsgErrLog,textNoMaxCountErr)=>{
   let resultErrNum;
   const verify = configs.verify,
@@ -33,3 +36,13 @@ const checkErr=async (ipMac,getMsgErrLog,textNoMaxCountErr)=>{
     return textNoMaxCountErr;
   }
 }
+module.exports.checkErr = checkErr;
+
+const getIP=(req)=>{
+  let ip = req.ip; // trust proxy sets ip to the remote client (not to the ip of the last reverse proxy server)
+  if (ip.substr(0,7) == '::ffff:') { // fix for if you have both ipv4 and ipv6
+    ip = ip.substr(7);
+  }
+  return ip;
+}
+module.exports.getIP=getIP;
