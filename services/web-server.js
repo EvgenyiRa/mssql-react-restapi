@@ -65,25 +65,40 @@ function initialize() {
         //httpWsServer = httpWs.createServer(appWs);
     }
 
-    app.all('*', function(req, res, next) {
-          let origin = req.headers.origin;
+    if (!!webServerConfig.trust_proxy) {
+      app.set('trust proxy', webServerConfig.trust_proxy);
+    }
+
+    app.all('*',async function(req, res, next) {
+        const origin = req.headers.origin,
+              ip=common.getIP(req);
+        let isOk=false;
+        req.ip=ip;
+        const resErrblock=await common.getAsync('errblock_'+ip);
+        //проверяем ip на нахождение в блокировке
+        if (resErrblock!==null) {
+            console.log('Заблокированный пользователь '+ip+' пытается войти');
+        }
+        else {
           if(jwt.host.indexOf(origin) >= 0){
               res.header("Access-Control-Allow-Origin", origin);
               res.header("Access-Control-Allow-Methods", "*");
               res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+              isOk=true;
               next();
           }
           else {
             //console.log(req);
             if ((req.originalUrl.split('/')[1]==='f-client') & (req.method==='POST')) {
+              isOk=true;
               next();
             }
           }
+        }
+        if (!isOk) {
+          res.status(404).end();
+        }
     });
-
-    if (!!webServerConfig.trust_proxy) {
-      app.set('trust proxy', webServerConfig.trust_proxy);
-    }
 
     app.use(bodyParser.json({limit: '100mb', extended: true}));
     app.use('/'+dbConfig.dbtype, routerDB);

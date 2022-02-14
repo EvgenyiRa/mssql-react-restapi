@@ -2,6 +2,7 @@
             configs=require('../config/configs.js'),
             jwt = configs.jwt,
             database = require('../services/database.js'),
+            common=require('../services/common.js'),
             dbConfig = configs.database;;
 /*02*/
 /*03*/async function post(req, res, next) {
@@ -62,6 +63,7 @@
             else if (dbConfig.dbtype==='pg') {
                rows=resquery.rows;
             }
+            const textAuthErr='Auth user error: ip-'+req.ip+'; login-'+req.body.login+'; pwd-'+req.body.password;
             if (rows.length>0) {
               const bcrypt = require('bcrypt');
               bcrypt.hash(req.body.password, jwt.salts[rows[0]['SOL']],async function(err, hash) {
@@ -71,12 +73,16 @@
                     return res.status(200).json(resAuthUser);
                   }
                   else {
-                      return res.status(200).json({ message: 'PWD error' });
+                      const resMsg='PWD error';
+                      await common.checkErr(req.ip,resMsg,textAuthErr);
+                      return res.status(200).json({ message: resMsg});
                   }
               });
             }
             else {
-                return res.status(200).json({ message: 'User not found' })
+                const resMsg='User not found';
+                await common.checkErr(req.ip,resMsg,textAuthErr);
+                return res.status(200).json({ message:  resMsg})
             }
           } catch (err) {
             next(err);

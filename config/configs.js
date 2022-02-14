@@ -31,7 +31,7 @@ module.exports = {
  },
  verify:{
    maxCountErrAuth:3,
-   countSecondBlock:10
+   countSecondBlock:30
  },
  redis:{
    port: process.env.WEBOLAP_RESTAPI_REDISPORT || 6379,
