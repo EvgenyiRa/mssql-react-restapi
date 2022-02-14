@@ -1,26 +1,20 @@
 module.exports = {
   webServer:{
     port: process.env.WEBOLAP_RESTAPI_HTTP_PORT || 3777,
-    host: process.env.WEBOLAP_RESTAPI_IP || '127.0.0.1',
-    https:false
+    host: process.env.WEBOLAP_RESTAPI_IP || '192.168.1.57',
+    https:false,
+    proxy:false
  },
  database:{
    pool: {
-     user: process.env.MSSQL_USER || 'user',
-     password: process.env.MSSQL_PWD || 'pwd',
-     server: process.env.MSSQL_SERVER || 'localhost',
-     port: +process.env.MSSQL_PORT || 1433,
-     database: process.env.MSSQL_DB || 'database',
-     pool: {
-         max: 10,
-         min: 10,
-         idleTimeoutMillis: 14400000 /*4hours*/
-     },
-     options: {
-       encrypt: false
-     }
+      connectionLimit : 10,
+      host     : process.env.MYSQL_HOST || '127.0.0.1',
+      user     : process.env.MYSQL_USER || 'user',
+      password : process.env.MYSQL_PWD || '111111',
+      database : process.env.MYSQL_DB || 'react',
+      debug    :  false
    },
-   dbtype:'mssql'
+   dbtype:'mysql'
  },
  jwt:{
    tokenKey : '7a9b-5c7d-5e7f-7g9h',
@@ -33,11 +27,15 @@ module.exports = {
           '$2a$10$u37ZiYRTq37uP2UUmQrwDg$',
           '$2a$10$r88PMCG7VUnmy8czYSg0nH$'
         ],
-   tokenQueueCount:8
+   tokenQueueCount:8,
+ },
+ verify:{
+   maxCountErrAuth:3,
+   countSecondBlock:10
  },
  redis:{
    port: process.env.WEBOLAP_RESTAPI_REDISPORT || 6379,
-   host: process.env.WEBOLAP_RESTAPI_REDISHOST || '127.0.0.1'
+   host: process.env.WEBOLAP_RESTAPI_REDISHOST || 'localhost'
  }
 
 };

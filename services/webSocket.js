@@ -1,10 +1,10 @@
 const WebSocket = require('ws'),
       wss= new WebSocket.Server({ noServer: true }),
+      configs=require('../config/configs.js'),
       execquery = require('../db_apis/execquery.js'),
       database = require('./database.js');
 
-wss.on('connection', async (wsf, request, client)=> {
-  console.log('Новый пользователь');
+wss.on('connection', async (wsf, request, client)=> {  
   let auth=false;
   const messDefault=JSON.stringify({type:'auth',data:"who is?"});
   wsf.send(messDefault);

@@ -107,9 +107,24 @@ function initialize() {
     httpsServer.on('upgrade', function upgrade(request, socket, head) {
       const { pathname } = lurl.parse(request.url);
       if (pathname === '/ws') {
-        wss.handleUpgrade(request, socket, head, function done(ws) {
-          wss.emit('connection', ws, request);
-        });
+        let ip;
+        if (configs.proxy) {
+          ip=request.headers['x-forwarded-for'].split(/\s*,\s*/)[0];
+        }
+        else {
+          ip = request.connection.remoteAddress;
+        }
+        //проверяем ip на нахождение в блокировке
+        let isBlock=false;
+        if (isBlock) {
+            socket.destroy();
+        }
+        else {
+          console.log('Новый пользователь '+ip);
+          wss.handleUpgrade(request, socket, head, function done(ws) {
+            wss.emit('connection', ws, request, socket);
+          });
+        }
       } else {
         socket.destroy();
       }
